@@ -1,0 +1,135 @@
+header{
+    height: 80px;
+    background-color: #f7f9fa;
+}
+nav{
+    height: 500px;
+    
+}
+.mainnav{
+    height: 50px;
+    background-color: #000000;
+}
+.subnav{
+    height: 450px;
+    background-color: brown;
+}
+.logo{
+    float: left;
+    width: 400px;
+    margin-left: 50px;
+}
+.imglogo{
+    margin-top: 15px;
+}
+.txtsearch{
+    float: left;
+    width: 400px;
+}
+.inputsearch{
+    margin-top: 15px;
+    width: 300px;  
+    margin-left: 20px;
+}
+.groupsearch{
+    width: 300px;
+}
+.account{
+    width: 200px;
+    float: left;
+    margin-top: 30px;
+    margin-left: 150px;
+    text-align: center;
+}
+.fas{
+    font-size:13px;
+    margin-bottom: 1px;
+    color: black
+}
+.dangky{
+    margin-left: 30px;
+}
+/*==Style cho menu===*/
+#menu ul {
+    /* background: #1F568B; */
+    list-style-type: none;
+    text-align: center;
+  }
+  #menu li {
+    color: #f1f1f1;
+    display: inline-block;
+    width: 120px;
+    height: 50px;
+    line-height: 40px;
+    margin-left: -5px;
+    margin-top: 5px;
+  }
+  #menu a {
+    text-decoration: none;
+    color: #fff;
+    display: block;
+  }
+  #menu a:hover {
+    background: #F1F1F1;
+    color: #333;
+  }
+  #iconmenu{
+    color: #fff;
+    font-size: 14px;
+  }
+  #iconmenu:hover {
+    background: #F1F1F1;
+    color: #333;
+  }
+  /*==Dropdown Menu==*/
+.sub-menu {
+    display: none;
+    position: absolute;
+  }
+  #menu li {
+    position: relative;
+  }
+  #menu li:hover .sub-menu {
+    display: block;
+    background-color: black;
+    text-align: left;
+  }
+  .sub-menu li {
+    margin-left:1 !important;
+  }
+  /* CSS cho Animation */
+  .slider-wrapper{
+    margin: auto;
+    /* max-width: 700px; */
+    height: auto;
+}
+/* Container */
+.containermain{
+    height: 630px;
+    background-color:chocolate;
+}
+/* Footer */
+footer{
+    height: 300px;
+    background-color: #1A1A1A;
+}
+.optionfooter{
+    height: 180px;
+
+}
+.authorfooter{
+font-size: 16px;
+/* text-align: center; */
+font-weight: 600;
+color: azure;
+}
+.logofooter{
+    float: left;
+    margin-left: 50px;
+}
+.authorfooter p{
+    float: left;
+    margin-left: 10px;
+    margin-top: 15px;
+}
+

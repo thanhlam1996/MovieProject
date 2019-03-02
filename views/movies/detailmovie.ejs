@@ -1,0 +1,57 @@
+<%include ../partials/header%>
+
+<%include ../partials/dialogloginregister%>
+	
+    <!-----------------------------------------------Container ------------------------------------------------>
+    <!----------------------------------- Detail for index page ------------------------------------------------>
+    <div class="container containerdetail">
+        <div class="row content">
+     
+            <!-- ----------------------------------Content left--------------------------------------- -->
+            <div class="col-sm-8">
+                <div class="row" id="<%=movie.id%>">
+                    <div class="col-sm-5">
+                        <div class="panel">
+                            <img src="emlabanoicuaanh.jpg" class="imgpanel">
+                            <div class="overlay"><img src="iconplay.png" class="plugoverlay" id="<%=movie.trailer%>">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-7">
+                        <div class="detail">
+                            <h2><%=movie.title%></h2><br>
+                            <span><i class='far fa-clock'></i> <%=movie.distance%>p</span><br>
+                            <span>Quốc gia: <%=movie.country%></span><br>
+                            <span>Đạo diễn: <%=movie.director%></span><br>
+                            <span>Thể loại: <%=movie.type%></span><br>
+                            <span>Diễn viên: <%=movie.actor%></span><br>
+                            <span>Nhà sản xuất: <%=movie.producer%></span><br>
+                            <span>Ngày: <%=movie.publicationdate%></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="contentmovie">
+                    <h4>Nội dung phim</h4><br>
+
+                    <p><%=movie.content%></p>
+                </div>
+            </div>
+            <!-- --------------------------------End Content left---------------------------------- -->
+            <!-- --------------------------------Content right------------------------------------- -->
+            <div class="col-sm-4 bg-dark">
+
+            </div>
+            <!-- -------------------------------------End Content right-------------------------------- -->
+
+        </div>
+    </div>
+    </div>
+
+    <!-- --------------------------------------------End Detail--------------------------------------------->
+	<%include ../partials/footer%>
+<script>
+     $(".plugoverlay").grtyoutube({
+            autoPlay:true,
+            theme: "dark"
+        });
+</script>

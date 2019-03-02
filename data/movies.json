@@ -1,0 +1,22 @@
+[
+    {
+        "id":"movie001",
+        "title":"Cua Lại Vợ Bầu",
+        "type":["Hài", "Gia đình","Tình cảm"],
+        "actor":["Thanh Lâm", "Văn Hiếu", "Trấn Thành"],
+        "director":"Nhất Trung",
+        "producer":"NT Studio",
+        "country":"Việt Nam",
+        "distance": 90,
+        "releasedate":"30/01/2019",
+        "posterimage":"url_aaaaa",
+        "trailer":"l8vTMxuvz6Y",
+        "content":"ádlkjasoldjhasldjlasdjlasdjlasdjoiashdasdfugufygweufgwfgsxgbfclhdsgfhsxbfcjhjsdgfjhsdgfjhsdgfljh",
+        "author":"lam.truong1996@gmail.com",
+        "publicationdate":"17/02/2019",
+        "status":1,
+        "comment":{},
+        "like":0,
+        "countview":0
+    }
+]

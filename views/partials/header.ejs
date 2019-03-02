@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title><%=title%></title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+	<!-- <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"> -->
+	<link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css'
+		integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
+	<!-- CSS for page -->
+
+	<link rel="stylesheet" type="text/css" href="layoutnew.css">
+	<!-- CSS for amination -->
+
+	<link rel="stylesheet" type="text/css" href="default.css" />
+	<!-- ----------------- -->
+	<!-- ----link for dialog ----->
+	<link rel="stylesheet" type="text/css" href="login.css" />
+	<!-- ----end link for dialog -->
+<!-- ======================================================CSS for page option========================================================================= -->
+<!-- ---Detail -->
+<link rel="stylesheet" type="text/css" href="grt-youtube-popup.css" />
+<link rel="stylesheet" type="text/css" href="detail.css">
+<!-- end detail -->
+<!-- ---Create -->
+<link rel="stylesheet" type="text/css" href="create.css">
+<!-- end create -->
+
+
+
+
+
+
+
+<!-- ======================================================END CSS for page option========================================================================= -->
+	<!-- jQuery library -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+	<!-- Popper JS -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
+
+	<!-- Latest compiled JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
+
+	<!-- script for Animatio -->
+	<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+
+
+	<script src="modernizr-2.6.2.min.js"></script>
+	<script src="mostslider.js" type="text/javascript"></script>
+
+	<script type="text/javascript" src="layoutnew.js"></script>
+	<!-- Validate -->
+	<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"
+		type="text/javascript"></script>
+	<!-- -------------------- -->
+	<!-- ======================================================JS for page option========================================================================= -->
+	<!-- ---Detail -->
+	<script src="grt-youtube-popup.js"></script>
+	<!-- end detail -->
+	<!-- ---Create -->
+	<script src="create.js"></script>
+	<!-- end create -->
+	
+
+
+
+
+
+
+
+<!-- ======================================================END JS for page option========================================================================= -->
+</head>
+
+<body>
+	<!----------------------------------- Nav header and Navigation for all page ------------------------------------------------>
+	<div class="container-fluid" id="container-fluid">
+		<div class="navbar-header">
+			<div class="navbar navbar-expand-md">
+				<div class="container">
+					<div class="navbar-nav mr-auto navbar-brand">
+						<a class="nav-link" href="http://localhost:3000/">
+							<img src="logoheader.png" class="logo">
+						</a>
+					</div>
+					<div class="navbar-nav">
+						<div class="input-group inputsearch">
+							<form class="navbar-form navbar-left" action="/search" method="get">
+								<div class="input-group mb-3 groupsearch">
+									<input type="text" name="title" class="form-control" placeholder="Search...">
+									<div class="input-group-append">
+										<button class="input-group-text pointer">
+											<i class='fas fa-search'></i>
+										</button>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+					<div class="navbar-nav ml-auto">
+						<div class="nav-item arealogin">
+							<a class="nav-link linklogin"><i class='fas fa-user'> Đăng Nhập</i></a>
+						</div>
+						<div class="nav-item arearegister">
+							<a class="nav-link linkregister"><i class='fas fa-user-plus'> Đăng ký</i></a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="navbar navbar-expand-md justify-content-center navigation">
+			<div class="navbar-nav">
+				<div class="nav-item"><a href="#" class="nav-link">MUA VÉ</a></div>
+				<div class="nav-item dropdown">
+					<a href="#" class="nav-link dropdown-toggle" id="navbardrop" data-toggle="dropdown">QUẢN LÝ</a>
+					<div class="dropdown-menu">
+						<a href="#" id="create" class="nav-link dropdown-item">TẠO BÀI VIẾT</a>
+						<a href="#" class="nav-link dropdown-item">DANH SÁCH ĐĂNG KÝ</a>
+						<a href="#" class="nav-link dropdown-item">DUYỆT BÀI</a>
+					</div>
+				</div>
+				<div class="nav-item"><a href="#" class="nav-link">GÓC ĐIỆN ẢNH</a></div>
+				<div class="nav-item"><a href="#" class="nav-link">SỰ KIỆN</a></div>
+				<div class="nav-item"><a href="#" class="nav-link">RẠP/GIÁ VÉ</a></div>
+				<div class="nav-item"><a href="#" class="nav-link">HỖ TRỢ</a></div>
+				<div class="nav-item dropdown">
+						<a href="#" class="nav-link dropdown-toggle" id="navbardrop" data-toggle="dropdown">THÀNH VIÊN</a>
+						<div class="dropdown-menu">
+							<a href="#" class="nav-link dropdown-item">ĐĂNG KÝ BÀI VIẾT</a>
+							<a href="/create" class="nav-link dropdown-item">VIẾT BÀI</a>
+							<a href="#" class="nav-link dropdown-item">======</a>
+						</div>
+					</div>
+				<!-- <div class="nav-item"><a href="#" class="nav-link">THÀNH VIÊN</a></div> -->
+			</div>
+		</div>
+	</div>
+    <!-- ---------------------------------------------------------------------------------------------------------->
+    <!-- ==========================Chổ này dành cho animation======================== -->
+    
+    <!-- =================================End Animation============================== -->
+    

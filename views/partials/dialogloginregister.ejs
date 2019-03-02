@@ -1,0 +1,138 @@
+<!-- --------------------------------------------Dialog --------------------------------------------------->
+	<!-- ===============Login -->
+	<div id="id01" class="modal1">
+            <form class="modal-content animate" id="formlogin">
+                <div class="imgcontainer">
+                    <span onclick="document.getElementById('id01').style.display='none'" class="close"
+                        title="Close Modal">&times;</span>
+                    <img src="avatarlogin.png" alt="Avatar" class="avatar">
+                    <p id="err" style="margin-left: 30px; display: none; color: red">Email hoặc mật khẩu sai</p>
+                </div>
+    
+                <div class="container">
+                    <div class="form-group reg-content">
+                        <div class="row">
+                            <label class="col-3"><b>Email</b></label>
+                            <input class="form-control col-7" id="email" type="text" placeholder="Email" name="email">
+                        </div>
+                        <div class="row">
+                            <label class="col-3"><b>Mật khẩu</b></label>
+                            <input class="form-control col-7" id="password" type="password" placeholder="Mật khẩu"
+                                name="password">
+                        </div>
+                        <div class="row">
+                            <label class="col-3">
+                            </label>
+                            <label class="form-control col-7">
+                                <input type="checkbox" checked="checked" name="remember"> Ghi nhớ đăng nhập</span>
+                            </label>
+                        </div>
+                        <div class="row">
+                            <label class="col-3"></label>
+                            <button class="btn btn-success col-7" id="btnlogin" type="button">Đăng nhập</button>
+                        </div>
+    
+                        <div class="container login-container-bottom" style="background-color:#f1f1f1">
+                            <!-- <button type="button" class="btn btn-danger cancelbtn">Cancel</button> -->
+                            <span class="psw">Quên <a href="#">mật khẩu?</a></span>
+                        </div>
+                    </div>
+                </div>
+    
+            </form>
+        </div>
+    
+        <!-- ===============endlogin -->
+        <!-- ===============Register -->
+        <div id="id02" class="modal2">
+            <form class="modal-content animate" id="formregister" method="POST" action="/register">
+                <div class="imgcontainer">
+                    <span onclick="document.getElementById('id02').style.display='none'" class="close"
+                        title="Close Modal">&times;</span>
+                    <img src="avatarlogin.png" alt="Avatar" class="avatar">
+                    <p id="check">Email đã tồn tại</p>
+                </div>
+    
+                <div class="container">
+                    <div class="form-group reg-content">
+                        <div class="row">
+                            <label class="col-3"><b>Email</b></label>
+                            <input id="emailregister" class="form-control col-7" type="text" placeholder="Email" name="email">
+                        </div>
+                        <div class="row">
+                            <label class="col-3"><b>Họ và Tên</b></label>
+                            <input class="form-control col-7" type="text" placeholder="Họ và tên" name="fullname">
+                        </div>
+                        <div class="row">
+                            <label class="col-3"><b>Giới tính</b></label>
+                            <div class="form-check-inline">
+                                <label class="form-check-label" for="radio1">
+                                    <input type="radio" class="form-check-input" id="radio1" name="sex" value="Nam"
+                                        checked>Nam
+                                </label>
+                            </div>
+                            <div class="form-check-inline">
+                                <label class="form-check-label" for="radio2">
+                                    <input type="radio" class="form-check-input" id="radio2" name="sex" value="Nữ">Nữ
+                                </label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label class="col-3"><b>Ngày sinh</b></label>
+                            <div class="form-check-inline">
+    
+                                <select class="form-control col-4" id="day" name="day">
+                                    <%for(var i =1; i<=31; i++){%>
+                                    <option value="<%=i%>">
+                                        <%=i%>
+                                    </option>
+                                    <%}%>
+                                    </select>
+                                    <select class="form-control col-4" id="month" name="month">
+                                        <%for(var i =1; i<=12; i++){%>
+                                    <option value="<%=i%>">
+                                        <%=i%>
+                                    </option>
+                                    <%}%>
+                                    </select>
+                                    <select class="form-control col-6" id="year" name="year">
+                                        <%for(var i =2030; i>=1900; i--){%>
+                                    <option value="<%=i%>">
+                                        <%=i%>
+                                    </option>
+                                    <%}%>
+                                    </select>
+                                
+                            </div>
+                        </div>
+                        <div class="row">
+                                <label class="col-3"><b>Mật khẩu</b></label>
+                                <input class="form-control col-7" id="password" type="password" placeholder="Mật khẩu" name="password" >
+                        </div>
+                        <div class="row">
+                                <label class="col-3"><b>Nhập lại mật khẩu</b></label>
+                                <input class="form-control col-7" type="password" placeholder="Nhập lại mật khẩu" name="confirmpassword" >
+                        </div>
+                        <div class="row">
+                                <label class="col-3"><b>Số điện thoại</b></label>
+                                <input class="form-control col-7" type="text" placeholder="Số điện thoại" name="phone" >
+                        </div>
+                        <div class="row">
+                                <label class="col-3"><b>Địa chỉ</b></label>
+                                <input class="form-control col-7" type="text" placeholder="Địa chỉ" name="adress" >
+                    </div>
+                    <div class="row">
+                            <label class="col-3"></label>
+                            <button disabled="true" id="btnregister" class="btn btn-success col-7" type="button">Tạo tài khoảng</button>
+                    </div>			
+                </div>
+                
+    
+                <div class="container login-container-bottom" style="background-color:#f1f1f1"></div>
+                    <!-- <button type="button" class="btn btn-danger cancelbtn">Cancel</button> -->
+                </div>
+            </form>
+        </div>
+    
+        <!-- ===============EndRegister -->
+        <!-- --------------------------------------------End Dialog--------------------------------------------- -->
