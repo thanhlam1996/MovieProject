@@ -6,9 +6,33 @@ var logger = require('morgan');
 var bodyParser = require("body-parser");
 var app = express();
 var session = require('express-session');
+var passport=require('passport');
+var passportfb=require('passport-facebook').Strategy;
+var ggstrategy=require('passport-google-oauth').OAuth2Strategy;
+var localStratery=require('passport-local').Strategy;
+
+
+
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var movie=require('./routes/movie');
+var account=require('./routes/account');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: true }))
 
@@ -16,6 +40,7 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 
 app.use(express.static(__dirname + '/public/images/icon/'));
+app.use(express.static(__dirname + '/public/images/uploads/'));
 app.use(express.static(__dirname + '/public/images/movie/'));
 app.use(express.static(__dirname + '/public/images/img_animation/'));
 app.use(express.static(__dirname + '/public/javascripts/'));
@@ -36,6 +61,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(passport.initialize());
+app.use(passport.session());
+
 app.use(session({
   secret: 'keyboard cat',
   resave: false,
@@ -45,7 +74,20 @@ app.use(session({
 }))
 
 app.use('/', indexRouter);
+app.use('/movie',movie);
+app.use('/account',account);
 app.use('/users', usersRouter);
+
+
+
+
+
+
+
+
+
+
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -63,7 +105,6 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 // =================================================Movies==================================================
-// app.use('/search', searchRouter);
 
 // ========================================================================================================= 
 module.exports = app;

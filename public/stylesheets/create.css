@@ -25,3 +25,7 @@
 #btn-removecomponentmovie{
     margin-left: 3px;
 }
+.create-err-title-display{
+    color: red;
+    display: none;
+}

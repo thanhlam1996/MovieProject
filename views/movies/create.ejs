@@ -4,30 +4,32 @@
 
 <!-----------------------------------------------Container ------------------------------------------------>
 <div class="container createmovie">
-    <div class="component-create">
-        <div class="form-group">
-            <div class="row form-inline group-formcreate">
-                <label class="col col-4 lable-create-title">Tiêu đề</label>
-                <label class="col col-4 lable-create-producer">Nhà phát hành</label>
-                <label class="col col-3 lable-create-producer">Hạn viết bài</label>
+    <form action="/movie/createmovie" method="POST">
+        <div class="component-create">
+            <div class="form-group comment-item">
+                <div class="row form-inline group-formcreate">
+                    <label class="col col-4 lable-create-title">Tiêu đề</label>
+                    <label class="col col-4 lable-create-producer">Nhà phát hành</label>
+                    <label class="col col-3 lable-create-producer">Hạn viết bài</label>
+                </div>
+                <div class="row form-inline">
+                    <input type="text" class="form-control col col-4 txt-create-title" id="create-err-title" name="title">
+                    <input type="text" class="form-control col col-4 txt-create-producer" name="producer">
+                    <input type="date" class="form-control col col-3 txt-create-producer" name="deadline">
+                </div>
+                <label id="create-err-title" class="create-err-title-display">Tiêu đề đã tồn tại. Hãy chọn tiêu đề khác</label>
             </div>
-            <div class="row form-inline">
-                <input type="text" class="form-control col col-4 txt-create-title" name="title">
-                <input type="text" class="form-control col col-4 txt-create-producer" name="producer">
-                <input type="date" class="form-control col col-3 txt-create-producer" name="deadline">
-                <!-- <button type="button" id="btn-removecomponentmovie" class="btn btn-danger">Xóa</button> -->
+        </div>
+        <div class="row tagbtncreatemovie">
+            <div class="col col-3">
+                <button class="btn btn-primary btnaddcreatemovie" type="button">Thêm</button>
+            </div>
+            <label class="col col-5"></label>
+            <div class="col col-4">
+                <button class="btn btn-success btncreatemovie" type="submit">Tạo bài viết</button>
             </div>
         </div>
-    </div>
-    <div class="row tagbtncreatemovie">
-        <div class="col col-3">
-            <button class="btn btn-primary btnaddcreatemovie" type="button">Thêm</button>
-        </div>
-        <label class="col col-5"></label>
-        <div class="col col-4">
-            <button class="btn btn-success btncreatemovie" type="button">Tạo bài viết</button>
-        </div>
-    </div>
+    </form>
 </div>
 <!-- --------------------------------------------End Detail--------------------------------------------->
 <%include ../partials/footer%>

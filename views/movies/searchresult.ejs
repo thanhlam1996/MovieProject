@@ -1,0 +1,25 @@
+<%include ../partials/header%>
+
+<%include ../partials/dialogloginregister%>
+
+<!-----------------------------------------------Container ------------------------------------------------>
+<div class="container search-result">
+    <!-- <div class="row"> -->
+    <%data.Items.forEach(function(i){%>
+
+    <div class="item-movie-result-search col col-4" id="<%=i.id%>">
+        <div class="row <%=i.id%>" id="<%=i.title%>">
+            <div class="img-item-result col col-6">
+                <img class="img-movie-result" src="<%=i.posterimage%>">
+            </div>
+            <div class="title-item-title col col-6">
+                <h5><%=i.title%></h5>
+            </div>
+        </div>
+
+    </div>
+    <%})%>
+    <!-- </div> -->
+</div>
+<!-- --------------------------------------------End Detail--------------------------------------------->
+<%include ../partials/footer%>
