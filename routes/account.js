@@ -27,15 +27,13 @@ var docClient = new AWS.DynamoDB.DocumentClient();
 // =======================================================================================================
 // ==========Register==============
 router.post('/register-account', function (req, res, next) {
-    var birthday = req.body.day + "/" + req.body.month + "/" + req.body.year;
-
     var params = {
         TableName: "Accounts",
         Item: {
             "email": req.body.email,
             "fullname": req.body.fullname,
             "password": req.body.password,
-            "birthday": birthday,
+            "birthday": req.body.birthday,
             "sex": req.body.sex,
             "adress": req.body.adress,
             "phone": req.body.phone,
@@ -53,10 +51,6 @@ router.post('/register-account', function (req, res, next) {
 // =======End Register=============
 // ==========Register==============
 
-
-// router.post('/login', function(req,res,next){
-//     console.log(email);
-// });
 
 router.post('/login', passport.authenticate('local', { failureRedirect:'/', successRedirect:'/'}));
 
@@ -291,33 +285,3 @@ passport.deserializeUser((user, done) => {
 // =======================================================================================================
 
 module.exports = router;
-// var params = {
-//     TableName: "Accounts",
-//     KeyConditionExpression: "#user =:email",
-//     ExpressionAttributeNames: {
-//         "#user": "email"
-//     },
-//     ExpressionAttributeValues: {
-//         ":email": email
-
-//     }
-// };
-// docClient.query(params, function (err, user) {
-//     if (err) {
-//         console.error("Unable to query. Error:", JSON.stringify(err, null, 2));
-//     } else {
-//         if (user.Count > 0) {
-//             user.Items.forEach(function (i) {
-//                 if (i.password == password) {
-//                     return done(null, user)
-//                 }
-//                 else {
-//                     return done(null, false);
-//                 }
-//             });
-//         }
-//         else {
-//             return res.send(false);
-//         }
-//     }
-// });

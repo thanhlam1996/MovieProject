@@ -1,213 +1,169 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-US">
 
 <head>
-	<meta charset="UTF-8">
-	<title><%=title%></title>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<!-- Latest compiled and minified CSS -->
-
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
-	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-	
-	<link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css'
-		integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
-
-	<!-- CSS Dialog Login and Register  -->
-	<link rel="stylesheet" type="text/css" href="Account_dialog_login_register.css" />
-	<!-- ===================== -->
-
-	<!-- CSS for page -->
-	<link rel="stylesheet" type="text/css" href="main.css" />
-	<!-- ============== -->
-
-	<!-- CSS for amination -->
-	<link rel="stylesheet" type="text/css" href="default.css" />
-	<!-- ----------------- -->
-	
-	<!-- ======================================================CSS for page option========================================================================= -->
-	<!-- ---Detail -->
-	<link rel="stylesheet" type="text/css" href="grt-youtube-popup.css" />
-	<link rel="stylesheet" type="text/css" href="detail.css" />
-	<!-- end detail -->
-
-	<!-- ---Create -->
-	<link rel="stylesheet" type="text/css" href="create.css" />
-	<!-- end create -->
-
-	<!-- ---List Register -->
-	<link rel="stylesheet" type="text/css" href="registerlist_admin.css" />
-	<!-- end List Register  -->
-
-	<!-- ---List Registed -->
-	<link rel="stylesheet" type="text/css" href="lisregisted.css" />
-	<!-- end List Registed  -->
-
-	<!-- ---List Writing -->
-	<link rel="stylesheet" type="text/css" href="writing.css" />
-	<!-- end List Registed  -->
-
-	<!-- ---Approve -->
-	<link rel="stylesheet" type="text/css" href="approve.css" />
-	<!-- end approve  -->
-
-	<!-- ---SearchResult -->
-	<link rel="stylesheet" type="text/css" href="searchresult.css" />
-	<!-- end SearchResult  -->
-	
-	<!-- ============================ -->
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <!-- Title -->
+   <title>Filmoja</title>
+   <!-- Favicon -->
+   <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon/favicon-32x32.png">
+   <!--Bootstrap css-->
+   <link rel="stylesheet" href="assets/css/bootstrap.css">
+   <!--Font Awesome css-->
+   <link rel="stylesheet" href="assets/css/font-awesome.min.css">
+   <!--Magnific css-->
+   <link rel="stylesheet" href="assets/css/magnific-popup.css">
+   <!--Owl-Carousel css-->
+   <link rel="stylesheet" href="assets/css/owl.carousel.min.css">
+   <link rel="stylesheet" href="assets/css/owl.theme.default.min.css">
+   <!--Animate css-->
+   <link rel="stylesheet" href="assets/css/animate.min.css">
+   <!--Slicknav css-->
+   <link rel="stylesheet" href="assets/css/slicknav.min.css">
+   <!--Site Main Style css-->
+   <link rel="stylesheet" href="assets/css/style.css">
+   <!--Responsive css-->
+   <link rel="stylesheet" href="assets/css/responsive.css">
 
 
 
-	<!-- ======================================================END CSS for page option========================================================================= -->
+   <!-- Option Custom ------------------------------------------------------------------>
+   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+   <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css'
+      integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
+   <!--login-register-account CSS -->
+   <link href="authentication/login-register-account.css" rel="stylesheet">
+   <!-- Index CSS -->
+   <link href="main/index.css" rel="stylesheet">
 
-	<!-- jQuery library -->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
-	<!-- Popper JS -->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
-
-	<!-- Latest compiled JavaScript -->
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
-
-	<!-- script for Animatio -->
-	<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
-
-	<script src="modernizr-2.6.2.min.js"></script>
-	<script src="mostslider.js" type="text/javascript"></script>
-
-	<script type="text/javascript" src="main.js"></script>
-	<!-- Validate -->
-	<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"
-		type="text/javascript"></script>
-	<!-- -------------------- -->
-	<!-- ======================================================JS for page option========================================================================= -->
-	<!-- Dialg signin and register -->
-	<script src="Account_dialog_login_register.js"></script>
-	<!-- ============ -->
-	<!-- ---Detail -->
-	<script src="grt-youtube-popup.js"></script>
-	<!-- end detail -->
-	
-	<!-- ---Create -->
-	<script src="create.js"></script>
-	<!-- end create -->
-
-	<!-- List Register -->
-	<script src="registerlist_admin.js"></script>
-	<!-- ============ -->
-
-	<!-- List Registed -->
-	<script src="listregisted.js"></script>
-	<!-- ============ -->
-
-	<!-- CKEDITOR 5-->
-	<script src="https://cdn.ckeditor.com/ckeditor5/12.0.0/classic/ckeditor.js"></script>
-	<!-- end CKEDITOR -->
-
-
-	<!-- writing -->
-	<script src="writing.js"></script>
-	<!-- ============ -->
-
-	<!-- approve -->
-	<script src="approve.js"></script>
-	<!-- ============ -->
-
-	<!-- Searchresult -->
-	<script src="searchresult.js"></script>
-	<!-- ============ -->
-
-	<!-- Waiting for approve -->
-	<script src="waiting-list-member.js"></script>
-	<!-- =================== -->
-	<!-- Detail moive -->
-	<script src="detailmovie.js"></script>
-	<!-- =================== -->
-
-	<!-- Edit moive -->
-	<script src="update-movie-member.js"></script>
-	<!-- =================== -->
-
-	<!-- ======================================================END JS for page option========================================================================= -->
 </head>
 
-
 <body>
-	<!----------------------------------- Nav header and Navigation for all page ------------------------------------------------>
-	<div class="container-fluid" id="container-fluid">
-		<div class="navbar-header">
-			<div class="navbar navbar-expand-md">
-				<!-- <div class="container"> -->
-					<div class="row rowheaderforheader">
-
-						<div class="navbar-nav col col-2 navbar-brand logo-header-main">
-							<a class="nav-link" href="http://localhost:3000/">
-								<img src="logoheader.png" class="logo">
-							</a>
-						</div>
 
 
-						<div class="navbar-nav col col-3">
-							<div class="input-group inputsearch">
-								<form class="navbar-form navbar-left" action="/search" method="get">
-									<div class="input-group mb-3 groupsearch">
-										<input type="text" name="title" class="form-control" placeholder="Search...">
-										<div class="input-group-append">
-											<button class="input-group-text pointer">
-												<i class='fas fa-search'></i>
-											</button>
-										</div>
-									</div>
-								</form>
-							</div>
-						</div>
+   <!-- Header Area Start -->
+   <header class="filmoja-header-area">
 
+      <!-- Header Top Area Start -->
+      <div class="header-top-area">
+         <div class="container">
+            <div class="row">
+               <div class="col-lg-6 col-sm-4">
+                  <div class="header-top-social">
+                  </div>
+               </div>
+               <div class="col-lg-6 col-sm-8">
+                  <div class="header-top-menu">
+                     <ul class="link-login-register">
+                        <li><a id="acction-login-register" href="/login-register">Đăng nhập/Đăng ký</a></li>
+                     </ul>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <!-- Header Top Area End -->
 
-						<div class="navbar-nav  col-4 action-login-register">
-							<div class="nav-item arealogin">
-								<a class="btn big-login" data-toggle="modal" data-target="#myModal">Đăng nhập</a>
-							</div>
-							<div class="nav-item arearegister">
-								<a class="btn big-register" data-toggle="modal" data-target="#registerAccountModal">Đăng ký</a>
-							</div>
-						</div>
+      <!-- Main Header Area Start -->
+      <div class="main-header-area">
+         <div class="container">
+            <div class="row">
+               <div class="col-lg-2">
+                  <div class="site-logo">
+                     <a href="/">
+                        <img src="assets/img/logo.png" alt="filmoja" />
+                     </a>
+                  </div>
+                  <!-- Responsive Menu Start -->
+                  <div class="filmoja-responsive-menu"></div>
+                  <!-- Responsive Menu End -->
+               </div>
+               <div class="col-lg-4">
+                  <div class="header-main-search hide-mobile">
+                     <form>
+                        <input type="search" placeholder="Search...">
+                        <button type="submit">
+                           <i class="fa fa-search"></i>
+                        </button>
+                     </form>
+                  </div>
+               </div>
+               <div class="col-lg-6">
+                  <div class="mainmenu">
+                     <nav>
+                        <ul id="responsive_navigation">
+                           <!-- Mobile Search Start -->
+                           <li class="header-main-search hide-desktop">
+                              <form>
+                                 <input type="search" placeholder="Search...">
+                                 <button type="submit">
+                                    <i class="fa fa-search"></i>
+                                 </button>
+                              </form>
+                           </li>
+                           <!-- Mobile Search End -->
+                           <li class="active"><a href="/">Trang chủ</a></li>
+                           <li>
+                              <a href="#">pages</a>
+                              <ul>
+                                 <li><a href="about.html">about us</a></li>
+                                 <li><a href="pricing.html">pricing</a></li>
+                                 <li class="submenu-parent">
+                                    <a href="#">blog</a>
+                                    <ul class="submenu">
+                                       <li><a href="blog.html">blog</a></li>
+                                       <li><a href="single-blog.html">blog details</a></li>
+                                    </ul>
+                                 </li>
+                                 <li class="submenu-parent">
+                                    <a href="#">Authentication</a>
+                                    <ul class="submenu">
+                                       <li><a href="login.html">login</a></li>
+                                       <li><a href="register.html">register</a></li>
+                                    </ul>
+                                 </li>
+                                 <li><a href="404.html">404 error</a></li>
+                              </ul>
+                           </li>
+                           <li>
+                              <a href="#">movies</a>
+                              <ul>
+                                 <li><a href="movie-list.html">movie list sidebar</a></li>
+                                 <li class="submenu-parent">
+                                    <a href="#">movie grid</a>
+                                    <ul class="submenu">
+                                       <li><a href="movie-grid-sidebar.html">grid sidebar</a></li>
+                                       <li><a href="movie-full-grid.html">full page grid</a></li>
+                                    </ul>
+                                 </li>
+                                 <li><a href="single-movie.html">movie details</a></li>
+                              </ul>
+                           </li>
+                           <li>
+                              <a href="#">Tv show</a>
+                              <ul>
+                                 <li><a href="tv-series.html">Tv Series</a></li>
+                                 <li><a href="single-series.html">series details</a></li>
+                              </ul>
+                           </li>
+                           <li>
+                              <a href="#">celebrities</a>
+                              <ul>
+                                 <li><a href="celebrities.html">all celebrities</a></li>
+                                 <li><a href="celebritie-details.html">celebrities details</a></li>
+                              </ul>
+                           </li>
+                           <li><a href="contact.html">contact</a></li>
+                        </ul>
+                     </nav>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <!-- Main Header Area End -->
 
-
-					</div>
-				</div>
-			<!-- </div> -->
-		</div>
-
-		<div class="navbar navbar-expand-md justify-content-center navigation">
-			<div class="navbar-nav">
-				<div class="nav-item"><a href="#" class="nav-link">MUA VÉ</a></div>
-				<div class="nav-item dropdown">
-					<a href="#" class="nav-link dropdown-toggle" id="navbardrop" data-toggle="dropdown">QUẢN LÝ</a>
-					<div class="dropdown-menu">
-						<a href="/create" id="navcreate" class="nav-link dropdown-item">TẠO BÀI VIẾT</a>
-						<a href="/getlistregister" id="nav-register" class="nav-link dropdown-item">DANH SÁCH ĐĂNG
-							KÝ</a>
-						<a href="/approve" id="nav-approve" class="nav-link dropdown-item">DUYỆT BÀI</a>
-					</div>
-				</div>
-				<div class="nav-item"><a href="#" class="nav-link">GÓC ĐIỆN ẢNH</a></div>
-				<div class="nav-item"><a href="#" class="nav-link">SỰ KIỆN</a></div>
-				<div class="nav-item"><a href="#" class="nav-link">RẠP/GIÁ VÉ</a></div>
-				<div class="nav-item"><a href="#" class="nav-link testislogin">HỖ TRỢ</a></div>
-				<div class="nav-item dropdown">
-					<a href="#" class="nav-link dropdown-toggle" id="navbardrop" data-toggle="dropdown">THÀNH VIÊN</a>
-					<div class="dropdown-menu">
-						<a href="#" class="nav-link dropdown-item">ĐĂNG KÝ BÀI VIẾT</a>
-						<a href="/getlistregisteraccout" id="nav-writing" class="nav-link dropdown-item">VIẾT BÀI</a>
-						<a href="/waitingapprove" class="nav-link dropdown-item">BÀI CHỜ DUYỆT</a>
-					</div>
-				</div>
-				<!-- <div class="nav-item"><a href="#" class="nav-link">THÀNH VIÊN</a></div> -->
-			</div>
-		</div>
-	</div>
-	<!-- ---------------------------------------------------------------------------------------------------------->
-	<!-- ==========================Chổ này dành cho animation======================== -->
-
-	<!-- =================================End Animation============================== -->
+   </header>
+   <!-- Header Area End -->

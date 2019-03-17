@@ -3,7 +3,7 @@ var router = express.Router();
 var AWS = require("aws-sdk");
 var uuid4 = require('uuid4');
 var dateFormat = require('dateformat');
-var multer  = require('multer');
+var multer = require('multer');
 var upload = multer({ dest: 'uploads/' });
 // =========================Role===========================
 // Movie
@@ -67,84 +67,205 @@ function checkidmovie(id) {
         }
     });
 }
-
+// ========Create=============
+router.get("/create-movie", function (req, res, next) {
+    res.render("movies/createMovie-admin.ejs");
+})
 
 // ================Multer==============
-var imgname="";//Bien khai bao static chua ten anh bia
+var imgname = "";//Bien khai bao static chua ten anh bia
 var storage = multer.diskStorage({
     destination: (req, file, cb) => {
-      cb(null, 'public/images/uploads')
+        cb(null, 'public/images/uploads')
     },
     filename: (req, file, cb) => {
-        imgname+=file.fieldname + '-' + Date.now()+file.originalname;
-      cb(null, imgname)
+        imgname += file.fieldname + '-' + Date.now() + file.originalname;
+        cb(null, imgname)
     }
 });
-var upload = multer({storage: storage});
+var upload = multer({ storage: storage });
 // ====================================
-router.post("/createmovie", function (req, res, next) {
-    if (req.session.email.role == 4) {
-        if (req.body.title instanceof Array) {
-            for (var i = 0; i < req.body.title.length; i++) {
-                // console.log(req.body.title[i] + "====" + req.body.producer[i] + "====" + req.body.deadline[i])
+router.post("/create-movie-admin", function (req, res, next) {
+    if (req.isAuthenticated()) {
+        return res.render("../views/err-role/err.ejs", { roleerr: "Bạn đăng nhập để truy cập đến trang này!" })
+        // return res.send(false);
+    }
+    else {
+        var sess = {};
+        req.session.passport.user.Items.forEach(function (j) {
+            sess = {
+                "email": j.email,
+                "fullname": j.fullname,
+                "role": j.role
+            }
+        })
+        if (sess.role < 3) {
+            return res.render("../views/err-role/err.ejs", { roleerr: "Bạn cần được cấp quyền để truy cập đến trang này!" })
+        }
+        else {
+
+            if (req.body.title instanceof Array) {
+                for (var i = 0; i < req.body.title.length; i++) {
+                    // console.log(req.body.title[i] + "====" + req.body.producer[i] + "====" + req.body.deadline[i])
+                    var id = createID();
+                    var params = {
+                        TableName: "Movies",
+                        Item: {
+                            "id": id,
+                            "title": req.body.title[i],
+                            "producer": req.body.producer[i],
+                            "deadline": req.body.deadline[i],
+                            "note": req.body.note[i],
+                            "stt": 4,
+                            "creater": sess.fullname,
+                            "emailcreater": sess.email
+                        }
+                    };
+                    docClient.put(params, function (err, data) {
+                        if (err) {
+                            console.error("Unable to update item. Error JSON:", JSON.stringify(err, null, 2));
+                        } else {
+                        }
+                    });
+                }
+                return res.redirect('/movie/list-movie-waiting-register-write')
+            }
+            else {
                 var id = createID();
                 var params = {
                     TableName: "Movies",
                     Item: {
                         "id": id,
-                        "title": req.body.title[i],
-                        "producer": req.body.producer[i],
-                        "deadline": req.body.deadline[i],
+                        "title": req.body.title,
+                        "producer": req.body.producer,
+                        "deadline": req.body.deadline,
+                        "note": req.body.note,
                         "stt": 4,
-                        "creater": req.session.email.fullname,
-                        "emailcreater": req.session.email.email
+                        "creater": sess.fullname,
+                        "emailcreater": sess.email
                     }
                 };
                 docClient.put(params, function (err, data) {
                     if (err) {
                         console.error("Unable to update item. Error JSON:", JSON.stringify(err, null, 2));
                     } else {
-                        //  return res.redirect("/getlistregister");
+                        return res.redirect('/movie/list-movie-waiting-register-write')
                     }
                 });
 
             }
-            // console.log(params)
-            return res.redirect("/getlistregister");
         }
-        else {
-            var id = createID();
-            var params = {
-                TableName: "Movies",
-                Item: {
-                    "id": id,
-                    "title": req.body.title,
-                    "producer": req.body.producer,
-                    "deadline": req.body.deadline,
-                    "stt": 4,
-                    "creater": req.session.email.fullname,
-                    "emailcreater": req.session.email.email
-                }
-            };
-            docClient.put(params, function (err, data) {
-                if (err) {
-                    console.error("Unable to update item. Error JSON:", JSON.stringify(err, null, 2));
-                } else {
-                    return res.redirect("/getlistregister");
-                }
-            });
-        }
-
-    }
-    else {
-        return false;
+        // return res.send(sess);
     }
 });
+
+// Get All List Register
+router.get('/list-movie-registed', function (req, res, next) {
+    if (req.isAuthenticated()) {
+        return res.render("../views/err-role/err.ejs", { roleerr: "Bạn đăng nhập để truy cập đến trang này!" })
+        // return res.send(false);
+    }
+    else {
+        var sess = {};
+        req.session.passport.user.Items.forEach(function (j) {
+            sess = {
+                "email": j.email,
+                "fullname": j.fullname,
+                "role": j.role
+            }
+        })
+        if (sess.role < 2) {
+            return res.render("../views/err-role/err.ejs", { roleerr: "Bạn cần được cấp quyền để truy cập đến trang này!" })
+        }
+        else {
+            var email = sess.email;
+            var params = {
+              TableName: "Movies",
+              // ProjectionExpression: "#status",
+              FilterExpression: "(#stt=:stt) AND (#writeremail=:email) ",
+              ExpressionAttributeNames: {
+                "#stt": "stt",
+                "#writeremail": "writeremail"
+              },
+              ExpressionAttributeValues: {
+                ":stt": 3,
+                ":email": email
+              }
+              
+            };
+            docClient.scan(params, function (error, result) {
+              if (error) {
+                console.error("Unable to query. Error:", JSON.stringify(error, null, 2));
+              } else {
+                res.render("../views/movies/list-movie-registed.ejs", {result});
+              }
+            });
+           
+        }
+    }
+  })
+  // ==end==
+// GET List movie waiting register write
+router.get('/list-movie-waiting-register-write', function (req, res, next) {
+
+    if (req.isAuthenticated()) {
+        return res.render("../views/err-role/err.ejs", { roleerr: "Bạn đăng nhập để truy cập đến trang này!" })
+        // return res.send(false);
+    }
+    else {
+        var sess = {};
+        req.session.passport.user.Items.forEach(function (j) {
+            sess = {
+                "email": j.email,
+                "fullname": j.fullname,
+                "role": j.role
+            }
+        })
+        if (sess.role < 2) {
+            return res.render("../views/err-role/err.ejs", { roleerr: "Bạn cần được cấp quyền để truy cập đến trang này!" })
+        }
+        else {
+
+            var params = {
+                TableName: "Movies",
+                // ProjectionExpression: "#status",
+                FilterExpression: "#stt=:stt OR #stt=:stt1",
+                ExpressionAttributeNames: {
+                    "#stt": "stt",
+                },
+                ExpressionAttributeValues: {
+                    ":stt": 4,
+                    ":stt1": 3
+                }
+                // Limit: 30
+            };
+            docClient.scan(params, function (error, result) {
+                if (error) {
+                    console.error("Unable to query. Error:", JSON.stringify(error, null, 2));
+                } else {
+
+                    res.render("../views/movies/list-movie-waiting-register-write.ejs", { result, role:sess.role});
+                }
+            });
+
+
+        }
+    }
+
+})
 // =========Register movie=========
-router.post("/registermoviewriter", function (req, res, next) {
+router.post("/member-register-movie", function (req, res, next) {
+    var sess = {};
+        req.session.passport.user.Items.forEach(function (j) {
+            sess = {
+                "email": j.email,
+                "fullname": j.fullname,
+                "role": j.role
+            }
+        })
     var id = req.body.id;
-    var email = req.session.email.email;
-    var fullname = req.session.email.fullname;
+    var email = sess.email;
+    var fullname = sess.fullname;
     var now = new Date();
     var registiondate = dateFormat(now, "isoDate");
     var title = req.body.title;
@@ -171,20 +292,46 @@ router.post("/registermoviewriter", function (req, res, next) {
         }
     });
 })
+
+// ========= Get writing movie=====
+router.get("/member-writing-movie", function (req, res, next) {
+    // var _title = req.body.title;
+    var _id = req.query.id;
+    var params = {
+      TableName: "Movies",
+      KeyConditionExpression: "id=:id",
+      ExpressionAttributeValues: {
+        ":id": _id
+      }
+    };
+    docClient.query(params, function (err, data) {
+      if (err) {
+        console.error("Unable to read item. Error JSON:", JSON.stringify(err, null, 2));
+      }
+      else {
+        if (data.Count > 0) {
+          return res.render("../views/movies/member-writing-movie.ejs", { data })
+        }
+      }
+    });
+  })
+
 // =========Register movie=========
 // =========Writing Movie of writer===============
-router.post("/submitmovie",upload.single('posterimage'),function(req,res,next){
-    var title=req.body.title;
-    var id=req.body.id;
-    var director=req.body.director;
-    var distance=req.body.distance;
-    var publicationdate=req.body.publicationdate;
-    var actor=req.body.actor;
-    var typemovie=req.body.typemovie;
-    var country=req.body.country;
-    var posterimage=imgname;
-    var trailer=req.body.trailer;
-    var content=req.body.content;
+router.post("/member-submit-movie", upload.single('posterimage'), function (req, res, next) {
+    var title = req.body.title1;
+    console.log("title=="+title)
+    var id = req.body.id1;
+    console.log("id=="+id)
+    var director = req.body.director;
+    var distance = req.body.distance;
+    var publicationdate = req.body.publicationdate;
+    var actor = req.body.actor;
+    var typemovie = req.body.typemovie;
+    var country = req.body.country;
+    var posterimage = imgname;
+    var trailer = req.body.trailer;
+    var content = req.body.content;
     var now = new Date();
     var dateofwrite = dateFormat(now, "isoDate");
     var params = {
@@ -196,16 +343,16 @@ router.post("/submitmovie",upload.single('posterimage'),function(req,res,next){
         UpdateExpression: "set stt=:st, director=:a, distance=:b, publicationdate=:c, actor=:d, typemovie=:e, posterimage=:g, trailer=:h, content=:i, dateofwrite=:j, country=:l",
         ExpressionAttributeValues: {
             ":st": 2,
-            ":a":director,
-            ":b":distance,
-            ":c":publicationdate,
-            ":d":actor,
-            ":e":typemovie,
-            ":l":country,
-            ":g":posterimage,
-            ":h":trailer,
-            ":i":content,
-            ":j":dateofwrite
+            ":a": director,
+            ":b": distance,
+            ":c": publicationdate,
+            ":d": actor,
+            ":e": typemovie,
+            ":l": country,
+            ":g": posterimage,
+            ":h": trailer,
+            ":i": content,
+            ":j": dateofwrite
 
         },
         ReturnValues: "UPDATED_NEW"
@@ -214,52 +361,99 @@ router.post("/submitmovie",upload.single('posterimage'),function(req,res,next){
         if (err) {
             console.error("Unable to update item. Error JSON:", JSON.stringify(err, null, 2));
         } else {
-            return res.redirect("/getlistregister");
-            imgname="";
+            return res.redirect("/movie/list-movie-registed");
+            imgname = "";
         }
     });
 })
-// ================Approved=======================
-router.post("/approved",function(req,res,next){
-    var approver=req.session.email.fullname;
-    var approveremail=req.session.email.email;
-    var title=req.body.title;
-    var id=req.body.id;
-    var now = new Date();
-    var dateofapproved = dateFormat(now, "isoDate");
+
+// ========Approve========
+router.get("/get-admin-approve-movie", function (req, res, next) {
+    var role = 2;
     var params = {
-        TableName: "Movies",
-        Key: {
-            "id": id,
-            "title": title
-        },
-        UpdateExpression: "set stt=:st, dateofapproved=:a, approver=:b, approveremail=:c",
-        ExpressionAttributeValues: {
-            ":st": 1,
-            ":a":dateofapproved,
-            ":b":approver,
-            ":c":approveremail
-        },
-        ReturnValues: "UPDATED_NEW"
+      TableName: "Movies",
+      // ProjectionExpression: "#status",
+      FilterExpression: "#stt=:stt",
+      ExpressionAttributeNames: {
+        "#stt": "stt"
+      },
+      ExpressionAttributeValues: {
+        ":stt": role,
+      }
+      // Limit: 30
     };
-    docClient.update(params, function (err, data) {
-        if (err) {
-            console.error("Unable to update item. Error JSON:", JSON.stringify(err, null, 2));
-        } else {
-            return res.send(true);
-        }
+    docClient.scan(params, function (error, result) {
+      if (error) {
+        console.error("Unable to query. Error:", JSON.stringify(error, null, 2));
+      } else {
+        res.render("../views/movies/admin-approve-movie.ejs", { result });
+      }
     });
+  })
+  // ========End Approve====
+// ================Approved=======================
+router.post("/admin-approve-movie", function (req, res, next) {
+    if (req.isAuthenticated()) {
+        return res.render("../views/err-role/err.ejs", { roleerr: "Bạn đăng nhập để truy cập đến trang này!" })
+        // return res.send(false);
+    }
+    else {
+        var sess = {};
+        req.session.passport.user.Items.forEach(function (j) {
+            sess = {
+                "email": j.email,
+                "fullname": j.fullname,
+                "role": j.role
+            }
+        })
+        if (sess.role < 2) {
+            return res.render("../views/err-role/err.ejs", { roleerr: "Bạn cần được cấp quyền để truy cập đến trang này!" })
+        }
+        else {
+
+            var approver = sess.fullname;
+            var approveremail = sess.email;
+            var title = req.body.title;
+            var id = req.body.id;
+            var now = new Date();
+            var dateofapproved = dateFormat(now, "isoDate");
+            var params = {
+                TableName: "Movies",
+                Key: {
+                    "id": id,
+                    "title": title
+                },
+                UpdateExpression: "set stt=:st, dateofapproved=:a, approver=:b, approveremail=:c",
+                ExpressionAttributeValues: {
+                    ":st": 1,
+                    ":a": dateofapproved,
+                    ":b": approver,
+                    ":c": approveremail
+                },
+                ReturnValues: "UPDATED_NEW"
+            };
+            docClient.update(params, function (err, data) {
+                if (err) {
+                    console.error("Unable to update item. Error JSON:", JSON.stringify(err, null, 2));
+                } else {
+                    return res.send(true);
+                }
+            });
+        }
+    }   
 })
+
+
 // =============end Approved======================
 // ================Unapprove=======================
-router.post("/unapprove",function(req,res,next){
-    var unapprover=req.session.email.fullname;
-    var unapproveremail=req.session.email.email;
-    var title=req.body.title;
-    var id=req.body.id;
+router.post("/unapprove", function (req, res, next) {
+    var unapprover = req.session.email.fullname;
+    var unapproveremail = req.session.email.email;
+    var title = req.body.title;
+    var id = req.body.id;
     var now = new Date();
     var undateofapprove = dateFormat(now, "isoDate");
-    var note=req.body.note;
+    var note = req.body.note;
     var params = {
         TableName: "Movies",
         Key: {
@@ -269,9 +463,9 @@ router.post("/unapprove",function(req,res,next){
         UpdateExpression: "set note=:note, unapprover=:a, unapproveremail=:b, undateofapprove=:c",
         ExpressionAttributeValues: {
             ":note": note,
-            ":a":unapprover,
-            ":b":unapproveremail,
-            ":c":undateofapprove
+            ":a": unapprover,
+            ":b": unapproveremail,
+            ":c": undateofapprove
         },
         ReturnValues: "UPDATED_NEW"
     };
@@ -285,12 +479,11 @@ router.post("/unapprove",function(req,res,next){
 })
 // =============end Unapprove======================
 // ================Delete Movie=======================
-router.post("/deletemovie",function(req,res,next){
-    var title=req.body.title;
-    var id=req.body.id;
-    var role=req.session.email.role;
-    if(role>2)
-    {
+router.post("/deletemovie", function (req, res, next) {
+    var title = req.body.title;
+    var id = req.body.id;
+    var role = req.session.email.role;
+    if (role > 2) {
         var params = {
             TableName: "Movies",
             Key: {
@@ -306,8 +499,7 @@ router.post("/deletemovie",function(req,res,next){
             }
         });
     }
-    else
-    {
+    else {
         return res.send("ERROR ROLE UNVALID");
     }
 })
@@ -320,7 +512,7 @@ router.post("/unregistermoviewriter", function (req, res, next) {
     var now = new Date();
     var unregistiondate = dateFormat(now, "isoDate");
     var title = req.body.title;
-  
+
     var params = {
         TableName: "Movies",
         Key: {
@@ -346,22 +538,21 @@ router.post("/unregistermoviewriter", function (req, res, next) {
 })
 // =============End Unregister============================
 // ==========Update Movie Member==========================
-router.post("/update-movie-member",upload.single('posterimage'),function(req,res,next){
-    var title=req.body.title;
-    var id=req.body.id;
-    var director=req.body.director;
-    var distance=req.body.distance;
-    var publicationdate=req.body.publicationdate;
-    var actor=req.body.actor;
-    var typemovie=req.body.typemovie;
-    var country=req.body.country;
-    var posterimage=imgname;
-    var trailer=req.body.trailer;
-    var content=req.body.content;
+router.post("/update-movie-member", upload.single('posterimage'), function (req, res, next) {
+    var title = req.body.title;
+    var id = req.body.id;
+    var director = req.body.director;
+    var distance = req.body.distance;
+    var publicationdate = req.body.publicationdate;
+    var actor = req.body.actor;
+    var typemovie = req.body.typemovie;
+    var country = req.body.country;
+    var posterimage = imgname;
+    var trailer = req.body.trailer;
+    var content = req.body.content;
     var now = new Date();
     var dateofwrite = dateFormat(now, "isoDate");
-    if(imgname=="")
-    {
+    if (imgname == "") {
         var params = {
             TableName: "Movies",
             Key: {
@@ -371,22 +562,21 @@ router.post("/update-movie-member",upload.single('posterimage'),function(req,res
             UpdateExpression: "set stt=:st, director=:a, distance=:b, publicationdate=:c, actor=:d, typemovie=:e, trailer=:h, content=:i, dateofwrite=:j, country=:l",
             ExpressionAttributeValues: {
                 ":st": 2,
-                ":a":director,
-                ":b":distance,
-                ":c":publicationdate,
-                ":d":actor,
-                ":e":typemovie,
-                ":l":country,
-                ":h":trailer,
-                ":i":content,
-                ":j":dateofwrite
-    
+                ":a": director,
+                ":b": distance,
+                ":c": publicationdate,
+                ":d": actor,
+                ":e": typemovie,
+                ":l": country,
+                ":h": trailer,
+                ":i": content,
+                ":j": dateofwrite
+
             },
             ReturnValues: "UPDATED_NEW"
         };
     }
-    else
-    {
+    else {
         var params = {
             TableName: "Movies",
             Key: {
@@ -396,17 +586,17 @@ router.post("/update-movie-member",upload.single('posterimage'),function(req,res
             UpdateExpression: "set stt=:st, director=:a, distance=:b, publicationdate=:c, actor=:d, typemovie=:e, posterimage=:g, trailer=:h, content=:i, dateofwrite=:j, country=:l",
             ExpressionAttributeValues: {
                 ":st": 2,
-                ":a":director,
-                ":b":distance,
-                ":c":publicationdate,
-                ":d":actor,
-                ":e":typemovie,
-                ":l":country,
-                ":g":posterimage,
-                ":h":trailer,
-                ":i":content,
-                ":j":dateofwrite
-    
+                ":a": director,
+                ":b": distance,
+                ":c": publicationdate,
+                ":d": actor,
+                ":e": typemovie,
+                ":l": country,
+                ":g": posterimage,
+                ":h": trailer,
+                ":i": content,
+                ":j": dateofwrite
+
             },
             ReturnValues: "UPDATED_NEW"
         };
@@ -416,7 +606,7 @@ router.post("/update-movie-member",upload.single('posterimage'),function(req,res
             console.error("Unable to update item. Error JSON:", JSON.stringify(err, null, 2));
         } else {
             return res.redirect("/getlistregister");
-            imgname="";
+            imgname = "";
         }
     });
 })

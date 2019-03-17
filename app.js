@@ -7,14 +7,12 @@ var bodyParser = require("body-parser");
 var app = express();
 var session = require('express-session');
 var passport=require('passport');
-var passportfb=require('passport-facebook').Strategy;
-var ggstrategy=require('passport-google-oauth').OAuth2Strategy;
-var localStratery=require('passport-local').Strategy;
 
 
 
 
 var indexRouter = require('./routes/index');
+var admin = require('./routes/admin');
 var usersRouter = require('./routes/users');
 var movie=require('./routes/movie');
 var account=require('./routes/account');
@@ -77,6 +75,7 @@ app.use('/', indexRouter);
 app.use('/movie',movie);
 app.use('/account',account);
 app.use('/users', usersRouter);
+app.use('/admin', admin);
 
 
 

@@ -1,0 +1,10 @@
+#acction-login-register:hover, #logined:hover ,#logined1:hover{
+    color: orange;
+}
+#daucach{
+    color: orange;
+    font-weight: 500;
+}
+#logined1{
+    font-size: 15px;
+}
