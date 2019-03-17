@@ -95,15 +95,15 @@ router.get("/create-movie", function(req, res, next) {
 
 // ================Multer==============
 var imgname = ""; //Bien khai bao static chua ten anh bia
-var storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, "public/images/uploads");
-  },
-  filename: (req, file, cb) => {
-    imgname += file.fieldname + "-" + Date.now() + file.originalname;
-    cb(null, imgname);
-  }
-});
+// var storage = multer.diskStorage({
+//   destination: (req, file, cb) => {
+//     cb(null, "public/images/uploads");
+//   },
+//   filename: (req, file, cb) => {
+//     imgname += file.fieldname + "-" + Date.now() + file.originalname;
+//     cb(null, imgname);
+//   }
+// });
 
 // Using S3 for upload image to aws bucket
 
@@ -112,20 +112,21 @@ var s3 = new AWS.S3();
 s3.config.endpoint = "s3.us-west-2.amazonaws.com";
 
 var s3upload = multer({
-    storage: multerS3({
-        s3: s3,
-        bucket: 'cars-management-img',
-        key: function (req, file, cb) {
-            console.log(file);
-            cb(null, file.originalname); //use Date.now() for unique file keys
-        }
-    })
+  storage: multerS3({
+    s3: s3,
+    bucket: "movies-images",
+    key: function(req, file, cb) {
+      console.log(file);
+      var fileName = file.fieldname + "-" + Date.now() + file.originalname;
+      imgname = "https://s3-us-west-2.amazonaws.com/movies-images/" + fileName;
+      cb(null, fileName); //use Date.now() for unique file keys
+    }
+  })
 });
 
 // Ending create S3 multer
 
-
-var upload = multer({ storage: storage });
+// var upload = multer({ storage: storage });
 // ====================================
 router.post("/create-movie-admin", function(req, res, next) {
   if (req.isAuthenticated()) {
@@ -376,7 +377,7 @@ router.get("/member-writing-movie", function(req, res, next) {
 
 // =========Register movie=========
 // =========Writing Movie of writer===============
-router.post("/member-submit-movie", upload.single("posterimage"), function(
+router.post("/member-submit-movie", s3upload.single("posterimage"), function(
   req,
   res,
   next
