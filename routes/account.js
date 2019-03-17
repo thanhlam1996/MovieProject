@@ -146,8 +146,8 @@ router.get(
 passport.use(
   new passportfb(
     {
-      clientID: "2224558900900786",
-      clientSecret: "37f2b2142b4828ddedfc8cbf50590652",
+      clientID: "257002525186870",
+      clientSecret: "994485da2b9a29fe8c80c80bd0d3ea1f",
       callbackURL: dynamoDbConfig.address + "/account/loginfb/cb",
       profileFields: ["email", "name"]
     },
@@ -212,6 +212,8 @@ router.get(
   passport.authenticate("google", { scope: ["profile", "email"] }),
   function(req, res, next) {}
 );
+
+
 router.get(
   "/logingg/cb",
   passport.authenticate("google", {

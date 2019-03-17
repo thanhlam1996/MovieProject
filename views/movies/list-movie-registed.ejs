@@ -20,9 +20,7 @@
                 <label class="col col-2">Ngày đăng ký</label>
                 <label class="col col-2">Hạn nộp bài</label>
                 <label class="col col-2">Ghi chú</label>
-                <div class="col col-2">
-                    <button class="btn btn-success btn-writing-registed" id="btn-writing-registed<%=count%>" type="button">Viết bài</button>
-                </div>
+                
             </div>
             <div class="row registerlist-detail">
                 <label class="col col-2"><%=i.producer%></label>
@@ -30,11 +28,17 @@
                 <label class="col col-2 deadline"><%=i.registiondate%></label>
                 <label class="col col-2 deadline"><%=i.deadline%></label>
                 <label class="col col-2"><%=i.note?i.note:"Note:"%></label>
-                <div class="col col-2">
+                
+            </div>
+            <div class="row">
+                <div class=" col col-8"></div>
+                <div class="col col-4">
+                    <button class="btn btn-success btn-writing-registed" id="btn-writing-registed<%=count%>" type="button">Viết bài</button>
                     <button class="btn btn-danger btn-writing-unregister" id="btn-writing-registed<%=count%>">Hủy đăng ký</button>
-                    <!-- <button class="btn btn-primary">Sửa</button>
-                    <button class="btn btn-danger">Xóa</button> -->
                 </div>
+                <!-- <div class="col col-2">
+                    <button class="btn btn-danger btn-writing-unregister" id="btn-writing-registed<%=count%>">Hủy đăng ký</button>
+                </div> -->
             </div>
         </div>
         <%count++%>

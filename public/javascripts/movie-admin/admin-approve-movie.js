@@ -21,7 +21,7 @@ $(document).on('click', '.btn-unapprove', function(){
         var note=$(".txt-unapprove-note").val();
         $.ajax({
             type: "post",
-            url:  "/movie/unapprove",
+            url:  "/movie//unapprove-movie-admin",
             data: {id:id, title:title,note:note}
         }).done(function(data){
             if(data)

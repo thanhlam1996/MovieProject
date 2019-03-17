@@ -36,7 +36,7 @@ $(document).on('click', '#btnadditemmovie', function () {
     item += ' </div>';
     item += ' </div>';
     item += '</div>';
-    $('.item-create-movie').after(item);
+    $('.item-create-movie').append(item);
     count++;
 })
 $(document).on('click', '.icon-remove-item-movie', function () {

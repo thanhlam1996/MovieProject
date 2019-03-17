@@ -20,21 +20,27 @@
                         bài</button></div>-->
         </div>
         <div class="row registerlist-label-topic">
-            <label class="col col-2">Nhà phát hành</label>
-            <label class="col col-2">Người viết bài</label>
-            <label class="col col-2">Ngày nộp bài</label>
-            <label class="col col-2">Hạn nộp bài</label>
-            <label class="col col-2">Ghi chú</label>
+            <label id="lbl-admin-approve-movie" class="col col-2">Nhà phát hành</label>
+            <label id="lbl-admin-approve-movie" class="col col-2">Người viết bài</label>
+            <label id="lbl-admin-approve-movie" class="col col-2">Ngày nộp bài</label>
+            <label id="lbl-admin-approve-movie" class="col col-2">Hạn nộp bài</label>
+            <label id="lbl-admin-approve-movie" class="col col-2">Ghi chú</label>
+            <%if(i.adminnote){%>
+                <label id="lbl-admin-approve-movie" class="col col-2">Ghi chú(AD)</label>
+            <%}%>
             <!-- <div class="col col-2">
                     <button class="btn btn-success btn-approve" id="btn-approve<%=count%>" type="button">Duyệt bài</button>
                 </div> -->
         </div>
         <div class="row registerlist-detail">
-            <label class="col col-2"><%=i.producer%></label>
-            <label class="col col-2"><%=i.writer%></label>
-            <label class="col col-2 deadline"><%=i.dateofwrite%></label>
-            <label class="col col-2 deadline"><%=i.deadline%></label>
-            <label class="col col-2"><%=i.note?i.note:"Note:"%></label>
+            <label id="lbl-admin-approve-movie" class="col col-2"><%=i.producer%></label>
+            <label id="lbl-admin-approve-movie" class="col col-2"><%=i.writer%></label>
+            <label id="lbl-admin-approve-movie" class="col col-2 deadline"><%=i.dateofwrite%></label>
+            <label id="lbl-admin-approve-movie" class="col col-2 deadline"><%=i.deadline%></label>
+            <label id="lbl-admin-approve-movie" class="col col-2"><%=i.note?i.note:"Note:"%></label>
+            <%if(i.adminnote){%>
+                <label id="lbl-admin-approve-movie" class="col col-2 deadline"><%=i.adminnote%></label>
+            <%}%>
             <!-- <div class="col col-2">
                                 <button class="btn btn-warning btn-unapprove" id="btn-approve<%=count%>" data-toggle="modal"
                                     data-target="#myModal">Không duyệt</button>
@@ -93,7 +99,6 @@
                 </div>
             </div>
         </div>
-
     </div>
     <!-- ---------- -->
     <!-- Dialog Remove-->

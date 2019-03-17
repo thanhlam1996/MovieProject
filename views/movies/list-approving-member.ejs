@@ -1,6 +1,4 @@
-<%include ../partials/header%>
-
-<%include ../partials/dialogloginregister%>
+<%include ../partials/header-admin%>
 
 <!-----------------------------------------------Container ------------------------------------------------>
 <%var count=1%>
@@ -24,9 +22,9 @@
             <label class="col col-2">Ngày nộp bài</label>
             <label class="col col-2">Hạn nộp bài</label>
             <label class="col col-2">Ghi chú</label>
-            <div class="col col-2">
-                <button class="btn btn-success btn-edit-post-member" id="list<%=count%>" type="button">Sửa bài viết</button>
-            </div>
+            <%if(i.adminnote){%>
+                <label id="lbl-admin-approve-movie" class="col col-2">Ghi chú(AD)</label>
+            <%}%>
         </div>
         <div class="row registerlist-detail">
             <label class="col col-2"><%=i.producer%></label>
@@ -34,19 +32,23 @@
             <label class="col col-2 deadline"><%=i.dateofwrite%></label>
             <label class="col col-2 deadline"><%=i.deadline%></label>
             <label class="col col-2"><%=i.note?i.note:"Note:"%></label>
-            <div class="col col-2">
-                <button class="btn btn-warning btn-view-post-member" id="list<%=count%>" >Xem trước</button>
-
-                <!-- <button class="btn btn-primary">Sửa</button>
-                <button class="btn btn-danger">Xóa</button> -->
+            <%if(i.adminnote){%>
+                <label id="lbl-admin-approve-movie" class="col col-2 deadline"><%=i.adminnote%></label>
+            <%}%>
+        </div>
+        <div class="row">
+            <div class="col col-8"></div>
+            <div class="col col-4">
+                <button class="btn btn-success btn-edit-post-member" id="list<%=count%>" type="button">Sửa bài viết</button>
+                <button class="btn btn-primary btn-view-post-member" id="list<%=count%>">Xem trước</button>
             </div>
         </div>
     </div>
     <%count++ })%>
     <!-- Dialog Note -->
     <!-- The Modal -->
-    
+
 </div>
 
 <!-- --------------------------------------------End Detail--------------------------------------------->
-<%include ../partials/footer%>
+<%include ../partials/footer-admin%>

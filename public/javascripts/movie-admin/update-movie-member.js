@@ -1,9 +1,12 @@
+$(document).ready(function(){
+    $(".imgposter").attr('style', 'display:block');
+})
 function readURL(input) {
     if (input.files && input.files[0]) {
         var reader = new FileReader();
         reader.onload = function (e) {
-            $(".imgposter-create").attr('style', 'display:block');
-            $(".imgposter-create").attr('src', e.target.result);
+            $(".imgposter").attr('style', 'display:block');
+            $(".imgposter").attr('src', e.target.result);
         }
         reader.readAsDataURL(input.files[0]);
     }
@@ -16,7 +19,4 @@ $(document).ready(function () {
 
     });
    
-});
-$(document).on('click','.btn-cancel-writing', function(){
-    window.history.back();
 });

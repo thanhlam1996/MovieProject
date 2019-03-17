@@ -15,7 +15,7 @@
                        </div>
                        <div class="col-lg-6 col-sm-8">
                           <div class="details-banner-info">
-                             <h3><%=i.title%></h3>
+                             <h3 class="detail-title-movie"><%=i.title%></h3>
                              <p class="details-time-left"><i class="fa fa-clock-o"></i><%=i.distance%></p>
                              <a href="<%=i.trailer%>" class="filmoja-btn tablet-action"><i class="fa fa-play"></i>Xem trailer</a>
                           </div>
@@ -40,7 +40,7 @@
         <div class="container">
            <div class="row">
               <div class="col-lg-9 offset-lg-3">
-                 <div class="movie-details-page-box">
+                 <div class="movie-details-page-box" id="<%=i.id%>">
                     <ul>
                        <li><span>Nhà sản xuất</span> : <%=i.producer%></li>
                        <li><span>Quốc gia</span> : <%=i.country%></li>
@@ -51,12 +51,13 @@
                        <li><span>Thời lượng</span> : <%=i.distance%><small>p</small></li>
 
                        <%if(role=="ad"){%>
-                        <li><a href="<%=i.trailer%>" class="filmoja-btn"><i class="fas fa-arrow-left"></i>Trở lại</a> <a href="<%=i.trailer%>" class="filmoja-btn"><i class="fas fa-check"></i>Duyệt bài</a></li>
+                        <li><button type="button" id="btn-back-admin-and-member" class="filmoja-btn"><i class="fas fa-arrow-left"></i>Trở lại</button> <button type="button" id="<%=i.title%>" class="filmoja-btn btn-admin-approve"><i class="fas fa-check"></i>Duyệt bài</button></li>
                         
                         <%}%>
                         <%if(role=="mb"){%>
-                            <li> <a href="<%=i.trailer%>" class="filmoja-btn"><i class="fas fa-arrow-left"></i>Trở lại</a></li>
-                        <%}%>
+                            <li> <button type="button" id="btn-back-admin-and-member" class="filmoja-btn"><i class="fas fa-arrow-left"></i>Trở lại</button><button type="button" id="<%=i.title%>" class="filmoja-btn btn-admin-edit"><i class="fas fa-check"></i>Sửa bài viết</button></li>
+                        
+                         <%}%>
                        <!-- <li><span>N</span> : English(srt)</li> -->
                     </ul>
                     <div class="tv-panel-list">

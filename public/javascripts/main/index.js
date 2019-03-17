@@ -16,7 +16,7 @@ $(document).ready(function () {
             menurole+="<li id='daucach'>||</li>"
             menurole+='<li><a id="logined1" class="nav-member-role2" href="/movie/list-movie-waiting-register-write">Đăng Ký BV</a></li>';
             menurole+="<li id='daucach'>||</li>"
-            menurole+='<li><a id="logined1" class="nav-member-role2" href="#">BV Chờ Duyệt</a></li>';
+            menurole+='<li><a id="logined1" class="nav-member-role2" href="/movie/list-approving-member">BV Chờ Duyệt</a></li>';
             menurole+="<li id='daucach'>||</li>"
             menurole+='<li><a id="logined1" class="nav-member-role2" href="#">Danh Sách BV</i></a></li>';
             menurole+='</ul>';

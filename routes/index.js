@@ -121,61 +121,10 @@ router.get("/detail-movie", function(req, res, next) {
   });
 });
 // ========End GET MOVIE==
-// ===========Get list waiting approve=========
-router.get("/waitingapprove", function(req, res, next) {
-  var email = req.session.email.email;
-  var params = {
-    TableName: "Movies",
-    // ProjectionExpression: "#status",
-    FilterExpression: "(#stt=:stt) AND (#writeremail=:email) ",
-    ExpressionAttributeNames: {
-      "#stt": "stt",
-      "#writeremail": "writeremail"
-    },
-    ExpressionAttributeValues: {
-      ":stt": 2,
-      ":email": email
-    }
-    // Limit: 30
-  };
-  docClient.scan(params, function(error, data) {
-    if (error) {
-      console.error("Unable to query. Error:", JSON.stringify(error, null, 2));
-    } else {
-      res.render("../views/movies/waiting-list-member.ejs", {
-        title: "Danh sách chờ duyệt",
-        data
-      });
-    }
-  });
-});
-// ============================================
-// ========Update Movie========================
-router.get("/update-movie", function(req, res, next) {
-  // var _title = req.body.title;
-  var _id = req.query.id;
-  var params = {
-    TableName: "Movies",
-    KeyConditionExpression: "id=:id",
-    ExpressionAttributeValues: {
-      ":id": _id
-    }
-  };
-  docClient.query(params, function(err, data) {
-    if (err) {
-      console.error(
-        "Unable to read item. Error JSON:",
-        JSON.stringify(err, null, 2)
-      );
-    } else {
-      return res.render("../views/movies/update-movie-member.ejs", {
-        title: "Sửa bài viết",
-        data
-      });
-    }
-  });
-});
-// ============================================
+
+
+
+
 
 // ====================== Phần này dành riêng cho trang quản lý thuộc về role của account >2=========
 router.get("/pageadmin", function(req, res, next) {

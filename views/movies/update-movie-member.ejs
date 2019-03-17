@@ -1,11 +1,8 @@
-<%include ../partials/header%>
-
-<%include ../partials/dialogloginregister%>
-
+<%include ../partials/header-admin%>
 <!-----------------------------------------------Container ------------------------------------------------>
 <div class="container">
 
-    <form class="form-writing" action="movie//update-movie-member" method="POST" enctype="multipart/form-data">
+    <form class="form-writing" action="/movie/update-movie-member" method="POST" enctype="multipart/form-data">
         <%data.Items.forEach(function(i){%>
         <div class="form-group">
             <label>
@@ -59,7 +56,7 @@
                 <label class="col col-2">ID URL</label>
                 <input type="text" name="trailer" value="<%=i.trailer%>" class="form-control col col-4">
                 <label class="col col-2"></label>
-                <img class="imgposter" src=" <%=i.posterimage%>" id="imgposter">
+                <img class="imgposter" src="../uploads/<%=i.posterimage%>" id="imgposter">
             </div>
         </div>
         <div class="form-group ckeditorgroup">
@@ -89,7 +86,7 @@
 <!-- </div> -->
 
 <!-- --------------------------------------------End Detail--------------------------------------------->
-<%include ../partials/footer%>
+<%include ../partials/footer-admin%>
 <script>
 
 

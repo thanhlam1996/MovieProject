@@ -9,7 +9,7 @@ $(document).on('click', '.btn-writing-unregister', function () {
    // console.log(id+"==="+title)
    $.ajax({
        type: "post",
-       url:  "/movie/unregistermoviewriter",
+       url:  "/movie/unregister-movie-member",
        data: {id:id, title:title}
    }).done(function(data){
        if(data)
