@@ -19,7 +19,24 @@ var docClient = new AWS.DynamoDB.DocumentClient();
 
 /* GET home page. */
 router.get("/", function(req, res, next) {
-  res.render("main/index", { title: "Movie" });
+  var params = {
+    TableName: "Movies",
+    FilterExpression: "#stt=:stt",
+    ExpressionAttributeNames: {
+      "#stt": "stt"
+    },
+    ExpressionAttributeValues: {
+      ":stt": 1
+    }
+  };
+
+  docClient.scan(params, function(err, data) {
+    if (err) {
+      console.error("Unable to query. Error:", JSON.stringify(err, null, 2));
+    } else {
+      res.render("main/index", { title: "Movie", data });
+    }
+  });
 });
 // ===========Search============
 router.get("/search", function(req, res, next) {
@@ -121,10 +138,6 @@ router.get("/detail-movie", function(req, res, next) {
   });
 });
 // ========End GET MOVIE==
-
-
-
-
 
 // ====================== Phần này dành riêng cho trang quản lý thuộc về role của account >2=========
 router.get("/pageadmin", function(req, res, next) {

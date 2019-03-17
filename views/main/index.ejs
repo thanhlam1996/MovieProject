@@ -16,22 +16,24 @@
 		   <div class="row">
 			  <div class="col-md-12">
 				 <div class="top-movie-slider owl-carousel">
-					<div class="single-top-movie">
+
+						<%data.Items.forEach(function(i){%>
+					<div class="single-top-movie" id="<%=i.id%>">
 					   <div class="top-movie-wrap">
 						  <div class="top-movie-img">
 							 <a href="#">
-							 <img src="assets/img/top-slider-1.jpeg" alt="top movies" />
+							 <img src="<%=i.posterimage%>" alt="top movies" />
 							 </a>
 						  </div>
 						  <div class="thumb-hover">
-							 <a class="play-video" href="https://www.youtube.com/watch?v=1Q8fG0TtVAY"><i class="fa fa-play"></i></a>
+							 <a class="play-video" href="https://www.youtube.com/watch?v=<%=i.trailer%>"><i class="fa fa-play"></i></a>
 							 <div class="thumb-date">
 								<span>05:30</span>
 							 </div>
 						  </div>
 					   </div>
 					   <div class="top-movie-details">
-						  <h4><a href="#">Dareing Joker</a></h4>
+						  <h4><a href="#"><%=i.title%></a></h4>
 						  <div class="movie-details-thumbs">
 							 <ul>
 								<li>
@@ -48,6 +50,8 @@
 						  </div>
 					   </div>
 					</div>
+					<%})%>
+
 					<div class="single-top-movie">
 					   <div class="top-movie-wrap">
 						  <div class="top-movie-img">
