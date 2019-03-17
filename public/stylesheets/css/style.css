@@ -174,8 +174,9 @@ padding: 0
 	background-color: transparent;
 }
 .header-right-info .navbar-nav{
-	float:right;
-	padding:17px 0px;
+	float: right;
+	padding:17px 10px;
+	display: inline-block;
 }
 /*----------------------------------------*/
 /*  3.  Header top Menu CSS
@@ -3670,7 +3671,8 @@ ul.profile-contact-menu {
     display:none;
 }
 #sidebar.active .left-custom-menu-adp-wrap ul.left-sidebar-menu-pro li .mini-dn {
-    display:inline-block;
+	display:inline-block;
+	margin-left: 10px;
 }
 #sidebar.active .left-custom-menu-adp-wrap ul.left-sidebar-menu-pro li .big-icon {
     font-size:14px;

@@ -1,14 +1,12 @@
 [
-    {
-        "email":"lam.truong1996@gmail.com",
-        "fullname":"Truong Thanh Lam",
-        "sex":"Nam",
-        "birthday":"30/07/1996",
-        "password":"11111111",
-        "phone":"0923334848",
-        "adress":"abc acv HCM",
-        "totalmovies":1,
-        "role":4,
-        "movies":["movie001"]
-    }
+  {
+    "email": "lam.truong1996@gmail.com",
+    "fullname": "Truong Thanh Lam",
+    "sex": "Nam",
+    "birthday": "30/07/1996",
+    "password": "11111111",
+    "phone": "0923334848",
+    "adress": "abc acv HCM",
+    "role": 4
+  }
 ]

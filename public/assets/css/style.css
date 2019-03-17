@@ -591,14 +591,14 @@ li {
 
 .mainmenu ul li {
 	display: inline-block;
-	position: relative
+	position: relative;
 }
 
 .mainmenu ul>li>a {
 	display: block;
 	color: #13212d;
 	text-transform: capitalize;
-	padding: 30px 10px;
+	padding: 30px 8px;
 	position: relative
 }
 
