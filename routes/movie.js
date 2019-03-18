@@ -834,7 +834,24 @@ router.post("/update-movie-member", upload.single("posterimage"), function(
       return res.redirect("/movie/list-approving-member");
       imgname = "";
     }
+<<<<<<< Updated upstream
   });
 });
+=======
+    docClient.update(params, function (err, data) {
+        if (err) {
+            console.error("Unable to update item. Error JSON:", JSON.stringify(err, null, 2));
+        } else {
+            return res.redirect("/movie/list-approving-member");
+            imgname = "";
+        }
+    });
+})
+//  ===========List Movie of Member writed===============
+router.get("/get-list-writed-member", function(req,res,next){
+    return res.render('../views/movies/list-movie-member-writed.ejs')
+})
+// ======================================================
+>>>>>>> Stashed changes
 // =======================================================
 module.exports = router;

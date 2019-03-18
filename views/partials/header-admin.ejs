@@ -4,11 +4,17 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Order Form | Adminpro - Admin Template</title>
+    <title>Manager</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<!--===================DATA TABLE++++++++++++++++++  -->
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.18/af-2.3.3/fc-3.2.5/datatables.min.css"/>
+ 
+<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.18/af-2.3.3/fc-3.2.5/datatables.min.js"></script>
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+<!-- ============================================== -->
     <!-- favicon
 		============================================ -->
     <link rel="shortcut icon" type="image/x-icon" href="../img/favicon.ico">
@@ -19,7 +25,8 @@
 		============================================ -->
     <link rel="stylesheet" href="../css/bootstrap.min.css">
     <!-- Bootstrap CSS
-		============================================ -->
+        ============================================ -->
+
     <link rel="stylesheet" href="../css/font-awesome.min.css">
     <!-- adminpro icon CSS
 		============================================ -->
@@ -48,40 +55,39 @@
     <!-- modernizr JS
         ============================================ -->
 
-        <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
-
+    <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css'
+        integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
 
     <!-- =========================PAGE===================== -->
     <!-- Create Movie Admin CSS -->
     <link rel="stylesheet" href="../movie-admin/create-movie-admin.css">
     <!-- ====================== -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    
+
+
     <!-- List  Movie waiting register  CSS -->
     <link rel="stylesheet" href="../movie-admin/list-movie-waiting-register-write.css">
     <!-- ====================== -->
     <!-- CKEDITOR 5-->
-	<script src="https://cdn.ckeditor.com/ckeditor5/12.0.0/classic/ckeditor.js"></script>
-	<!-- end CKEDITOR -->
+    <script src="https://cdn.ckeditor.com/ckeditor5/12.0.0/classic/ckeditor.js"></script>
+    <!-- end CKEDITOR -->
     <link rel="stylesheet" href="../movie-admin/member-writing-movie.css">
     <!-- modernizr JS
         ============================================ -->
-     <!-- List  Movie waiting register  CSS -->
-     <link rel="stylesheet" href="../movie-admin/list-movie-waiting-register-write.css">
-     <!-- ====================== -->
-        <!-- List  Movie waiting register  CSS -->
-     <link rel="stylesheet" href="../movie-admin/list-movie-registed.css">
-     <!-- ====================== -->
+    <!-- List  Movie waiting register  CSS -->
+    <link rel="stylesheet" href="../movie-admin/list-movie-waiting-register-write.css">
+    <!-- ====================== -->
+    <!-- List  Movie waiting register  CSS -->
+    <link rel="stylesheet" href="../movie-admin/list-movie-registed.css">
+    <!-- ====================== -->
 
-          <!-- List  approving meber  CSS -->
-     <link rel="stylesheet" href="../movie-admin/list-approving-member.css">
-     <!-- ====================== -->
+    <!-- List  approving meber  CSS -->
+    <link rel="stylesheet" href="../movie-admin/list-approving-member.css">
+    <!-- ====================== -->
 
-
-
+    
 
     <!-- =========================End PAGE================= -->
-        
+
     <script src="../js/vendor/modernizr-2.8.3.min.js"></script>
 </head>
 
@@ -102,20 +108,24 @@
                 </div>
                 <div class="left-custom-menu-adp-wrap">
                     <ul class="nav navbar-nav left-sidebar-menu-pro">
-                            <li class="nav-item">
-                                    <a href="/"><i class="fa big-icon fa-home"></i> <span class="mini-dn">Trang Chủ</span></a>
-                                </li>
                         <li class="nav-item">
-                            <a href="/movie/create-movie"><i class="fas big-icon fa-plus-square"></i> <span class="mini-dn">Tạo
+                            <a href="/"><i class="fa big-icon fa-home"></i> <span class="mini-dn">Trang Chủ</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/movie/create-movie"><i class="fas big-icon fa-plus-square"></i> <span
+                                    class="mini-dn">Tạo
                                     bài viết</span></a>
                         </li>
-                        <li class="nav-item"><a href="#"><i class="fas big-icon fa-list-ul"></i> <span class="mini-dn">Danh Mục</span></a>
+                        <li class="nav-item"><a href="#"><i class="fas big-icon fa-list-ul"></i> <span
+                                    class="mini-dn">Danh Mục</span></a>
                         </li>
                         <li class="nav-item">
-                            <a href="/movie/get-admin-approve-movie"><i class="fas big-icon fa-check-square"></i> <span class="mini-dn">Duyệt
+                            <a href="/movie/get-admin-approve-movie"><i class="fas big-icon fa-check-square"></i> <span
+                                    class="mini-dn">Duyệt
                                     Bài</span></a>
                         </li>
-                        <li class="nav-item"><a href="#"><i class="fas big-icon fa-tasks"></i> <span class="mini-dn">Quản
+                        <li class="nav-item"><a href="#"><i class="fas big-icon fa-tasks"></i> <span
+                                    class="mini-dn">Quản
                                     Lý Bài Viết</span> </a>
                         </li>
                         <li class="nav-item"><a href="#"><i class="fas big-icon fa-calendar-check"></i> <span
@@ -125,8 +135,6 @@
                         <li class="nav-item"><a href="#"><i class="fas big-icon fa-shield-alt"></i> <span
                                     class="mini-dn">Phân Quyền</span></a>
                         </li>
-
-
                     </ul>
                 </div>
             </nav>
@@ -142,19 +150,38 @@
                                     class="btn bar-button-pro header-drl-controller-btn btn-info navbar-btn">
                                     <i class="fa fa-bars"></i>
                                 </button>
+
+
                                 <div class="admin-logo logo-wrap-pro">
                                     <a href="#"><img src="img/logo/log.png" alt="" />
                                     </a>
                                 </div>
                             </div>
                             <div class="col-lg-6 col-md-1 col-sm-1 col-xs-12">
-                               
+                                <div class="header-top-menu">
+                                    <ul class="nav navbar-nav mai-top-nav">
+                                        <li class="nav-item"> <a href="/"><i class="fa big-icon fa-home"></i> <span
+                                                    class="mini-dn"></span></a>
+                                        </li>
+                                        <li class="nav-item"><a href="/movie/list-movie-registed" class="nav-link">Viết
+                                                Bài</a>
+                                        </li>
+                                        <li class="nav-item"><a href="/movie/list-movie-waiting-register-write"
+                                                class="nav-link">Đăng Ký BV</a>
+                                        </li>
+                                        <li class="nav-item"><a href="/movie/list-approving-member" class="nav-link">BV
+                                                Chờ Duyệt</a>
+                                        </li>
+                                        <li class="nav-item"><a href="/movie/get-list-writed-member" class="nav-link">Danh Sách BV</a>
+                                        </li>
+                                    </ul>
+                                </div>
                             </div>
                             <div class="col-lg-5 col-md-5 col-sm-6 col-xs-12">
                                 <div class="header-right-info">
                                     <ul class="nav navbar-nav mai-top-nav header-right-menu">
-                                       
-                                        <li class="nav-item"><a href="#" data-toggle="dropdown" role="button"
+
+                                        <!-- <li class="nav-item"><a href="#" data-toggle="dropdown" role="button"
                                                 aria-expanded="false" class="nav-link dropdown-toggle"><i
                                                     class="fa fa-bell-o" aria-hidden="true"></i><span
                                                     class="indicator-nt"></span></a>
@@ -218,15 +245,14 @@
                                                     <a href="#">View All Notification</a>
                                                 </div>
                                             </div>
-                                        </li>
+                                        </li> -->
                                         <li class="nav-item">
-                                            <a href="#" 
-                                                class="nav-link dropdown-toggle">
-                                                <span class="admin-name">Đăng Xuất</span>                                       
+                                            <a href="#" class="admin-logout">
+                                                <span class="admin-name">Đăng Xuất</span>
                                             </a>
-                    
+
                                         </li>
-                                       
+
                                     </ul>
                                 </div>
                             </div>
