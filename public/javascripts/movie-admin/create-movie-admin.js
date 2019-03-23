@@ -1,12 +1,4 @@
-$(document).ready(function () {
-    $('#datepicker').datepicker({
-        dateFormat: 'dd/mm/yy',
-        showMonthAfterYear: true,
-        yearSuffix: '',
-        dayNamesMin: ['T2', 'T3', 'T4', 'T5', 'T6', 'T7', 'CN'],
-        monthNames: ['tháng 1', 'tháng 2', 'tháng 3', 'tháng 4', 'tháng 5', 'tháng 6', 'tháng 7', 'tháng 8', 'tháng 9', 'tháng 10', 'tháng 11', 'tháng 12'],
-    });
-})
+
 
 var count = 1;
 $(document).on('click', '#btnadditemmovie', function () {
@@ -28,7 +20,7 @@ $(document).on('click', '#btnadditemmovie', function () {
     item += '<div class="row">';
     item += ' <div class="col col-6 date">';
     item += '     <label>Hạn nộp bài</label>';
-    item += '     <input placeholder="dd/mm/yyyy" type="text" class="form-control col col-10" id="datepicker" name="deadline">';
+    item += '     <input type="date" class="form-control col col-10" name="deadline">';
     item += '  </div>';
     item += '  <div class="col col-6">';
     item += '      <label>Ghi chú</label>';
@@ -46,15 +38,5 @@ $(document).on('click', '.icon-remove-item-movie', function () {
 // $(document).ready(function () {
 
 // })
-$('#datepicker').on('click','#datepicker',function () {
-   
-    $('#datepicker').datepicker({
-        dateFormat: 'dd/mm/yy',
-        showMonthAfterYear: true,
-        yearSuffix: '',
-        dayNamesMin: ['T2', 'T3', 'T4', 'T5', 'T6', 'T7', 'CN'],
-        monthNames: ['tháng 1', 'tháng 2', 'tháng 3', 'tháng 4', 'tháng 5', 'tháng 6', 'tháng 7', 'tháng 8', 'tháng 9', 'tháng 10', 'tháng 11', 'tháng 12'],
-    });
-})
 
 

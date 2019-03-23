@@ -27,15 +27,8 @@ router.get("/pageadmin", function(req, res, next) {
     });
     // return res.send(false);
   } else {
-    var sess = {};
-    req.session.passport.user.Items.forEach(function(i) {
-      sess = {
-        email: i.email,
-        fullname: i.fullname,
-        role: i.role
-      };
-    });
-    if (sess.role < 3) {
+   
+    if (req.session.passport.user.role < 1) {
       return res.render("../views/err-role/err.ejs", {
         roleerr: "Bạn cần được cấp quyền để truy cập đến trang này!"
       });

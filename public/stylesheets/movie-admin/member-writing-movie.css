@@ -1,5 +1,5 @@
 .form-writing{
-    margin-top: 100px;
+    margin-top: 50px;
     margin-bottom: 100px;
 }
 #title-movie-writing{
@@ -33,10 +33,14 @@
 .btn-submit-writing{
     margin-right: 10px;
 }
-.imgposter{
+.imgpostercreate{
     height: 100px;
     width: 70px;
     display: none;
+}
+#imgposter{
+    height: 100px;
+    width: 70px;
 }
 .form-writing label{
     justify-content: left;
@@ -45,4 +49,7 @@
 #lbl-content-right{
     
     text-align: right;
+}
+#title-writing{
+    color: blue;
 }

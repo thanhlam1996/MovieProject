@@ -1,10 +1,9 @@
 $(document).on('click', '.btn-approve', function(){
-    var id=$("."+$(this).attr('id')).attr('id');
-    var title=$('.'+id).attr('id');
+    var id=$(this).attr('id')
     $.ajax({
         type: "post",
         url:  "/movie/admin-approve-movie",
-        data: {id:id, title:title}
+        data: {id:id}
     }).done(function(data){
         if(data)
         {
@@ -15,14 +14,13 @@ $(document).on('click', '.btn-approve', function(){
 });
 // Unapprove
 $(document).on('click', '.btn-unapprove', function(){
-    var id=$("."+$(this).attr('id')).attr('id');
-    var title=$('.'+id).attr('id');
+    var id=$(this).attr('id');
     $(".btn-unapprove-note").click(function(){
         var note=$(".txt-unapprove-note").val();
         $.ajax({
             type: "post",
-            url:  "/movie//unapprove-movie-admin",
-            data: {id:id, title:title,note:note}
+            url:  "/movie/unapprove-movie-admin",
+            data: {id:id,note:note}
         }).done(function(data){
             if(data)
             {
@@ -35,14 +33,12 @@ $(document).on('click', '.btn-unapprove', function(){
 });
 // Delete
 $(document).on('click', '.btn-remove-approve', function(){
-    var id=$("."+$(this).attr('id')).attr('id');
-    var title=$('.'+id).attr('id');
+    var id=$(this).attr('id');
     $(".btn-remove-approve").click(function(){
-       
         $.ajax({
             type: "post",
-            url:  "/movie/deletemovie",
-            data: {id:id, title:title}
+            url:  "/movie/delete-movie-admin",
+            data: {id:id}
         }).done(function(data){
             if(data)
             {
@@ -54,7 +50,6 @@ $(document).on('click', '.btn-remove-approve', function(){
     
 });
 $(document).on('click', '.btn-view-post-admin', function(){
-    var id=$("."+$(this).attr('id')).attr('id');
-    // var title=$('.'+id).attr('id');
+    var id=$(this).attr('id');
     window.location.href="/detail-movie?id="+id+"&role=ad";    
 });

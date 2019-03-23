@@ -7,14 +7,14 @@
     <title>Manager</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+   
+    
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<!--===================DATA TABLE++++++++++++++++++  -->
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.18/af-2.3.3/fc-3.2.5/datatables.min.css"/>
- 
-<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.18/af-2.3.3/fc-3.2.5/datatables.min.js"></script>
 
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 
-<!-- ============================================== -->
+    <!-- ============================================== -->
     <!-- favicon
 		============================================ -->
     <link rel="shortcut icon" type="image/x-icon" href="../img/favicon.ico">
@@ -83,12 +83,29 @@
     <!-- List  approving meber  CSS -->
     <link rel="stylesheet" href="../movie-admin/list-approving-member.css">
     <!-- ====================== -->
+    <!-- List  approving meber  CSS -->
+    <link rel="stylesheet" href="../movie-admin/admin-approve-movie.css">
+    <!-- ====================== -->
+    <!-- Page admin  CSS -->
+    <link rel="stylesheet" href="../admin/pageadmin.css">
+    <!-- ====================== -->
+    <!-- List movie member writed  CSS -->
+    <link rel="stylesheet" href="../movie-admin/list-movie-member-writed.css">
+    <!-- ====================== -->
 
-    
-
+    <!-- List movie member writed  CSS -->
+    <link rel="stylesheet" href="../movie-admin/admin-update-movie.css">
+    <!-- ====================== -->
+      <!-- ADmin decentralization  CSS -->
+    <link rel="stylesheet" href="../authentication/admin-decentralization.css">
+      <!-- ====================== -->
     <!-- =========================End PAGE================= -->
-
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
+  
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    
     <script src="../js/vendor/modernizr-2.8.3.min.js"></script>
+
 </head>
 
 <body class="materialdesign">
@@ -99,43 +116,16 @@
     <div class="wrapper-pro">
         <div class="left-sidebar-pro">
             <nav id="sidebar">
-                <div class="sidebar-header">
+                <div class="sidebar-header acc">
                     <a href="#"><img src="../img/message/1.jpg" alt="" />
                     </a>
-                    <h3>Thanh Lâm</h3>
+                    <!-- <h3>Thanh Lâm</h3>
                     <p>Admin</p>
-                    <strong>TL</strong>
+                    <strong>TL</strong> -->
                 </div>
-                <div class="left-custom-menu-adp-wrap">
-                    <ul class="nav navbar-nav left-sidebar-menu-pro">
-                        <li class="nav-item">
-                            <a href="/"><i class="fa big-icon fa-home"></i> <span class="mini-dn">Trang Chủ</span></a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="/movie/create-movie"><i class="fas big-icon fa-plus-square"></i> <span
-                                    class="mini-dn">Tạo
-                                    bài viết</span></a>
-                        </li>
-                        <li class="nav-item"><a href="#"><i class="fas big-icon fa-list-ul"></i> <span
-                                    class="mini-dn">Danh Mục</span></a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="/movie/get-admin-approve-movie"><i class="fas big-icon fa-check-square"></i> <span
-                                    class="mini-dn">Duyệt
-                                    Bài</span></a>
-                        </li>
-                        <li class="nav-item"><a href="#"><i class="fas big-icon fa-tasks"></i> <span
-                                    class="mini-dn">Quản
-                                    Lý Bài Viết</span> </a>
-                        </li>
-                        <li class="nav-item"><a href="#"><i class="fas big-icon fa-calendar-check"></i> <span
-                                    class="mini-dn">Sự Kiện</span></a>
-                        </li>
-                        </li>
-                        <li class="nav-item"><a href="#"><i class="fas big-icon fa-shield-alt"></i> <span
-                                    class="mini-dn">Phân Quyền</span></a>
-                        </li>
-                    </ul>
+                <div id="render-menu-by-role" class="left-custom-menu-adp-wrap">
+                    <!-- render theo role -->
+
                 </div>
             </nav>
         </div>
@@ -160,22 +150,40 @@
                             <div class="col-lg-6 col-md-1 col-sm-1 col-xs-12">
                                 <div class="header-top-menu">
                                     <ul class="nav navbar-nav mai-top-nav">
-                                        <li class="nav-item"> <a href="/"><i class="fa big-icon fa-home"></i> <span
-                                                    class="mini-dn"></span></a>
+                                        <li class="nav-item"> <a href="/admin/pageadmin"><i
+                                                    class="fa big-icon fa-home"></i> <span class="mini-dn"></span></a>
                                         </li>
+
+                                    </ul>
+                                    <ul class="nav navbar-nav mai-top-nav">
+
                                         <li class="nav-item"><a href="/movie/list-movie-registed" class="nav-link">Viết
                                                 Bài</a>
                                         </li>
+
+                                    </ul>
+                                    <ul class="nav navbar-nav mai-top-nav">
+
                                         <li class="nav-item"><a href="/movie/list-movie-waiting-register-write"
                                                 class="nav-link">Đăng Ký BV</a>
                                         </li>
+
+                                    </ul>
+                                    <ul class="nav navbar-nav mai-top-nav">
+
                                         <li class="nav-item"><a href="/movie/list-approving-member" class="nav-link">BV
                                                 Chờ Duyệt</a>
                                         </li>
-                                        <li class="nav-item"><a href="/movie/get-list-writed-member" class="nav-link">Danh Sách BV</a>
+
+                                    </ul>
+                                    <ul class="nav navbar-nav mai-top-nav">
+
+                                        <li class="nav-item"><a href="/movie/get-list-writed-member"
+                                                class="nav-link">Danh Sách BV</a>
                                         </li>
                                     </ul>
                                 </div>
+
                             </div>
                             <div class="col-lg-5 col-md-5 col-sm-6 col-xs-12">
                                 <div class="header-right-info">

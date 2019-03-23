@@ -1,157 +1,47 @@
 [
   {
-    "id": "movie001",
-    "title": "Cua Lại Vợ Bầu",
-    "typemovie": ["Hài", "Gia đình", "Tình cảm"],
-    "actor": ["Thanh Lâm", "Văn Hiếu", "Trấn Thành"],
-    "director": "Nhất Trung",
-    "producer": "NT Studio",
-    "country": "Việt Nam",
-    "distance": 90,
-    "releasedate": "30/01/2019",
-    "posterimage": "url_aaaaa",
-    "trailer": "l8vTMxuvz6Y",
-    "content": "ádlkjasoldjhasldjlasdjlasdjlasdjoiashdasdfugufygweufgwfgsxgbfclhdsgfhsxbfcjhjsdgfjhsdgfjhsdgfljh",
-    "author": "lam.truong1996@gmail.com",
-    "publicationdate": "17/02/2019",
-    "stt": 1,
-    "comment": {},
-    "like": 0,
-    "countview": 0
-  },
-  {
-    "actor": ["Suraj Sharma", "Irrfan Khan", "Ayush Tandon", "Gautam Belur"],
-    "author": "lam.truong1996@gmail.com",
-    "comment": {},
-    "content": "In Canada, a writer visits the Indian storyteller Pi Patel and asks him to tell his life story. Pi tells the story of his childhood in Pondicherry, India, and the origin of his nickname. One day, his father, a zoo owner, explains that the municipality is no longer supporting the zoo and he has hence decided to move to Canada, where the animals the family owns would also be sold. They board on a Japanese cargo ship with the animals and out of the blue, there is a storm, followed by a shipwrecking. Pi survives in a lifeboat with a zebra, an orangutan, a hyena and a male Bengal tiger nicknamed Richard Parker. They are adrift in the Pacific Ocean, with aggressive hyena and Richard Parker getting hungry. Pi needs to find a way to survive.",
-    "country": "USA, Taiwan, UK, Canada",
-    "countview": 0,
-    "director": "Ang Lee",
-    "distance": 127,
-    "id": "tt0454876",
-    "like": 525193,
-    "posterimage": "https://m.media-amazon.com/images/M/MV5BNTg2OTY2ODg5OF5BMl5BanBnXkFtZTcwODM5MTYxOA@@._V1_SX300.jpg",
-    "producer": "20th Century Fox",
-    "publicationdate": "12/03/2013",
-    "releasedate": "21/11/2012",
-    "stt": 1,
-    "title": "Life of Pi",
-    "trailer": "3mMN693-F3U",
-    "typemovie": ["Gia đình", "Tình cảm", "Phiêu lưu"]
-  },
-  {
-    "actor": ["Leonardo DiCaprio", "Kate Winslet", "Billy Zane", "Kathy Bates"],
-    "author": "lam.truong1996@gmail.com",
-    "comment": {},
-    "content": "84 years later, a 100 year-old woman named Rose DeWitt Bukater tells the story to her granddaughter Lizzy Calvert, Brock Lovett, Lewis Bodine, Bobby Buell and Anatoly Mikailavich on the Keldysh about her life set in April 10th 1912, on a ship called Titanic when young Rose boards the departing ship with the upper-class passengers and her mother, Ruth DeWitt Bukater, and her fiancé, Caledon Hockley. Meanwhile, a drifter and artist named Jack Dawson and his best friend Fabrizio De Rossi win third-class tickets to the ship in a game. And she explains the whole story from departure until the death of Titanic on its first and last voyage April 15th, 1912 at 2:20 in the morning.",
-    "country": "USA",
-    "countview": 0,
-    "director": "James Cameron",
-    "distance": 194,
-    "id": "tt0120338",
-    "like": 941210,
-    "posterimage": "https://m.media-amazon.com/images/M/MV5BMDdmZGU3NDQtY2E5My00ZTliLWIzOTUtMTY4ZGI1YjdiNjk3XkEyXkFqcGdeQXVyNTA4NzY1MzY@._V1_SX300.jpg",
-    "producer": "Paramount Pictures",
-    "publicationdate": "10/09/2012",
-    "releasedate": "19/12/1997",
-    "stt": 1,
-    "title": "Titanic",
-    "trailer": "-iRajLSA8TA",
-    "typemovie": ["Gia đình", "Tình cảm", "Phiêu lưu"]
-  },
-  {
-    "id": "tt0102926",
-    "title": "The Silence of the Lambs",
-    "typemovie": ["Hành động", "Phiêu lưu", "Tình cảm"],
-    "actor": [
-      "Jodie Foster",
-      "Lawrence A. Bonney",
-      "Kasi Lemmons",
-      "Lawrence T. Wrentz"
+    "id":"movie01",
+    "title":"Titanic",
+    "stt":1,
+    "process":{
+      "create":{
+        "creater":["Thanh Lam","lam.truong1996@gmail.com"],
+        "initdate":"19-03-2019",
+        "deadline":"30-03-2019",
+        "createnote":"Thay đổi sẽ thành công"
+      },
+      "registion":{
+        "register":["Van Hieu","hieuabc@gmail.com"],
+        "registion date":"20-03-2019"
+      },
+      "approve":{
+        "submitiondate":"22-03-2019",
+        "approver":["Thanh Lam","lam.truong1996@gmail.com"],
+        "dateof approve":"24-03-2019",
+        "complaint":"Sắp rớt môn..."
+      }
+    },
+    "info":{
+        "movietype":["Hài", "Gia đình","Tình cảm"],
+        "actor":["Thanh Lam", "Van Hieu"],
+        "director":"Nhất Trung",
+        "producer":"NT Studio",
+        "country":"Việt Nam",
+        "distance": 90,
+        "posterimage":"url_aaaaa",
+        "trailer":"l8vTMxuvz6Y",
+        "content":"ádlkjasoldjhasldjlasdjlasdjlasgsxgbfclhdsgfhsxbfcjhjsdgfjhsdgfjhsdgfljh",
+        "publicationdate":"17/02/2019"
+    },
+    "feedback":[
+     {
+        "feedbacker": ["Thanh Lam","lam.truong1996@gmail.com","id-asdasdasd"],
+        "feedbackdate":"30-04-2019",
+        "feedbackcontent":"Phim quá hay" 
+     }
     ],
-    "director": "Jonathan Demme",
-    "producer": "Orion Pictures Corporation",
-    "country": "USA",
-    "distance": 118,
-    "releasedate": "14/02/1991",
-    "posterimage": "https://m.media-amazon.com/images/M/MV5BNjNhZTk0ZmEtNjJhMi00YzFlLWE1MmEtYzM1M2ZmMGMwMTU4XkEyXkFqcGdeQXVyNjU0OTQ0OTY@._V1_SX300.jpg",
-    "trailer": "W6Mm8Sbe__o",
-    "content": "FBI trainee Clarice Starling works hard to advance her career, including trying to hide or put behind her West Virginia roots, of which if some knew would automatically classify her as being backward or white trash. After graduation, she aspires to work in the agency's Behavioral Science Unit under the leadership of Jack Crawford. While she is still a trainee, Crawford does ask her to question Dr. Hannibal Lecter, a psychiatrist imprisoned thus far for eight years in maximum security isolation for being a serial killer, he who cannibalized his victims. Clarice is able to figure out the assignment is to pick Lecter's brains to help them solve another serial murder case, that of someone coined by the media as Buffalo Bill who has so far killed five victims, all located in the eastern US, all young women who are slightly overweight especially around the hips, all who were drowned in natural bodies of water, and all who were stripped of large swaths of skin. She also figures that Crawford chose her as a woman to be able to trigger some emotional response from Lecter. After speaking to Lecter for the first time, she realizes that everything with him will be a psychological game with her having often to read between the very cryptic lines he provides. She has to decide how much she will play along as his request in return for talking to him is to expose herself emotionally to him. The case takes more dire turns when a sixth victim is discovered, this one from who they are able to retrieve a key piece of evidence if Lecter is being forthright as to its meaning. A potential seventh victim is high profile Catherine Martin, the daughter of Senator Ruth Martin, which places greater scrutiny on the case as they search for a hopefully still alive Catherine. Who may factor into what happens is Dr. Frederick Chilton, the warden at the prison, he an opportunist who sees the higher profile with Catherine, meaning a higher profile for himself if he can insert himself successfully into the proceedings.",
-    "author": "lam.truong1996@gmail.com",
-    "publicationdate": "01/07/1998",
-    "stt": 1,
-    "comment": {},
-    "like": 0,
-    "countview": 0
-  },
-  {
-    "id": "tt4975722",
-    "title": "Moonlight",
-    "typemovie": ["Hành động", "Phiêu lưu", "Tình cảm"],
-    "actor": [
-      "Mahershala Ali",
-      "Shariff Earp",
-      "Duan Sanderson",
-      "Alex R. Hibbert"
-    ],
-    "director": "Barry Jenkins",
-    "producer": "A24 Films",
-    "country": "USA",
-    "distance": 111,
-    "releasedate": "18/11/2016",
-    "posterimage": "https://m.media-amazon.com/images/M/MV5BNzQxNTIyODAxMV5BMl5BanBnXkFtZTgwNzQyMDA3OTE@._V1_SX300.jpg",
-    "trailer": "9NJj12tJzqc",
-    "content": "Three time periods - young adolescence, mid-teen and young adult - in the life of black-American Chiron is presented. When a child, Chiron lives with his single, crack addict mother Paula in a crime ridden neighborhood in Miami. Chiron is a shy, withdrawn child largely due to his small size and being neglected by his mother, who is more concerned about getting her fixes and satisfying her carnal needs than taking care of him. Because of these issues, Chiron is bullied, the slurs hurled at him which he doesn't understand beyond knowing that they are meant to be hurtful. Besides his same aged Cuban-American friend Kevin, Chiron is given what little guidance he has in life from a neighborhood drug dealer named Juan, who can see that he is neglected, and Juan's caring girlfriend Teresa, whose home acts as a sanctuary away from the bullies and away from Paula's abuse. With this childhood as a foundation, Chiron may have a predetermined path in life, one that will only be magnified in terms of its problems when he reaches his difficult teen years when peer pressure affects what he and many of his peers do, unless he follows Juan's advice of truly making his own decisions for himself.",
-    "author": "lam.truong1996@gmail.com",
-    "publicationdate": "28/02/2017",
-    "stt": 1,
-    "comment": {},
-    "like": 0,
-    "countview": 0
-  },
-  {
-    "id": "tt4975722",
-    "title": "Moonlight",
-    "typemovie": ["Hành động", "Phiêu lưu", "Tình cảm"],
-    "actor": [
-      "Mahershala Ali",
-      "Shariff Earp",
-      "Duan Sanderson",
-      "Alex R. Hibbert"
-    ],
-    "director": "Barry Jenkins",
-    "producer": "A24 Films",
-    "country": "USA",
-    "distance": 111,
-    "releasedate": "18/11/2016",
-    "posterimage": "https://m.media-amazon.com/images/M/MV5BNzQxNTIyODAxMV5BMl5BanBnXkFtZTgwNzQyMDA3OTE@._V1_SX300.jpg",
-    "trailer": "9NJj12tJzqc",
-    "content": "Three time periods - young adolescence, mid-teen and young adult - in the life of black-American Chiron is presented. When a child, Chiron lives with his single, crack addict mother Paula in a crime ridden neighborhood in Miami. Chiron is a shy, withdrawn child largely due to his small size and being neglected by his mother, who is more concerned about getting her fixes and satisfying her carnal needs than taking care of him. Because of these issues, Chiron is bullied, the slurs hurled at him which he doesn't understand beyond knowing that they are meant to be hurtful. Besides his same aged Cuban-American friend Kevin, Chiron is given what little guidance he has in life from a neighborhood drug dealer named Juan, who can see that he is neglected, and Juan's caring girlfriend Teresa, whose home acts as a sanctuary away from the bullies and away from Paula's abuse. With this childhood as a foundation, Chiron may have a predetermined path in life, one that will only be magnified in terms of its problems when he reaches his difficult teen years when peer pressure affects what he and many of his peers do, unless he follows Juan's advice of truly making his own decisions for himself.",
-    "author": "lam.truong1996@gmail.com",
-    "publicationdate": "28/02/2017",
-    "stt": 1,
-    "comment": {},
-    "like": 0,
-    "countview": 0
-  },
-  {
-    "id": "tt5580390",
-    "title": "The Shape of Water",
-    "typemovie": ["Hành động", "Phiêu lưu", "Tình cảm"],
-    "actor": ["Adventure", "Drama", "Fantasy", "Romance", "Thriller"],
-    "director": "Barry Jenkins",
-    "producer": "Guillermo del Toro",
-    "country": "USA",
-    "distance": 123,
-    "releasedate": "22/12/2017",
-    "posterimage": "https://m.media-amazon.com/images/M/MV5BNGNiNWQ5M2MtNGI0OC00MDA2LWI5NzEtMmZiYjVjMDEyOWYzXkEyXkFqcGdeQXVyMjM4NTM5NDY@._V1_SX300.jpg",
-    "trailer": "XFYWazblaUA",
-    "content": "At a top secret research facility in the 1960s, a lonely janitor forms a unique relationship with an amphibious creature that is being held in captivity.",
-    "author": "lam.truong1996@gmail.com",
-    "publicationdate": "13/03/2018",
-    "stt": 1,
-    "comment": {},
-    "like": 0,
-    "countview": 0
+    "like":[
+      {"liker":["Thanh Lam","lam.truong1996@gmail.com","id-asdasdasd"]}
+    ]
   }
 ]

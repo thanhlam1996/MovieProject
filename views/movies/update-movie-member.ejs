@@ -17,32 +17,32 @@
                     Nhà phát hành
                 </label>
                 <input type="text" class="form-control col col-4" disabled id="producer-movie-writing" name="producer"
-                    value="<%=i.producer%>">
+                    value="<%=i.info.producer%>">
                 <label class="col col-2">Đạo diễn</label>
-                <input type="text" value="<%=i.director%>" name="director" class="form-control col col-4">
+                <input type="text" value="<%=i.info.director%>" name="director" class="form-control col col-4">
             </div>
         </div>
         
         <div class="form-group">
             <div class="row form-inline">
                 <label class="col col-2">Thời lượng</label>
-                <input type="text" value="<%=i.distance%>" name="distance" class="form-control col col-4">
+                <input type="text" value="<%=i.info.distance%>" name="distance" class="form-control col col-4">
                 <label class="col col-2">Ngày công chiếu</label>
-                <input type="date" value="<%=i.publicationdate%>" class="form-control col col-4" name="publicationdate">
+                <input type="date" value="<%=i.info.publicationdate%>" class="form-control col col-4" name="publicationdate">
             </div>
         </div>
         <div class="form-group">
             <div class="row form-inline">
                 <label class="col col-2">Diễn viên</label>
-                <input type="text" name="actor" value="<%=i.actor%>" class="form-control col col-4">
+                <input type="text" name="actor" value="<%=i.info.actor%>" class="form-control col col-4">
                 <label class="col col-2">Thể loại</label>
-                <input type="text" value="<%=i.typemovie%>" class="form-control col col-4" name="typemovie">
+                <input type="text" value="<%=i.info.movietype%>" class="form-control col col-4" name="typemovie">
             </div>
         </div>
         <div class="form-group">
             <div class="row form-inline">
                 <label class="col col-2">Quốc gia</label>
-                <input type="text" name="country" value="<%=i.country%>" class="form-control col col-4">
+                <input type="text" name="country" value="<%=i.info.country%>" class="form-control col col-4">
                 <label class="col col-2">Ảnh Bìa</label>
                 <div class="custom-file col col-4">
                     <input type="file" class="custom-file-input" id="customFile" name="posterimage">
@@ -54,14 +54,15 @@
         <div class="form-group">
             <div class="row form-inline">
                 <label class="col col-2">ID URL</label>
-                <input type="text" name="trailer" value="<%=i.trailer%>" class="form-control col col-4">
+                <input type="text" name="trailer" value="<%=i.info.trailer%>" class="form-control col col-4">
+                <input style="display:none" type="text" name="imgold" value="<%=i.info.posterimage%>" class="form-control col col-4">
                 <label class="col col-2"></label>
-                <img class="imgposter" src="../uploads/<%=i.posterimage%>" id="imgposter">
+                <img class="imgposter" src="https://s3-us-west-2.amazonaws.com/movies-images/<%=i.info.posterimage%>" id="imgposter">
             </div>
         </div>
         <div class="form-group ckeditorgroup">
             <textarea name="content" id="editor" >
-                    <%=i.content%>
+                    <%=i.info.content%>
             </textarea>
 
             <script>

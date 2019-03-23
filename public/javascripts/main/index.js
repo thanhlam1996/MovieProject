@@ -8,35 +8,30 @@ $(document).ready(function () {
         if (sess) {
             $(".link-login-register").empty();
             $('.header-top-social').empty();
-            var login = "<li><a id='logined' href='#'>"+sess.fullname+"</a></li>";
-                login+="<li id='daucach'>||</li>"
-                login+="<li><a id='logined' class='signout' href='#'>Đăng xuất</a></li>"
-            var menurole='<ul>'
-            menurole+='<li><a id="logined1" class="nav-member-role2" href="/movie/list-movie-registed">Viết Bài</i></a></li>';
-            menurole+="<li id='daucach'>||</li>"
-            menurole+='<li><a id="logined1" class="nav-member-role2" href="/movie/list-movie-waiting-register-write">Đăng Ký BV</a></li>';
-            menurole+="<li id='daucach'>||</li>"
-            menurole+='<li><a id="logined1" class="nav-member-role2" href="/movie/list-approving-member">BV Chờ Duyệt</a></li>';
-            menurole+="<li id='daucach'>||</li>"
-            menurole+='<li><a id="logined1" class="nav-member-role2" href="/movie/get-list-writed-member">Danh Sách BV</i></a></li>';
-            menurole+='</ul>';
-
-          
-            var admin="<li id='daucach'>||</li>"
-            admin+='<li><a id="logined1" class="nav-member-role2" href="admin/pageadmin">Chuyên Trang Quản Lý</i></a></li>'
-            admin+="<li id='daucach'>||</li>"
-            if(sess.role==2)
-            {  
-                $(".header-top-social").append(menurole);
-                $(".link-login-register").append(login);
-            }
-            else if(sess.role>2)
-            {
+            var login = '<li>';
+            login+='<div class="dropdown">';
+            login+='<button type="button" id="btn-name-account-logined" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">';
+            login+='<span id="daucach"> || </span>'+sess.fullname+'<span id="daucach"> ||</span>';
+            login+='</button>';
+            login+='<div class="dropdown-menu">';
+            login+='<a class="dropdown-item" href="/get-detail-account">Thông tin tài khoản</a>';
+            login+='<a class="dropdown-item" href="/get-update-account">Cập nhật thông tin</a>';
+            login+='<a class="dropdown-item" href="#">Đăng xuất</a>';
+            login+='</div>';
+            login+='</div>';
+            login += '</li>';          
+            var admin = "<li id='daucach'>||</li>"
+            admin += '<li><a id="logined1" class="nav-member-role2" href="/pageadmin">Chuyên Trang Quản Lý</i></a></li>'
+            admin += "<li id='daucach'>||</li>"
+            if (sess.role == 2) {
                 $(".header-top-social").append(admin);
                 $(".link-login-register").append(login);
             }
-            else
-            {
+            else if (sess.role > 2) {
+                $(".header-top-social").append(admin);
+                $(".link-login-register").append(login);
+            }
+            else {
                 $(".link-login-register").append(login);
             }
         }

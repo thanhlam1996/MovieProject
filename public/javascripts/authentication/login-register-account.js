@@ -102,7 +102,6 @@ $(document).ready(function () {
         }
         else {
 			$(".errphone").attr('style', 'display:block; color:red');
-			console.log("ok");
             return false;
         }
     });

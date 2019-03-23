@@ -7,7 +7,7 @@
     <form class="form-writing" action="/movie/member-submit-movie" method="POST" enctype="multipart/form-data">
         <%data.Items.forEach(function(i){%>
         <div class="form-group">
-            <label>
+            <label id="title-writing">
                 <h2><%=i.title%></h2>
             </label>
             <input type="text" class="form-control" id="title-movie-writing" name="id1" value="<%=i.id%>">
@@ -19,7 +19,7 @@
                     Nhà phát hành
                 </label>
                 <input type="text" class="form-control col col-4" disabled id="producer-movie-writing" name="producer"
-                    value="<%=i.producer%>">
+                    value="<%=i.info.producer%>">
                 <label class="col col-2" id="lbl-content-right">Đạo diễn</label>
                 <input type="text" name="director" class="form-control col col-4">
             </div>
@@ -47,7 +47,7 @@
                 <input type="text" name="country" class="form-control col col-4">
                 <label class="col col-2" id="lbl-content-right">Ảnh Bìa</label>
                 <div class="custom-file col col-4">
-                    <input type="file" class="custom-file-input" id="customFile" name="posterimage">
+                    <input type="file" class="custom-file-input" id="customFile1" name="posterimage">
                     <label class="custom-file-label"><input class="file-name" name="filename" type="text"
                             value="Chọn ảnh bìa..."></label>
                 </div>
@@ -58,7 +58,7 @@
                 <label class="col col-2" id="lbl-content-left">URL</label>
                 <input type="text" name="trailer" class="form-control col col-4">
                 <label class="col col-2"></label>
-                <img class="imgposter-create" src="" id="imgposter">
+                <img class="imgpostercreate" src="" id="imgposter1">
             </div>
         </div>
         <div class="form-group ckeditorgroup">
@@ -81,9 +81,6 @@
     </form>
 
 </div>
-
-
-
 <!-- </div> -->
 
 <!-- --------------------------------------------End Detail--------------------------------------------->

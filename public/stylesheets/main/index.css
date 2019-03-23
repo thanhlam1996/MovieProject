@@ -8,3 +8,31 @@
 #logined1{
     font-size: 15px;
 }
+.dropdown-menu{
+    background-color: #181818;
+    color: white;
+}
+#btn-name-account-logined{
+    background-color: #181818;
+    border: none;
+    font-size: 15px;
+}
+.dropdown-item{
+    font-size: 15px;
+    font-weight:100; 
+}
+#btn-name-account-logined::after{
+    background-color: #181818;
+    border: none;
+}
+.dropdown-item:hover{
+    color: orange;
+    background-color: #181818;
+}
+.dropdown:hover .dropdown-menu{
+    display: block;
+    
+}
+.link-login-register{
+    margin-bottom: 0px;
+}

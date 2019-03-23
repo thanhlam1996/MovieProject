@@ -25,7 +25,7 @@
             <label id="lbl-admin-approve-movie" class="col col-2">Ngày nộp bài</label>
             <label id="lbl-admin-approve-movie" class="col col-2">Hạn nộp bài</label>
             <label id="lbl-admin-approve-movie" class="col col-2">Ghi chú</label>
-            <%if(i.adminnote){%>
+            <%if(i.process.approve.complaint){%>
                 <label id="lbl-admin-approve-movie" class="col col-2">Ghi chú(AD)</label>
             <%}%>
             <!-- <div class="col col-2">
@@ -33,13 +33,13 @@
                 </div> -->
         </div>
         <div class="row registerlist-detail">
-            <label id="lbl-admin-approve-movie" class="col col-2"><%=i.producer%></label>
-            <label id="lbl-admin-approve-movie" class="col col-2"><%=i.writer%></label>
-            <label id="lbl-admin-approve-movie" class="col col-2 deadline"><%=i.dateofwrite%></label>
-            <label id="lbl-admin-approve-movie" class="col col-2 deadline"><%=i.deadline%></label>
-            <label id="lbl-admin-approve-movie" class="col col-2"><%=i.note?i.note:"Note:"%></label>
-            <%if(i.adminnote){%>
-                <label id="lbl-admin-approve-movie" class="col col-2 deadline"><%=i.adminnote%></label>
+            <label id="lbl-admin-approve-movie" class="col col-2"><%=i.info.producer%></label>
+            <label id="lbl-admin-approve-movie" class="col col-2"><%=i.process.registion.register[0]%></label>
+            <label id="lbl-admin-approve-movie" class="col col-2 deadline"><%=i.process.approve.submitiondate%></label>
+            <label id="lbl-admin-approve-movie" class="col col-2 deadline"><%=i.process.create.deadline%></label>
+            <label id="lbl-admin-approve-movie" class="col col-2"><%=i.process.create.createnote?i.process.create.createnote:"Note:"%></label>
+            <%if(i.process.approve.complaint){%>
+                <label id="lbl-admin-approve-movie" class="col col-2 deadline"><%=i.process.approve.complaint%></label>
             <%}%>
             <!-- <div class="col col-2">
                                 <button class="btn btn-warning btn-unapprove" id="btn-approve<%=count%>" data-toggle="modal"
@@ -50,23 +50,11 @@
             <div class="col col-4">
 
             </div>
-            <div class="col col-2">
-                <button class="btn btn-warning btn-unapprove" id="btn-approve<%=count%>" data-toggle="modal"
-                    data-target="#myModal">Không duyệt</button>
-            </div>
-            <div class="col col-2">
-                <button class="btn btn-danger btn-remove-approve" data-toggle="modal" data-target="#myModalremove"
-                    id="btn-approve<%=count%>">Xóa
-                    bài</button>
-                <!-- </div> -->
-            </div>
-            <div class="col col-2">
-                <button class="btn btn-primary btn-view-post-admin" id="btn-approve<%=count%>">Xem trước
-                    bài</button>
-            </div>
-            <!-- </div> -->
-            <div class="col col-2">
-                <button class="btn btn-success btn-approve" id="btn-approve<%=count%>" type="button">Duyệt bài</button>
+            <div class="col col-8 ">
+                <button class="btn btn-warning btn-unapprove" id="<%=i.id%>" data-toggle="modal" data-target="#myModal">Không duyệt</button>
+                <button class="btn btn-danger btn-remove-approve" data-toggle="modal" data-target="#myModalremove" id="<%=i.id%>">Xóa bài</button>
+                <button class="btn btn-primary btn-view-post-admin" id="<%=i.id%>">Xem trước</button>
+                <button class="btn btn-success btn-approve" id="<%=i.id%>" type="button">Duyệt bài</button>
             </div>
         </div>
     </div>

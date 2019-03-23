@@ -22,19 +22,18 @@
             <label class="col col-2">Ngày nộp bài</label>
             <label class="col col-2">Hạn nộp bài</label>
             <label class="col col-2">Ghi chú</label>
-            <%if(i.adminnote){%>
+            <%if(i.process.approve.complaint){%>
                 <label id="lbl-admin-approve-movie" class="col col-2">Ghi chú(AD)</label>
             <%}%>
         </div>
         <div class="row registerlist-detail">
-            <label class="col col-2"><%=i.producer%></label>
-            <label class="col col-2"><%=i.writer%></label>
-            <label class="col col-2 deadline"><%=i.dateofwrite%></label>
-            <label class="col col-2 deadline"><%=i.deadline%></label>
-            <label class="col col-2"><%=i.note?i.note:"Note:"%></label>
-            <%if(i.adminnote){%>
-                <label id="lbl-admin-approve-movie" class="col col-2 deadline"><%=i.adminnote%></label>
-            <%}%>
+            <label class="col col-2"><%=i.info.producer%></label>
+            <label class="col col-2"><%=i.process.registion.register[0]%></label>
+            <label class="col col-2 deadline"><%=i.process.approve.submitiondate%></label>
+            <label class="col col-2 deadline"><%=i.process.create.deadline%></label>
+            <label class="col col-2"><%=i.process.create.createnote?i.process.create.createnote:"Note:"%></label>
+            <label id="lbl-admin-approve-movie" class="col col-2 deadline"><%=i.process.approve.complaint?i.process.approve.complaint:""%></label>
+            
         </div>
         <div class="row">
             <div class="col col-8"></div>

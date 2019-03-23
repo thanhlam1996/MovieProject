@@ -10,20 +10,20 @@
                     <div class="row">
                        <div class="col-lg-3 col-sm-4">
                           <div class="details-banner-thumb">
-                             <img src="<%=i.posterimage%>" alt="movie">
+                             <img src="https://s3-us-west-2.amazonaws.com/movies-images/<%=i.info.posterimage%>" alt="movie">
                           </div>
                        </div>
                        <div class="col-lg-6 col-sm-8">
                           <div class="details-banner-info">
                              <h3 class="detail-title-movie"><%=i.title%></h3>
-                             <p class="details-time-left"><i class="fa fa-clock-o"></i><%=i.distance%></p>
-                             <a href="<%=i.trailer%>" class="filmoja-btn tablet-action"><i class="fa fa-play"></i>Xem trailer</a>
+                             <p class="details-time-left"><i class="fa fa-clock-o"></i><%=i.info.distance%></p>
+                             <a href="<%=i.info.trailer%>" class="filmoja-btn tablet-action"><i class="fa fa-play"></i>Xem trailer</a>
                           </div>
                        </div>
                        <div class="col-lg-3">
                           <div class="details-banner-action">
                               
-                             <a href="<%=i.trailer%>" class="filmoja-btn"><i class="fa fa-play"></i>Xem trailer</a>
+                             <a href="<%=i.info.trailer%>" class="filmoja-btn"><i class="fa fa-play"></i>Xem trailer</a>
                           </div>
                        </div>
                     </div>
@@ -42,13 +42,13 @@
               <div class="col-lg-9 offset-lg-3">
                  <div class="movie-details-page-box" id="<%=i.id%>">
                     <ul>
-                       <li><span>Nhà sản xuất</span> : <%=i.producer%></li>
-                       <li><span>Quốc gia</span> : <%=i.country%></li>
-                       <li><span>Đạo diễn</span> : <%=i.director%></li>
-                       <li><span>Thể loại</span> : <%=i.typemovie%></li>
-                       <li><span>Diễn viên</span> : <%=i.actor%></li>
-                       <li><span>Ngày</span> : <%=i.publicationdate%></li>
-                       <li><span>Thời lượng</span> : <%=i.distance%><small>p</small></li>
+                       <li><span>Nhà sản xuất</span> : <%=i.info.producer%></li>
+                       <li><span>Quốc gia</span> : <%=i.info.country%></li>
+                       <li><span>Đạo diễn</span> : <%=i.info.director%></li>
+                       <li><span>Thể loại</span> : <%=i.info.movietype%></li>
+                       <li><span>Diễn viên</span> : <%=i.info.actor%></li>
+                       <li><span>Ngày</span> : <%=i.info.publicationdate%></li>
+                       <li><span>Thời lượng</span> : <%=i.info.distance%><small>p</small></li>
 
                        <%if(role=="ad"){%>
                         <li><button type="button" id="btn-back-admin-and-member" class="filmoja-btn"><i class="fas fa-arrow-left"></i>Trở lại</button> <button type="button" id="<%=i.title%>" class="filmoja-btn btn-admin-approve"><i class="fas fa-check"></i>Duyệt bài</button></li>
@@ -80,7 +80,7 @@
                                 <div class="row">
                                    <div class="col-md-12">
                                       <div class="tab-body">
-                                         <p><%-i.content%></p>
+                                         <p><%-i.info.content%></p>
                                       </div>
                                    </div>
                                 </div>

@@ -6,6 +6,7 @@ var passportfb = require("passport-facebook").Strategy;
 var ggstrategy = require("passport-google-oauth").OAuth2Strategy;
 var localStratery = require("passport-local").Strategy;
 var dynamoDbConfig = require("../config/dynamodb-config");
+var uuid4 = require("uuid4");
 // =========================Role===========================
 
 // ============
@@ -25,22 +26,84 @@ AWS.accessKeyId = dynamoDbConfig.accessKeyId;
 AWS.secretAccessKey = dynamoDbConfig.secretAccessKey;
 var docClient = new AWS.DynamoDB.DocumentClient();
 // =======================================================================================================
+// ======================Check Login=============================
+function CheckLogin(role, res, req) {
+  if (req.isAuthenticated()) {
+    res.render("../views/err-role/err.ejs", {
+      roleerr: "Bạn đăng nhập để truy cập đến trang này!"
+    });
+    return false;
+  } else {
+    if (req.session.passport.user.role < role) {
+      res.render("../views/err-role/err.ejs", {
+        roleerr: "Bạn cần được cấp quyền để truy cập đến trang này!"
+      });
+      return false;
+    } else {
+      return true;
+    }
+  }
+}
+
+
+// ======================End Check Login=========================
+
+// Create ID:
+function createID() {
+  var id = uuid4();
+  while (checkidmovie(id) == true) {
+    id = uuid4();
+  }
+  return id;
+}
+
+//Function check id tu database
+function checkidmovie(id) {
+  var params = {
+    TableName: "Accounts",
+    KeyConditionExpression: "#id =:id",
+    ExpressionAttributeNames: {
+      "#id": "id"
+    },
+    ExpressionAttributeValues: {
+      ":id": id
+    }
+  };
+  docClient.query(params, function (err, data) {
+    if (err) {
+      console.error("Unable to query. Error:", JSON.stringify(err, null, 2));
+    } else {
+      if (data.Count > 0) {
+        return false;
+      } else {
+        return true;
+      }
+    }
+  });
+}
+// ==========
+
+
 // ==========Register==============
-router.post("/register-account", function(req, res, next) {
+router.post("/register-account", function (req, res, next) {
+  var _id = createID();
   var params = {
     TableName: "Accounts",
     Item: {
-      email: req.body.email,
-      fullname: req.body.fullname,
+      id: _id,
+      info: {
+        email: req.body.email,
+        fullname: req.body.fullname,
+        birthday: req.body.birthday,
+        sex: req.body.sex,
+        adress: req.body.adress,
+        phone: req.body.phone
+      },
       password: req.body.password,
-      birthday: req.body.birthday,
-      sex: req.body.sex,
-      adress: req.body.adress,
-      phone: req.body.phone,
-      role: 2
+      role: 1
     }
   };
-  docClient.put(params, function(err, data) {
+  docClient.put(params, function (err, data) {
     if (err) {
       console.error(
         "Unable to update item. Error JSON:",
@@ -68,15 +131,13 @@ passport.use(
     (email, password, done) => {
       var params = {
         TableName: "Accounts",
-        KeyConditionExpression: "#user =:email",
-        ExpressionAttributeNames: {
-          "#user": "email"
-        },
+        FilterExpression: "info.email=:email AND password=:pass",
         ExpressionAttributeValues: {
-          ":email": email
+          ":email": email,
+          ":pass": password
         }
       };
-      docClient.query(params, function(err, user) {
+      docClient.scan(params, function (err, user) {
         if (err) {
           console.error(
             "Unable to query. Error:",
@@ -84,13 +145,18 @@ passport.use(
           );
         } else {
           if (user.Count > 0) {
-            user.Items.forEach(function(i) {
-              if (i.password == password) {
-                return done(null, user);
-              } else {
-                return done(null, false);
-              }
-            });
+            var sess = {};
+            user.Items.forEach(function (j) {
+              sess = {
+                email: j.info.email,
+                fullname: j.info.fullname,
+                role: j.role,
+                id: j.id
+              };
+            })
+            return done(null, sess);
+          } else {
+            return done(null, false);
           }
         }
       });
@@ -99,18 +165,17 @@ passport.use(
 );
 // =======End Register=============
 // =======Check Email==============
-router.get("/checkemail", function(req, res, next) {
+router.get("/checkemail", function (req, res, next) {
   var _email = req.query.email;
-
   var params = {
     TableName: "Accounts",
-    KeyConditionExpression: "email=:email",
+    FilterExpression: "info.email=:email",
     ExpressionAttributeValues: {
       ":email": _email
     }
   };
 
-  docClient.query(params, function(err, data) {
+  docClient.scan(params, function (err, data) {
     if (err) {
       console.error("Unable to query. Error:", JSON.stringify(err, null, 2));
     } else {
@@ -124,7 +189,7 @@ router.get("/checkemail", function(req, res, next) {
 });
 // =======End Check Email==========
 //========Sign out session==============
-router.get("/signout", function(req, res, next) {
+router.get("/signout", function (req, res, next) {
   req.session.destroy();
   return res.end();
 });
@@ -133,7 +198,7 @@ router.get("/signout", function(req, res, next) {
 router.get(
   "/loginfb",
   passport.authenticate("facebook", { scope: ["email"] }),
-  function(req, res, next) {}
+  function (req, res, next) { }
 );
 router.get(
   "/loginfb/cb",
@@ -153,21 +218,21 @@ passport.use(
     },
     (accessToken, refreshToken, profile, done) => {
       var _email = "";
-      var _id = profile.id;
-      profile.emails.forEach(function(i) {
+      var _id = "FB-" + profile.id;
+      profile.emails.forEach(function (i) {
         _email = i.value;
       });
 
       var _fullname = profile.name.givenName + " " + profile.name.familyName;
       var params = {
         TableName: "Accounts",
-        KeyConditionExpression: "email=:email",
+        KeyConditionExpression: "id=:id",
         ExpressionAttributeValues: {
-          ":email": _id
+          ":id": _id
         }
       };
 
-      docClient.query(params, function(err, user) {
+      docClient.query(params, function (err, user) {
         if (err) {
           console.error(
             "Unable to query. Error:",
@@ -180,20 +245,21 @@ passport.use(
             var param = {
               TableName: "Accounts",
               Item: {
-                email: _id,
-                fullname: _fullname,
-                role: 2,
-                id: _email
+                id: _id,
+                role: 1,
+                info: {
+                  email: _email,
+                  fullname: _fullname
+                }
               }
             };
-            docClient.put(param, function(error, user) {
+            docClient.put(param, function (error, user) {
               if (err) {
                 console.error(
                   "Unable to update item. Error JSON:",
                   JSON.stringify(err, null, 2)
                 );
               } else {
-                console.log("Mơi tạo xong" + user);
                 return done(null, user);
               }
             });
@@ -210,7 +276,7 @@ passport.use(
 router.get(
   "/logingg",
   passport.authenticate("google", { scope: ["profile", "email"] }),
-  function(req, res, next) {}
+  function (req, res, next) { }
 );
 
 
@@ -235,19 +301,19 @@ passport.use(
       var _fullname = profile.name.givenName + " " + profile.name.familyName;
 
       var _email = "";
-      var _id = profile.id;
-      profile.emails.forEach(function(i) {
+      var _id = "GG-" + profile.id;
+      profile.emails.forEach(function (i) {
         _email = i.value;
       });
       var params = {
         TableName: "Accounts",
-        KeyConditionExpression: "email=:email",
+        KeyConditionExpression: "id=:id",
         ExpressionAttributeValues: {
-          ":email": _id
+          ":id": _id
         }
       };
 
-      docClient.query(params, function(err, user) {
+      docClient.query(params, function (err, user) {
         if (err) {
           console.error(
             "Unable to query. Error:",
@@ -260,13 +326,15 @@ passport.use(
             var param = {
               TableName: "Accounts",
               Item: {
-                email: _id,
-                fullname: _fullname,
-                role: 2,
-                id: _email
+                id: _id,
+                role: 1,
+                info: {
+                  email: _email,
+                  fullname: _fullname
+                }
               }
             };
-            docClient.put(param, function(error, user) {
+            docClient.put(param, function (error, user) {
               if (err) {
                 console.error(
                   "Unable to update item. Error JSON:",
@@ -287,26 +355,37 @@ passport.use(
 // ===============PAssport==================================
 
 // Passport online
-passport.serializeUser(function(user, done) {
+passport.serializeUser(function (user, done) {
   done(null, user);
 });
 passport.deserializeUser((user, done) => {
-  var _email = user.Items.email;
+  var _email = user.Items.id;
 
   var params = {
     TableName: "Accounts",
-    KeyConditionExpression: "email=:email",
+    KeyConditionExpression: "id=:id",
     ExpressionAttributeValues: {
-      ":email": _email
+      ":id": id
     }
   };
 
-  docClient.query(params, function(err, user) {
+  docClient.query(params, function (err, user) {
     if (err) {
       console.error("Unable to query. Error:", JSON.stringify(err, null, 2));
     } else {
       if (user.Count > 0) {
-        return done(null, user);
+        var sess = {};
+        user.Items.forEach(j)
+        {
+          sess = {
+            email: j.info.email,
+            fullname: j.info.fullname,
+            role: j.role,
+            id: j.id
+          };
+        }
+
+        return done(null, sess);
       } else {
         return done(null, false);
       }
@@ -317,5 +396,216 @@ passport.deserializeUser((user, done) => {
 
 // ===========================================================
 // =======================================================================================================
+router.get("/admin-decentralization", function (req, res, next) {
+  if (CheckLogin(4, res, req)) {
+    // var role=req.session.passport.user.role;
+    // var id=req.session.passport.user.id;
+    var params = {
+      TableName: "Accounts"
+    };
+
+    docClient.scan(params, function (err, data) {
+      if (err) {
+        console.error("Unable to query. Error:", JSON.stringify(err, null, 2));
+      } else {
+        // if(role>1){
+        return res.render("../views/account/admin-decentralization.ejs", { data })
+        // }
+      }
+    });
+  }
+  else {
+    return false; //ERR 500
+  }
+})
+// ========Delete ACC Admin
+router.post("/delete-acc-admin", function (req, res, next) {
+  if (CheckLogin(4, res, req)) {
+    var id = req.body.id;
+    var params = {
+      TableName: "Accounts",
+      Key: {
+        id: id
+      }
+    };
+    docClient.delete(params, function (err, data) {
+      if (err) {
+        console.error(
+          "Unable to delete item. Error JSON:",
+          JSON.stringify(err, null, 2)
+        );
+      } else {
+        return res.send(true);
+      }
+    });
+  } else {
+    return false; //ERR 500
+  }
+})
+// ========================
+// ============Change Role Admin==============
+router.post("/change-role-admin", function (req, res, next) {
+  if(CheckLogin(4,res,req)){
+   var id = req.body.id;
+   var role = req.body.role;
+  
+   var params = {
+     TableName: "Accounts",
+     Key: {
+       id: id
+     },
+     UpdateExpression:
+       "set #role=:a",
+       ExpressionAttributeNames:{"#role": "role"},
+     ExpressionAttributeValues: {
+       ":a": role
+     },
+     ReturnValues: "UPDATED_NEW"
+   };
+   docClient.update(params, function (err, data) {
+     if (err) {
+       console.error(
+         "Unable to update item. Error JSON:",
+         JSON.stringify(err, null, 2)
+       );
+     } else {
+       return res.send(true);
+     }
+   });
+  }else{
+    return false; //ERR 500
+  }
+ });
+// ===========================================
+
+
+// =============GET DETAIL ACC= ADMIN===============
+router.get("/get-acc-detail-admin", function (req, res, next) {
+  if(CheckLogin(4,res,req)){
+   var id = req.query.id;
+   var params = {
+    TableName: "Accounts",
+    KeyConditionExpression: "id=:id",
+    ExpressionAttributeValues: {
+      ":id": id
+    }
+  };
+  docClient.query(params, function (err, data) {
+    if (err) {
+      console.error(
+        "Unable to read item. Error JSON:",
+        JSON.stringify(err, null, 2)
+      );
+    } else {
+      return res.send(data);
+    }
+  });
+  }else{
+    return false; //ERR 500
+  }
+ });
+// ===========================================
+// =============GET DETAIL ACC ALL OBJECT================
+router.get("/get-detail-account", function (req, res, next) {
+  if(CheckLogin(1,res,req)){
+   var _id = req.session.passport.user.id;
+   var params = {
+    TableName: "Accounts",
+    KeyConditionExpression: "id=:id",
+    ExpressionAttributeValues: {
+      ":id": _id
+    }
+  };
+  docClient.query(params, function (err, data) {
+    if (err) {
+      console.error(
+        "Unable to read item. Error JSON:",
+        JSON.stringify(err, null, 2)
+      );
+    } else {
+     
+    
+        return res.render("../views/account/detail-acc-owner.ejs",{data});
+      
+    }
+  });
+  }else{
+    return false; //ERR 500
+  }
+ });
+// ===========================================
+// =============GET DETAIL ACC ALL OBJECT================
+router.get("/check-password", function (req, res, next) {
+  if(CheckLogin(1,res,req)){
+   var _id = req.session.passport.user.id;
+   var params = {
+    TableName: "Accounts",
+    KeyConditionExpression: "id=:id",
+    ExpressionAttributeValues: {
+      ":id": _id
+    }
+  };
+  docClient.query(params, function (err, data) {
+    if (err) {
+      console.error(
+        "Unable to read item. Error JSON:",
+        JSON.stringify(err, null, 2)
+      );
+    } else {
+     if(data.Count>0)
+     {
+      var oldpass="";
+       data.Items.forEach((i)=>{
+        oldpass=i.password;
+       })
+       return res.send(oldpass);
+     }
+     else{
+       return res.send(false);
+     }
+    }
+  });
+  }else{
+    return false; //ERR 500
+  }
+ });
+// ===========================================
+// ============Change Role Admin==============
+router.post("/change-password", function (req, res, next) {
+  if(CheckLogin(1,res,req)){
+   var id = req.session.passport.user.id;
+  //  var oldpass=req.body.oldpass;
+   var newpass=req.body.newpass;
+  
+   var params = {
+     TableName: "Accounts",
+     Key: {
+       id: id
+     },
+     UpdateExpression:
+       "set #pass=:a",
+       ExpressionAttributeNames:{"#pass": "password"},
+     ExpressionAttributeValues: {
+       ":a": newpass
+     },
+     ReturnValues: "UPDATED_NEW"
+   };
+   docClient.update(params, function (err, data) {
+     if (err) {
+       console.error(
+         "Unable to update item. Error JSON:",
+         JSON.stringify(err, null, 2)
+       );
+     } else {
+       return res.send(true);
+     }
+   });
+  }else{
+    return false; //ERR 500
+  }
+ });
+// ===========================================
+// ==============UPDATE ACCOUNT===============
+// ===========================================
 
 module.exports = router;
