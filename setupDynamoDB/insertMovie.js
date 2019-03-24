@@ -1,14 +1,22 @@
-var aws = require("aws-sdk");
+var AWS = require("AWS-sdk");
 var fs = require("fs");
 var dynamoDbConfig = require("../config/dynamodb-config");
 
-AWS.config.update({
-  region: dynamoDbConfig.region,
-  endpoint: dynamoDbConfig.endpoint
-});
-AWS.accessKeyId = dynamoDbConfig.accessKeyId;
-AWS.secretAccessKey = dynamoDbConfig.secretAccessKey;
-var docClient = new aws.DynamoDB.DocumentClient();
+if (dynamoDbConfig.isDev) {
+  AWS.config.update({
+    region: dynamoDbConfig.localConfig.region,
+    endpoint: dynamoDbConfig.localConfig.endpoint
+  });
+} else {
+  AWS.config.update({
+    region: dynamoDbConfig.onlineConfig.region,
+    endpoint: dynamoDbConfig.onlineConfig.endpoint
+  });
+  AWS.accessKeyId = dynamoDbConfig.onlineConfig.accessKeyId;
+  AWS.secretAccessKey = dynamoDbConfig.onlineConfig.secretAccessKey;
+}
+
+var docClient = new AWS.DynamoDB.DocumentClient();
 
 console.log("Importing cars into DynamoDB. Please wait...");
 

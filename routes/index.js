@@ -6,12 +6,20 @@ var dynamoDbConfig = require("../config/dynamodb-config");
 
 // var urlencodedParser = bodyParser.urlencoded({ extended: false })
 
-AWS.config.update({
-  region: "us-west-2",
-  endpoint: "dynamodb.us-west-2.amazonaws.com"
-});
-AWS.config.accessKeyId = "AKIAII56X4EHJSADC2KA";
-AWS.config.secretAccessKey = "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";
+if (dynamoDbConfig.isDev) {
+  AWS.config.update({
+    region: dynamoDbConfig.localConfig.region,
+    endpoint: dynamoDbConfig.localConfig.endpoint
+  });
+} else {
+  AWS.config.update({
+    region: dynamoDbConfig.onlineConfig.region,
+    endpoint: dynamoDbConfig.onlineConfig.endpoint
+  });
+  AWS.accessKeyId = dynamoDbConfig.onlineConfig.accessKeyId;
+  AWS.secretAccessKey = dynamoDbConfig.onlineConfig.secretAccessKey;
+}
+
 var docClient = new AWS.DynamoDB.DocumentClient();
 //
 

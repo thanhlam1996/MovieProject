@@ -26,12 +26,20 @@ var deleteS3 = require('s3fs')
 
 // var urlencodedParser = bodyParser.urlencoded({ extended: false })
 
-AWS.config.update({
-  region: dynamoDbConfig.region,
-  endpoint: dynamoDbConfig.endpoint
-});
-AWS.accessKeyId = dynamoDbConfig.accessKeyId;
-AWS.secretAccessKey = dynamoDbConfig.secretAccessKey;
+if (dynamoDbConfig.isDev) {
+  AWS.config.update({
+    region: dynamoDbConfig.localConfig.region,
+    endpoint: dynamoDbConfig.localConfig.endpoint
+  });
+} else {
+  AWS.config.update({
+    region: dynamoDbConfig.onlineConfig.region,
+    endpoint: dynamoDbConfig.onlineConfig.endpoint
+  });
+  AWS.accessKeyId = dynamoDbConfig.onlineConfig.accessKeyId;
+  AWS.secretAccessKey = dynamoDbConfig.onlineConfig.secretAccessKey;
+}
+
 var docClient = new AWS.DynamoDB.DocumentClient();
 //
 // =====function create and check uuid4===========

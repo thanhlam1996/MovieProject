@@ -1,34 +1,48 @@
 var AWS = require("aws-sdk");
 var dynamoDbConfig = require("../config/dynamodb-config");
 
-AWS.config.update({
-    region: dynamoDbConfig.region,
-    endpoint: dynamoDbConfig.endpoint
+if (dynamoDbConfig.isDev) {
+  AWS.config.update({
+    region: dynamoDbConfig.localConfig.region,
+    endpoint: dynamoDbConfig.localConfig.endpoint
   });
-  AWS.accessKeyId = dynamoDbConfig.accessKeyId;
-  AWS.secretAccessKey = dynamoDbConfig.secretAccessKey;
+} else {
+  AWS.config.update({
+    region: dynamoDbConfig.onlineConfig.region,
+    endpoint: dynamoDbConfig.onlineConfig.endpoint
+  });
+  AWS.accessKeyId = dynamoDbConfig.onlineConfig.accessKeyId;
+  AWS.secretAccessKey = dynamoDbConfig.onlineConfig.secretAccessKey;
+}
+
 var dynamodb = new AWS.DynamoDB();
 
 var params = {
-    TableName : "Accounts",
-    KeySchema: [       
-        { AttributeName: "email", KeyType: "HASH"},  //Partition key
-        { AttributeName: "fullname", KeyType: "RANGE" }  //Sort key
-    ],
-    AttributeDefinitions: [       
-        { AttributeName: "email", AttributeType: "S" },
-        { AttributeName: "fullname", AttributeType: "S" }
-    ],
-    ProvisionedThroughput: {       
-        ReadCapacityUnits: 10, 
-        WriteCapacityUnits: 10
-    }
+  TableName: "Accounts",
+  KeySchema: [
+    { AttributeName: "email", KeyType: "HASH" }, //Partition key
+    { AttributeName: "fullname", KeyType: "RANGE" } //Sort key
+  ],
+  AttributeDefinitions: [
+    { AttributeName: "email", AttributeType: "S" },
+    { AttributeName: "fullname", AttributeType: "S" }
+  ],
+  ProvisionedThroughput: {
+    ReadCapacityUnits: 10,
+    WriteCapacityUnits: 10
+  }
 };
 
 dynamodb.createTable(params, function(err, data) {
-    if (err) {
-        console.error("Unable to create table. Error JSON:", JSON.stringify(err, null, 2));
-    } else {
-        console.log("Created table. Table description JSON:", JSON.stringify(data, null, 2));
-    }
+  if (err) {
+    console.error(
+      "Unable to create table. Error JSON:",
+      JSON.stringify(err, null, 2)
+    );
+  } else {
+    console.log(
+      "Created table. Table description JSON:",
+      JSON.stringify(data, null, 2)
+    );
+  }
 });

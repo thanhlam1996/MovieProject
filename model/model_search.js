@@ -1,12 +1,20 @@
 var AWS = require("aws-sdk");
 var dynamoDbConfig = require("../config/dynamodb-config");
 
-AWS.config.update({
-  region: dynamoDbConfig.region,
-  endpoint: dynamoDbConfig.endpoint
-});
-AWS.accessKeyId = dynamoDbConfig.accessKeyId;
-AWS.secretAccessKey = dynamoDbConfig.secretAccessKey;
+if (dynamoDbConfig.isDev) {
+  AWS.config.update({
+    region: dynamoDbConfig.localConfig.region,
+    endpoint: dynamoDbConfig.localConfig.endpoint
+  });
+} else {
+  AWS.config.update({
+    region: dynamoDbConfig.onlineConfig.region,
+    endpoint: dynamoDbConfig.onlineConfig.endpoint
+  });
+  AWS.accessKeyId = dynamoDbConfig.onlineConfig.accessKeyId;
+  AWS.secretAccessKey = dynamoDbConfig.onlineConfig.secretAccessKey;
+}
+
 var docClient = new AWS.DynamoDB.DocumentClient();
 
 exports.search = function(id) {
