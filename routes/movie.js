@@ -42,6 +42,27 @@ if (dynamoDbConfig.isDev) {
 
 var docClient = new AWS.DynamoDB.DocumentClient();
 //
+
+// ==============================function check login====================================
+function CheckLogin(role, res, req) {
+  if (req.isAuthenticated()) {
+    res.render("../views/err-role/err.ejs", {
+      roleerr: "Bạn đăng nhập để truy cập đến trang này!"
+    });
+    return false;
+  } else {
+    if (req.session.passport.user.role < role) {
+      res.render("../views/err-role/err.ejs", {
+        roleerr: "Bạn cần được cấp quyền để truy cập đến trang này!"
+      });
+      return false;
+    } else {
+      return true;
+    }
+  }
+}
+// ======================================================================================
+
 // =====function create and check uuid4===========
 //Khi mot uuid dc tao ra no se kiem tra xem tai csdl co ton tai cai id nay chua neu co thi lay cai khac va tiep tuc check
 function createID() {
@@ -76,29 +97,14 @@ function checkidmovie(id) {
     }
   });
 }
-// ========Create=============
+// ========Create============= role=3
 router.get("/create-movie", function (req, res, next) {
-  if (req.isAuthenticated()) {
-    return res.render("../views/err-role/err.ejs", {
-      roleerr: "Bạn đăng nhập để truy cập đến trang này!"
-    });
-  } else {
-    var sess = {};
-    req.session.passport.user.Items.forEach(function (j) {
-      sess = {
-        email: j.email,
-        fullname: j.fullname,
-        role: j.role
-      };
-    });
-    if (sess.role < 3) {
-      return res.render("../views/err-role/err.ejs", {
-        roleerr: "Bạn cần được cấp quyền để truy cập đến trang này!"
-      });
-    } else {
-      res.render("movies/createMovie-admin.ejs");
-    }
-  }
+  if(CheckLogin(3,res,req)){
+   return res.render("movies/createMovie-admin.ejs");
+  }else
+  {
+    return false; //ERR 500;
+  };
 });
 
 // ================Multer==============
@@ -114,7 +120,6 @@ var s3upload = multer({
     s3: s3,
     bucket: "movies-images",
     key: function (req, file, cb) {
-      console.log(file);
       var fileName = file.fieldname + "-" + Date.now() + file.originalname;
       imgname = fileName;
       // imgname = "https://s3-us-west-2.amazonaws.com/movies-images/" + fileName;
@@ -136,80 +141,44 @@ var s3Fs = new deleteS3('movies-images', s3Options);
 
 // ========================================================================
 
-
-
-
-
-
-// Ending create S3 multer
-
-// var upload = multer({ storage: storage });
+//=========================================================================
+// ========================================================================
+//=========================================================================
+//***************** Phần multer này dùng dể test local vs folder save là updates============
+// ================Multer==============
+var imgname="";//Bien khai bao static chua ten anh bia
+var storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+      cb(null, 'public/images/uploads')
+    },
+    filename: (req, file, cb) => {
+      var fileName = file.fieldname + "-" + Date.now() + file.originalname;
+      imgname = fileName;
+      cb(null, fileName)
+    }
+});
+var upload = multer({storage: storage});
 // ====================================
+//*****************************************************************************************/
+// =========================================================================
+//==========================================================================
+// =========================================================================
+
+
+
+
+
+
+
+// ====================================role=3
 router.post("/create-movie-admin", function (req, res, next) {
-  if (req.isAuthenticated()) {
-    return res.render("../views/err-role/err.ejs", {
-      roleerr: "Bạn đăng nhập để truy cập đến trang này!"
-    });
-    // return res.send(false);
-  } else {
-    var sess = {};
-    req.session.passport.user.Items.forEach(function (j) {
-      sess = {
-        email: j.email,
-        fullname: j.fullname,
-        role: j.role
-      };
-    });
-    if (sess.role < 3) {
-      return res.render("../views/err-role/err.ejs", {
-        roleerr: "Bạn cần được cấp quyền để truy cập đến trang này!"
-      });
-    } else {
-      if (req.body.title instanceof Array) {
-        for (var i = 0; i < req.body.title.length; i++) {
-          var id = createID();
-          var note = "no";
-          if (req.body.note[i]) {
-            note += req.body.note[i]
-          }
-          var now = new Date();
-          var initdate = dateFormat(now, "isoDate");
-          var params = {
-            TableName: "Movies",
-            Item: {
-              id: id,
-              title: req.body.title[i],
-              process: {
-                create: {
-                  "creater": [sess.fullname, sess.email],
-                  "initdate": initdate,
-                  "deadline": req.body.deadline[i],
-                  "createnote": note
-                }
-              },
-              info: {
-                "producer": req.body.producer[i]
-              },
-              stt: 4
-            }
-          };
-          docClient.put(params, function (err, data) {
-            if (err) {
-              console.error(
-                "Unable to update item. Error JSON:",
-                JSON.stringify(err, null, 2)
-              );
-            } else {
-            }
-          });
-          // console.log(JSON.stringify(params))
-        }
-        return res.redirect("/movie/list-movie-waiting-register-write");
-      } else {
+  if(CheckLogin(3,res,req)){
+    if (req.body.title instanceof Array) {
+      for (var i = 0; i < req.body.title.length; i++) {
         var id = createID();
         var note = "no";
-        if (req.body.note) {
-          note = req.body.note
+        if (req.body.note[i]) {
+          note += req.body.note[i]
         }
         var now = new Date();
         var initdate = dateFormat(now, "isoDate");
@@ -217,22 +186,21 @@ router.post("/create-movie-admin", function (req, res, next) {
           TableName: "Movies",
           Item: {
             id: id,
-            title: req.body.title,
+            title: req.body.title[i],
             process: {
               create: {
-                "creater": [sess.fullname, sess.email],
-                "init date": initdate,
-                "deadline": req.body.deadline,
+                "creater": [req.session.passport.user.fullname, req.session.passport.user.email],
+                "initdate": initdate,
+                "deadline": req.body.deadline[i],
                 "createnote": note
               }
             },
             info: {
-              "producer": req.body.producer
+              "producer": req.body.producer[i]
             },
             stt: 4
           }
         };
-        
         docClient.put(params, function (err, data) {
           if (err) {
             console.error(
@@ -240,79 +208,87 @@ router.post("/create-movie-admin", function (req, res, next) {
               JSON.stringify(err, null, 2)
             );
           } else {
-            return res.redirect("/movie/list-movie-waiting-register-write");
           }
         });
+        // console.log(JSON.stringify(params))
       }
-    }
-  }
-});
-// =========Update Movie Admin==================
-router.get("/update-movie-admin", function (req, res, next) {
-  if (req.isAuthenticated()) {
-    return res.render("../views/err-role/err.ejs", {
-      roleerr: "Bạn đăng nhập để truy cập đến trang này!"
-    });
-    // return res.send(false);
-  } else {
-    var sess = {};
-    req.session.passport.user.Items.forEach(function (j) {
-      sess = {
-        email: j.email,
-        fullname: j.fullname,
-        role: j.role
-      };
-    });
-    if (sess.role < 2) {
-      return res.render("../views/err-role/err.ejs", {
-        roleerr: "Bạn cần được cấp quyền để truy cập đến trang này!"
-      });
+      return res.redirect("/movie/list-movie-waiting-register-write");
     } else {
-      var _id = req.query.id;
+      var id = createID();
+      var note = "no";
+      if (req.body.note) {
+        note = req.body.note
+      }
+      var now = new Date();
+      var initdate = dateFormat(now, "isoDate");
       var params = {
         TableName: "Movies",
-        KeyConditionExpression: "id=:id",
-        ExpressionAttributeValues: {
-          ":id": _id
+        Item: {
+          id: id,
+          title: req.body.title,
+          process: {
+            create: {
+              "creater": [req.session.passport.user.fullname, req.session.passport.user.email],
+              "init date": initdate,
+              "deadline": req.body.deadline,
+              "createnote": note
+            }
+          },
+          info: {
+            "producer": req.body.producer
+          },
+          stt: 4
         }
       };
-      docClient.query(params, function (err, data) {
+      
+      docClient.put(params, function (err, data) {
         if (err) {
           console.error(
-            "Unable to read item. Error JSON:",
+            "Unable to update item. Error JSON:",
             JSON.stringify(err, null, 2)
           );
         } else {
-          if (data.Count > 0) {
-            return res.render("../views/movies/admin-update-movie.ejs", { data });
-          }
+          return res.redirect("/movie/list-movie-waiting-register-write");
         }
       });
     }
+  }else
+  {
+    return false; //ERR 500
   }
-})
-
-router.post("/update-movie-admin", function (req, res, next) {
-  if (req.isAuthenticated()) {
-    return res.render("../views/err-role/err.ejs", {
-      roleerr: "Bạn đăng nhập để truy cập đến trang này!"
-    });
-    // return res.send(false);
-  } else {
-    var sess = {};
-    req.session.passport.user.Items.forEach(function (j) {
-      sess = {
-        email: j.email,
-        fullname: j.fullname,
-        role: j.role
-      };
-    });
-    if (sess.role < 2) {
-      return res.render("../views/err-role/err.ejs", {
-        roleerr: "Bạn cần được cấp quyền để truy cập đến trang này!"
-      });
+});
+// =========Update Movie Admin================== role=2
+router.get("/update-movie-admin", function (req, res, next) {
+ if(CheckLogin(2,res,req)){
+  var _id = req.query.id;
+  var params = {
+    TableName: "Movies",
+    KeyConditionExpression: "id=:id",
+    ExpressionAttributeValues: {
+      ":id": _id
+    }
+  };
+  docClient.query(params, function (err, data) {
+    if (err) {
+      console.error(
+        "Unable to read item. Error JSON:",
+        JSON.stringify(err, null, 2)
+      );
     } else {
-      var _id = req.body.id;
+      if (data.Count > 0) {
+        return res.render("../views/movies/admin-update-movie.ejs", { data });
+      }
+    }
+  });
+ }else
+ {
+   return false; //ERR 500
+ }
+})
+// role=2
+router.post("/update-movie-admin", function (req, res, next) {
+  if(CheckLogin(2,res,req)){
+    var _id = req.body.id;
       var _title = req.body.title;
       var _producer = req.body.producer;
       var _deadline = req.body.deadline;
@@ -349,32 +325,16 @@ router.post("/update-movie-admin", function (req, res, next) {
           return res.redirect("/movie/list-movie-waiting-register-write");
         }
       });
-    }
+  }else
+  {
+    return false; //ERR 500
   }
 })
 // =============================================
-// Get All List Register
+// Get All List Register role=2
 router.get("/list-movie-registed", function (req, res, next) {
-  if (req.isAuthenticated()) {
-    return res.render("../views/err-role/err.ejs", {
-      roleerr: "Bạn đăng nhập để truy cập đến trang này!"
-    });
-    // return res.send(false);
-  } else {
-    var sess = {};
-    req.session.passport.user.Items.forEach(function (j) {
-      sess = {
-        email: j.email,
-        fullname: j.fullname,
-        role: j.role
-      };
-    });
-    if (sess.role < 2) {
-      return res.render("../views/err-role/err.ejs", {
-        roleerr: "Bạn cần được cấp quyền để truy cập đến trang này!"
-      });
-    } else {
-      var email = sess.email;
+  if(CheckLogin(2,res,req)){
+    var email = req.session.passport.user.email;
       var params = {
         TableName: "Movies",
         // ProjectionExpression: "#status",
@@ -398,73 +358,52 @@ router.get("/list-movie-registed", function (req, res, next) {
           res.render("../views/movies/list-movie-registed.ejs", { result });
         }
       });
-    }
+  }else
+  {
+    return false;//ERR 500
   }
 });
 // ==end==
-// GET List movie waiting register write
+// GET List movie waiting register write ==role=2
 router.get("/list-movie-waiting-register-write", function (req, res, next) {
-  if (req.isAuthenticated()) {
-    return res.render("../views/err-role/err.ejs", {
-      roleerr: "Bạn đăng nhập để truy cập đến trang này!"
+  if(CheckLogin(2,res,req)){
+    var params = {
+      TableName: "Movies",
+      // ProjectionExpression: "#status",
+      FilterExpression: "#stt=:stt OR #stt=:stt1",
+      ExpressionAttributeNames: {
+        "#stt": "stt"
+      },
+      ExpressionAttributeValues: {
+        ":stt": 4,
+        ":stt1": 3
+      }
+      // Limit: 30
+    };
+    docClient.scan(params, function (error, result) {
+      if (error) {
+        console.error(
+          "Unable to query. Error:",
+          JSON.stringify(error, null, 2)
+        );
+      } else {
+        res.render("../views/movies/list-movie-waiting-register-write.ejs", {
+          result,
+          role: req.session.passport.user.role
+        });
+      }
     });
-    // return res.send(false);
-  } else {
-    var sess = {};
-    req.session.passport.user.Items.forEach(function (j) {
-      sess = {
-        email: j.email,
-        fullname: j.fullname,
-        role: j.role
-      };
-    });
-    if (sess.role < 2) {
-      return res.render("../views/err-role/err.ejs", {
-        roleerr: "Bạn cần được cấp quyền để truy cập đến trang này!"
-      });
-    } else {
-      var params = {
-        TableName: "Movies",
-        // ProjectionExpression: "#status",
-        FilterExpression: "#stt=:stt OR #stt=:stt1",
-        ExpressionAttributeNames: {
-          "#stt": "stt"
-        },
-        ExpressionAttributeValues: {
-          ":stt": 4,
-          ":stt1": 3
-        }
-        // Limit: 30
-      };
-      docClient.scan(params, function (error, result) {
-        if (error) {
-          console.error(
-            "Unable to query. Error:",
-            JSON.stringify(error, null, 2)
-          );
-        } else {
-          res.render("../views/movies/list-movie-waiting-register-write.ejs", {
-            result,
-            role: sess.role
-          });
-        }
-      });
-    }
+  }else{
+    return false; //ERR 500
   }
 });
-// =========Register movie=========
+// =========Register movie========= role=2
 router.post("/member-register-movie", function (req, res, next) {
-  var sess = {};
-  req.session.passport.user.Items.forEach(function (j) {
-    sess = {
-      email: j.email,
-      fullname: j.fullname,
-      role: j.role
-    };
-  });
+ if(CheckLogin(2,res,req)){
+
   var id = req.body.id;
-  var email = sess.email;
-  var fullname = sess.fullname;
+  var email = req.session.passport.user.email;
+  var fullname = req.session.passport.user.fullname;
   var now = new Date();
   var registiondate = dateFormat(now, "isoDate");
   var title = req.body.title;
@@ -494,11 +433,16 @@ router.post("/member-register-movie", function (req, res, next) {
       return res.send(true);
     }
   });
+ }else
+ {
+   return false;//ERR 500
+ }
 });
 
-// ========= Get writing movie=====
+// ========= Get writing movie===== role=2
 router.get("/member-writing-movie", function (req, res, next) {
-  var _id = req.query.id;
+  if(CheckLogin(2,res,req)){
+    var _id = req.query.id;
   var params = {
     TableName: "Movies",
     KeyConditionExpression: "id=:id",
@@ -518,13 +462,18 @@ router.get("/member-writing-movie", function (req, res, next) {
       }
     }
   });
+  }else{
+    return false; //ERR 500
+  }
 });
 
 // =========Register movie=========
-// =========Writing Movie of writer===============
-router.post("/member-submit-movie", function (req, res, next) {
-  var title = req.body.title1;
-  var id = req.body.id1;
+// =========Writing Movie of writer=============== role=2
+router.post("/member-submit-movie",upload.single("posterimage"), function (req, res, next) { 
+  if(CheckLogin(2,res,req)){
+    
+  var title = req.body.title;
+  var id = req.body.id;
   var director = req.body.director;
   var distance = req.body.distance;
   var publicationdate = req.body.publicationdate;
@@ -568,16 +517,20 @@ router.post("/member-submit-movie", function (req, res, next) {
         JSON.stringify(err, null, 2)
       );
     } else {
-      s3upload.single("posterimage")
+      
       return res.redirect("/movie/list-movie-registed");
       imgname = "";
     }
   });
+  }else{
+    return false; //ERR 500
+  }
 });
 
-// ========Approve========
+// ========Approve======== role=3
 router.get("/get-admin-approve-movie", function (req, res, next) {
-  var role = 2;
+  if(CheckLogin(3,res,req)){
+    var role = 2;
   var params = {
     TableName: "Movies",
     // ProjectionExpression: "#status",
@@ -597,282 +550,201 @@ router.get("/get-admin-approve-movie", function (req, res, next) {
       res.render("../views/movies/admin-approve-movie.ejs", { result });
     }
   });
+  }else
+  {
+    return false; //ERR 500
+  }
 });
 // ========End Approve====
-// ================Approved=======================
+// ================Approved======================= role=3
 router.post("/admin-approve-movie", function (req, res, next) {
-  if (req.isAuthenticated()) {
-    return res.render("../views/err-role/err.ejs", {
-      roleerr: "Bạn đăng nhập để truy cập đến trang này!"
-    });
-    // return res.send(false);
-  } else {
-    var sess = {};
-    req.session.passport.user.Items.forEach(function (j) {
-      sess = {
-        email: j.email,
-        fullname: j.fullname,
-        role: j.role
-      };
-    });
-    if (sess.role < 3) {
-      return res.render("../views/err-role/err.ejs", {
-        roleerr: "Bạn cần được cấp quyền để truy cập đến trang này!"
-      });
+ if(CheckLogin(3,res,req)){
+  var approver = req.session.passport.user.fullname;
+  var approveremail = req.session.passport.user.email;
+  var id = req.body.id;
+  var now = new Date();
+  var dateofapproved = dateFormat(now, "isoDate");
+  var params = {
+    TableName: "Movies",
+    Key: {
+      id: id
+    },
+    UpdateExpression:
+      "set stt=:st, process.approve.approver=:a, process.approve.dateofapprove=:b",
+    ExpressionAttributeValues: {
+      ":st": 1,
+      ":a": [approver, approveremail],
+      ":b": dateofapproved,
+    },
+    ReturnValues: "UPDATED_NEW"
+  };
+  docClient.update(params, function (err, data) {
+    if (err) {
+      console.error(
+        "Unable to update item. Error JSON:",
+        JSON.stringify(err, null, 2)
+      );
     } else {
-      var approver = sess.fullname;
-      var approveremail = sess.email;
-      var id = req.body.id;
-      var now = new Date();
-      var dateofapproved = dateFormat(now, "isoDate");
-      var params = {
-        TableName: "Movies",
-        Key: {
-          id: id
-        },
-        UpdateExpression:
-          "set stt=:st, process.approve.approver=:a, process.approve.dateofapprove=:b",
-        ExpressionAttributeValues: {
-          ":st": 1,
-          ":a": [approver, approveremail],
-          ":b": dateofapproved,
-        },
-        ReturnValues: "UPDATED_NEW"
-      };
-      docClient.update(params, function (err, data) {
-        if (err) {
-          console.error(
-            "Unable to update item. Error JSON:",
-            JSON.stringify(err, null, 2)
-          );
-        } else {
-          return res.send(true);
-        }
-      });
+      return res.send(true);
     }
-  }
+  });
+ }else{
+   return false; //ERR 500
+ }
 });
 
 // =============end Approved======================
 
-// ================== Get List approving member===
+// ================== Get List approving member=== role=2
 
 router.get("/list-approving-member", function (req, res, next) {
-  if (req.isAuthenticated()) {
-    return res.render("../views/err-role/err.ejs", {
-      roleerr: "Bạn đăng nhập để truy cập đến trang này!"
+  if(CheckLogin(2,res,req)){
+    var email = req.session.passport.user.email;
+    var params = {
+      TableName: "Movies",
+      // ProjectionExpression: "#status",
+      FilterExpression: "(#stt=:stt) AND (process.registion.register[1]=:email) ",
+      ExpressionAttributeNames: {
+        "#stt": "stt"
+      },
+      ExpressionAttributeValues: {
+        ":stt": 2,
+        ":email": email
+      }
+      // Limit: 30
+    };
+    docClient.scan(params, function (error, data) {
+      if (error) {
+        console.error(
+          "Unable to query. Error:",
+          JSON.stringify(error, null, 2)
+        );
+      } else {
+        console.log(JSON.stringify(data));
+        res.render("../views/movies/list-approving-member.ejs", { data });
+      }
     });
-    // return res.send(false);
-  } else {
-    var sess = {};
-    req.session.passport.user.Items.forEach(function (j) {
-      sess = {
-        email: j.email,
-        fullname: j.fullname,
-        role: j.role
-      };
-    });
-    if (sess.role < 2) {
-      return res.render("../views/err-role/err.ejs", {
-        roleerr: "Bạn cần được cấp quyền để truy cập đến trang này!"
-      });
-    } else {
-      var email = sess.email;
-      var params = {
-        TableName: "Movies",
-        // ProjectionExpression: "#status",
-        FilterExpression: "(#stt=:stt) AND (process.registion.register[1]=:email) ",
-        ExpressionAttributeNames: {
-          "#stt": "stt"
-        },
-        ExpressionAttributeValues: {
-          ":stt": 2,
-          ":email": email
-        }
-        // Limit: 30
-      };
-      docClient.scan(params, function (error, data) {
-        if (error) {
-          console.error(
-            "Unable to query. Error:",
-            JSON.stringify(error, null, 2)
-          );
-        } else {
-          console.log(JSON.stringify(data));
-          res.render("../views/movies/list-approving-member.ejs", { data });
-        }
-      });
-    }
+  }else{
+    return false; //ERR 500
   }
 });
 
 // ===============================================
 
-// ================Unapprove=======================
+// ================Unapprove======================= role=3
 router.post("/unapprove-movie-admin", function (req, res, next) {
-  if (req.isAuthenticated()) {
-    return res.render("../views/err-role/err.ejs", {
-      roleerr: "Bạn đăng nhập để truy cập đến trang này!"
+  if(CheckLogin(3,res,req)){
+    var id = req.body.id;
+    var complaint = req.body.note;
+    var params = {
+      TableName: "Movies",
+      Key: {
+        id: id
+      },
+      UpdateExpression:
+        "set process.approve.complaint=:a",
+      ExpressionAttributeValues: {
+        ":a": complaint
+      },
+      ReturnValues: "UPDATED_NEW"
+    };
+    docClient.update(params, function (err, data) {
+      if (err) {
+        console.error(
+          "Unable to update item. Error JSON:",
+          JSON.stringify(err, null, 2)
+        );
+      } else {
+        return res.send(true);
+      }
     });
-    // return res.send(false);
-  } else {
-    var sess = {};
-    req.session.passport.user.Items.forEach(function (j) {
-      sess = {
-        email: j.email,
-        fullname: j.fullname,
-        role: j.role
-      };
-    });
-    if (sess.role < 3) {
-      return res.render("../views/err-role/err.ejs", {
-        roleerr: "Bạn cần được cấp quyền để truy cập đến trang này!"
-      });
-    } else {
-      var id = req.body.id;
-      var complaint = req.body.note;
+  }else{
+    return false; //ERR 500
+  }
+});
+// =============end Unapprove======================
+// ================Delete Movie======================= role 3
+router.post("/delete-movie-admin", function (req, res, next) {
+  if(CheckLogin(3,res,req)){
+    var id = req.body.id;
+    var role = req.session.passport.user.role;
+    if (role > 2) {
       var params = {
         TableName: "Movies",
         Key: {
           id: id
-        },
-        UpdateExpression:
-          "set process.approve.complaint=:a",
-        ExpressionAttributeValues: {
-          ":a": complaint
-        },
-        ReturnValues: "UPDATED_NEW"
+        }
       };
-      docClient.update(params, function (err, data) {
+      var param1s = {
+        TableName: "Movies",
+        KeyConditionExpression: "id=:id",
+        ExpressionAttributeValues: {
+          ":id": id
+        }
+      };
+      docClient.query(param1s, function (err, result) { //lay file hinh
         if (err) {
           console.error(
-            "Unable to update item. Error JSON:",
+            "Unable to read item. Error JSON:",
             JSON.stringify(err, null, 2)
           );
         } else {
-          return res.send(true);
+          var img = "";
+          var stt = "";
+          result.Items.forEach(function (i) {
+            img = i.info.posterimage;
+            stt = i.stt;
+          })
+          if (stt == 4 || stt == 3) {
+
+            docClient.delete(params, function (err, data) {
+              if (err) {
+                console.error(
+                  "Unable to delete item. Error JSON:",
+                  JSON.stringify(err, null, 2)
+                );
+              } else {
+                return res.send(true);
+              }
+            });
+
+
+          }
+          else {
+            s3Fs.unlink(img, function (err, data) {//Xoa img s3
+              if (err) {
+                throw err;
+              }
+              else { //Xoa dynamodb
+                docClient.delete(params, function (err, data) {
+                  if (err) {
+                    console.error(
+                      "Unable to delete item. Error JSON:",
+                      JSON.stringify(err, null, 2)
+                    );
+                  } else {
+                    return res.send(true);
+                  }
+                });
+              }
+            })
+          }
         }
       });
-    }
-  }
-});
-// =============end Unapprove======================
-// ================Delete Movie=======================
-router.post("/delete-movie-admin", function (req, res, next) {
-  if (req.isAuthenticated()) {
-    return res.render("../views/err-role/err.ejs", {
-      roleerr: "Bạn đăng nhập để truy cập đến trang này!"
-    });
-    // return res.send(false);
-  } else {
-    var sess = {};
-    req.session.passport.user.Items.forEach(function (j) {
-      sess = {
-        email: j.email,
-        fullname: j.fullname,
-        role: j.role
-      };
-    });
-    if (sess.role < 3) {
-      return res.render("../views/err-role/err.ejs", {
-        roleerr: "Bạn cần được cấp quyền để truy cập đến trang này!"
-      });
     } else {
-
-      var id = req.body.id;
-      var role = sess.role;
-      if (role > 2) {
-        var params = {
-          TableName: "Movies",
-          Key: {
-            id: id
-          }
-        };
-        var param1s = {
-          TableName: "Movies",
-          KeyConditionExpression: "id=:id",
-          ExpressionAttributeValues: {
-            ":id": id
-          }
-        };
-        docClient.query(param1s, function (err, result) { //lay file hinh
-          if (err) {
-            console.error(
-              "Unable to read item. Error JSON:",
-              JSON.stringify(err, null, 2)
-            );
-          } else {
-            var img = "";
-            var stt = "";
-            result.Items.forEach(function (i) {
-              img = i.info.posterimage;
-              stt = i.stt;
-            })
-            if (stt == 4 || stt == 3) {
-
-              docClient.delete(params, function (err, data) {
-                if (err) {
-                  console.error(
-                    "Unable to delete item. Error JSON:",
-                    JSON.stringify(err, null, 2)
-                  );
-                } else {
-                  return res.send(true);
-                }
-              });
-
-
-            }
-            else {
-              s3Fs.unlink(img, function (err, data) {//Xoa img s3
-                if (err) {
-                  throw err;
-                }
-                else { //Xoa dynamodb
-                  docClient.delete(params, function (err, data) {
-                    if (err) {
-                      console.error(
-                        "Unable to delete item. Error JSON:",
-                        JSON.stringify(err, null, 2)
-                      );
-                    } else {
-                      return res.send(true);
-                    }
-                  });
-                }
-              })
-            }
-          }
-        });
-      } else {
-        return res.send("ERROR ROLE UNVALID");
-      }
+      return res.send("ERROR ROLE UNVALID");
     }
+  }else
+  {
+    return false; //ERR 500
   }
+  
 });
 // =============End delete movie======================
-// =============Unregister============================
+// =============Unregister============================role=2
 router.post("/unregister-movie-member", function (req, res, next) {
-  if (req.isAuthenticated()) {
-    return res.render("../views/err-role/err.ejs", {
-      roleerr: "Bạn đăng nhập để truy cập đến trang này!"
-    });
-    // return res.send(false);
-  } else {
-    var sess = {};
-    req.session.passport.user.Items.forEach(function (j) {
-      sess = {
-        email: j.email,
-        fullname: j.fullname,
-        role: j.role
-      };
-    });
-    if (sess.role < 2) {
-      return res.render("../views/err-role/err.ejs", {
-        roleerr: "Bạn cần được cấp quyền để truy cập đến trang này!"
-      });
-    } else {
-      var id = req.body.id;
+  if(CheckLogin(2,res,req)){
+    var id = req.body.id;
       var now = new Date();
       var params = {
         TableName: "Movies",
@@ -916,14 +788,17 @@ router.post("/unregister-movie-member", function (req, res, next) {
           });
         }
       });
-    }
+  }else
+  {
+    return false; //ERR 500
   }
 });
 // =============End Unregister============================
-// ==========Update Movie Member==========================
+// ==========Update Movie Member========================== role=2
 
 router.get("/get-update-movie-member", function (req, res, next) {
-  var _id = req.query.id;
+  if(CheckLogin(2,res,req)){
+    var _id = req.query.id;
   var params = {
     TableName: "Movies",
     KeyConditionExpression: "id=:id",
@@ -941,8 +816,13 @@ router.get("/get-update-movie-member", function (req, res, next) {
       return res.render("../views/movies/update-movie-member.ejs", { data });
     }
   });
+  }else{
+    return false; //ERR 500
+  }
 });
+// ============ Role =3
 router.get("/get-update-movie-admin", function (req, res, next) {
+ if(CheckLogin(3,res,req)){
   var _id = req.query.id;
   var params = {
     TableName: "Movies",
@@ -961,9 +841,14 @@ router.get("/get-update-movie-admin", function (req, res, next) {
       return res.render("../views/movies/admin-update-content-movie.ejs", { data });
     }
   });
+ }else
+ {
+   return false; //ERR 500
+ }
 });
-
-router.post("/update-movie-member", s3upload.single("posterimage"), function (req, res, next) {
+// =========== role=2
+router.post("/update-movie-member", upload.single("posterimage"), function (req, res, next) {
+ if(CheckLogin(2,res,req)){
   var id = req.body.id;
   var director = req.body.director;
   var distance = req.body.distance;
@@ -1047,10 +932,16 @@ router.post("/update-movie-member", s3upload.single("posterimage"), function (re
       });
     }
   })
+ }else
+ {
+   return false; //ERR 500
+ }
 
   //Hướng phát triển: Sau này nếu member update trong trường hợp bài viết đã được approve .Khi update lại sẽ tạo ra 1 bản mới và 1 bản củ để admin lựa chọn dữ lại bản củ hay lấy bản mới.
 })
-router.post("/update-content-movie-admin", s3upload.single("posterimage"), function (req, res, next) {
+// ========role=3
+router.post("/update-content-movie-admin", upload.single("posterimage"), function (req, res, next) {
+ if(CheckLogin(3)){
   var title = req.body.title;
   var producer=req.body.producer;
   var id = req.body.id;
@@ -1156,32 +1047,17 @@ router.post("/update-content-movie-admin", s3upload.single("posterimage"), funct
       });
     }
   })
+ }else{
+   return false; //ERR 500
+ }
 
   //Hướng phát triển: Sau này nếu member update trong trường hợp bài viết đã được approve .Khi update lại sẽ tạo ra 1 bản mới và 1 bản củ để admin lựa chọn dữ lại bản củ hay lấy bản mới.
 })
-// =================Delete Create Admin======================
+// =================Delete Create Admin====================== role =3
 router.post("/delete-create-movie-admin", function (req, res, next) {
-  if (req.isAuthenticated()) {
-    return res.render("../views/err-role/err.ejs", {
-      roleerr: "Bạn đăng nhập để truy cập đến trang này!"
-    });
-    // return res.send(false);
-  } else {
-    var sess = {};
-    req.session.passport.user.Items.forEach(function (j) {
-      sess = {
-        email: j.email,
-        fullname: j.fullname,
-        role: j.role
-      };
-    });
-    if (sess.role < 3) {
-      return res.render("../views/err-role/err.ejs", {
-        roleerr: "Bạn cần được cấp quyền để truy cập đến trang này!"
-      });
-    } else {
-      var id = req.body.id;
-      var role = sess.role;
+  if(CheckLogin(3,res,req)){
+    var id = req.body.id;
+      var role = req.session.passport.user.role;
       if (role > 2) {
         var params = {
           TableName: "Movies",
@@ -1204,97 +1080,67 @@ router.post("/delete-create-movie-admin", function (req, res, next) {
       } else {
         return res.send("ERROR ROLE UNVALID");
       }
-    }
+  }else
+  {
+    return false; //ERR 500;
   }
 });
 // ==========================================================
 
 
-//  ===========List Movie of Member writed===============
+//  ===========List Movie of Member writed===============role =2
 router.get("/get-list-writed-member", function (req, res, next) {
-  if (req.isAuthenticated()) {
-    return res.render("../views/err-role/err.ejs", {
-      roleerr: "Bạn đăng nhập để truy cập đến trang này!"
-    });
-    // return res.send(false);
-  } else {
-    var sess = {};
-    req.session.passport.user.Items.forEach(function (j) {
-      sess = {
-        email: j.email,
-        fullname: j.fullname,
-        role: j.role
-      };
-    });
-    if (sess.role < 1) {
-      return res.render("../views/err-role/err.ejs", {
-        roleerr: "Bạn cần được cấp quyền để truy cập đến trang này!"
-      });
-    } else {
-      var email = sess.email;
-      var params = {
-        TableName: "Movies",
-        // ProjectionExpression: "#status",
-        FilterExpression: "(#stt<=:stt) AND (process.registion.register[1]=:email)",
-        ExpressionAttributeNames: {
-          "#stt": "stt"
-        },
-        ExpressionAttributeValues: {
-          ":stt": 3,
-          ":email": email
-        }
-        // Limit: 30
-      };
-      docClient.scan(params, function (error, data) {
-        if (error) {
-          console.error(
-            "Unable to query. Error:",
-            JSON.stringify(error, null, 2)
-          );
-        } else {
-          res.render("../views/movies/list-movie-member-writed.ejs", { data });
-        }
-      });
+ if(CheckLogin(2,res,req)){
+  var email = req.session.passport.user.email;
+  var params = {
+    TableName: "Movies",
+    // ProjectionExpression: "#status",
+    FilterExpression: "(#stt<=:stt) AND (process.registion.register[1]=:email)",
+    ExpressionAttributeNames: {
+      "#stt": "stt"
+    },
+    ExpressionAttributeValues: {
+      ":stt": 3,
+      ":email": email
     }
-  }
+    // Limit: 30
+  };
+  docClient.scan(params, function (error, data) {
+    if (error) {
+      console.error(
+        "Unable to query. Error:",
+        JSON.stringify(error, null, 2)
+      );
+    } else {
+      res.render("../views/movies/list-movie-member-writed.ejs", { data });
+    }
+  });
+ }else
+ {
+   return false; //ERR 500
+ }
 })
-// ==========Get all movie for Admin list manager========
+// ==========Get all movie for Admin list manager======== role=3
 router.get("/get-list-movie-admin", function (req, res, next) {
-  if (req.isAuthenticated()) {
-    return res.render("../views/err-role/err.ejs", {
-      roleerr: "Bạn đăng nhập để truy cập đến trang này!"
-    });
-    // return res.send(false);
-  } else {
-    var sess = {};
-    req.session.passport.user.Items.forEach(function (j) {
-      sess = {
-        email: j.email,
-        fullname: j.fullname,
-        role: j.role
-      };
-    });
-    if (sess.role < 3) {
-      return res.render("../views/err-role/err.ejs", {
-        roleerr: "Bạn cần được cấp quyền để truy cập đến trang này!"
-      });
+if(CheckLogin(3,res,req)){
+  var email = req.session.passport.user.email;
+  var params = {
+    TableName: "Movies"
+  };
+  docClient.scan(params, function (error, data) {
+    if (error) {
+      console.error(
+        "Unable to query. Error:",
+        JSON.stringify(error, null, 2)
+      );
     } else {
-      var email = sess.email;
-      var params = {
-        TableName: "Movies"
-      };
-      docClient.scan(params, function (error, data) {
-        if (error) {
-          console.error(
-            "Unable to query. Error:",
-            JSON.stringify(error, null, 2)
-          );
-        } else {
-          res.render("../views/movies/manager-movie-admin.ejs", { data });
-        }
-      });
+      res.render("../views/movies/manager-movie-admin.ejs", { data });
     }
-  }
+  });
+}else
+{
+  return false; //ERR 500
+}
 })
 // ======================================================
 // >>>>>>> Stashed changes

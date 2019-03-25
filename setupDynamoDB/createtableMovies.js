@@ -18,19 +18,17 @@ if (dynamoDbConfig.isDev) {
 var dynamodb = new AWS.DynamoDB();
 
 var params = {
-  TableName: "Movies",
-  KeySchema: [
-    { AttributeName: "id", KeyType: "HASH" }, //Partition key
-    { AttributeName: "title", KeyType: "RANGE" } //Sort key
-  ],
-  AttributeDefinitions: [
-    { AttributeName: "id", AttributeType: "S" },
-    { AttributeName: "title", AttributeType: "S" }
-  ],
-  ProvisionedThroughput: {
-    ReadCapacityUnits: 10,
-    WriteCapacityUnits: 10
-  }
+    TableName : "Movies",
+    KeySchema: [       
+        { AttributeName: "id", KeyType: "HASH"}  //Partition key
+    ],
+    AttributeDefinitions: [       
+        { AttributeName: "id", AttributeType: "S" }
+    ],
+    ProvisionedThroughput: {       
+        ReadCapacityUnits: 10, 
+        WriteCapacityUnits: 10
+    }
 };
 
 dynamodb.createTable(params, function(err, data) {

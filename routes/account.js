@@ -7,6 +7,7 @@ var ggstrategy = require("passport-google-oauth").OAuth2Strategy;
 var localStratery = require("passport-local").Strategy;
 var dynamoDbConfig = require("../config/dynamodb-config");
 var uuid4 = require("uuid4");
+var moment = require('moment');
 // =========================Role===========================
 
 // ============
@@ -95,6 +96,7 @@ function checkidmovie(id) {
 // ==========Register==============
 router.post("/register-account", function (req, res, next) {
   var _id = createID();
+  //var _birthday=moment(req.body.birthday).format('DD/MM/YYYY');
   var params = {
     TableName: "Accounts",
     Item: {
@@ -452,167 +454,229 @@ router.post("/delete-acc-admin", function (req, res, next) {
 // ========================
 // ============Change Role Admin==============
 router.post("/change-role-admin", function (req, res, next) {
-  if(CheckLogin(4,res,req)){
-   var id = req.body.id;
-   var role = req.body.role;
-  
-   var params = {
-     TableName: "Accounts",
-     Key: {
-       id: id
-     },
-     UpdateExpression:
-       "set #role=:a",
-       ExpressionAttributeNames:{"#role": "role"},
-     ExpressionAttributeValues: {
-       ":a": role
-     },
-     ReturnValues: "UPDATED_NEW"
-   };
-   docClient.update(params, function (err, data) {
-     if (err) {
-       console.error(
-         "Unable to update item. Error JSON:",
-         JSON.stringify(err, null, 2)
-       );
-     } else {
-       return res.send(true);
-     }
-   });
-  }else{
+  if (CheckLogin(4, res, req)) {
+    var id = req.body.id;
+    var role = req.body.role;
+
+    var params = {
+      TableName: "Accounts",
+      Key: {
+        id: id
+      },
+      UpdateExpression:
+        "set #role=:a",
+      ExpressionAttributeNames: { "#role": "role" },
+      ExpressionAttributeValues: {
+        ":a": role
+      },
+      ReturnValues: "UPDATED_NEW"
+    };
+    docClient.update(params, function (err, data) {
+      if (err) {
+        console.error(
+          "Unable to update item. Error JSON:",
+          JSON.stringify(err, null, 2)
+        );
+      } else {
+        return res.send(true);
+      }
+    });
+  } else {
     return false; //ERR 500
   }
- });
+});
 // ===========================================
 
 
 // =============GET DETAIL ACC= ADMIN===============
 router.get("/get-acc-detail-admin", function (req, res, next) {
-  if(CheckLogin(4,res,req)){
-   var id = req.query.id;
-   var params = {
-    TableName: "Accounts",
-    KeyConditionExpression: "id=:id",
-    ExpressionAttributeValues: {
-      ":id": id
-    }
-  };
-  docClient.query(params, function (err, data) {
-    if (err) {
-      console.error(
-        "Unable to read item. Error JSON:",
-        JSON.stringify(err, null, 2)
-      );
-    } else {
-      return res.send(data);
-    }
-  });
-  }else{
+  if (CheckLogin(4, res, req)) {
+    var id = req.query.id;
+    var params = {
+      TableName: "Accounts",
+      KeyConditionExpression: "id=:id",
+      ExpressionAttributeValues: {
+        ":id": id
+      }
+    };
+    docClient.query(params, function (err, data) {
+      if (err) {
+        console.error(
+          "Unable to read item. Error JSON:",
+          JSON.stringify(err, null, 2)
+        );
+      } else {
+        return res.send(data);
+      }
+    });
+  } else {
     return false; //ERR 500
   }
- });
+});
 // ===========================================
 // =============GET DETAIL ACC ALL OBJECT================
 router.get("/get-detail-account", function (req, res, next) {
-  if(CheckLogin(1,res,req)){
-   var _id = req.session.passport.user.id;
-   var params = {
-    TableName: "Accounts",
-    KeyConditionExpression: "id=:id",
-    ExpressionAttributeValues: {
-      ":id": _id
-    }
-  };
-  docClient.query(params, function (err, data) {
-    if (err) {
-      console.error(
-        "Unable to read item. Error JSON:",
-        JSON.stringify(err, null, 2)
-      );
-    } else {
-     
-    
-        return res.render("../views/account/detail-acc-owner.ejs",{data});
-      
-    }
-  });
-  }else{
+  if (CheckLogin(1, res, req)) {
+    var _id = req.session.passport.user.id;
+    var params = {
+      TableName: "Accounts",
+      KeyConditionExpression: "id=:id",
+      ExpressionAttributeValues: {
+        ":id": _id
+      }
+    };
+    docClient.query(params, function (err, data) {
+      if (err) {
+        console.error(
+          "Unable to read item. Error JSON:",
+          JSON.stringify(err, null, 2)
+        );
+      } else {
+        return res.render("../views/account/detail-acc-owner.ejs", { data });
+      }
+    });
+  } else {
     return false; //ERR 500
   }
- });
+});
 // ===========================================
 // =============GET DETAIL ACC ALL OBJECT================
 router.get("/check-password", function (req, res, next) {
-  if(CheckLogin(1,res,req)){
-   var _id = req.session.passport.user.id;
-   var params = {
-    TableName: "Accounts",
-    KeyConditionExpression: "id=:id",
-    ExpressionAttributeValues: {
-      ":id": _id
-    }
-  };
-  docClient.query(params, function (err, data) {
-    if (err) {
-      console.error(
-        "Unable to read item. Error JSON:",
-        JSON.stringify(err, null, 2)
-      );
-    } else {
-     if(data.Count>0)
-     {
-      var oldpass="";
-       data.Items.forEach((i)=>{
-        oldpass=i.password;
-       })
-       return res.send(oldpass);
-     }
-     else{
-       return res.send(false);
-     }
-    }
-  });
-  }else{
+  if (CheckLogin(1, res, req)) {
+    var _id = req.session.passport.user.id;
+    var params = {
+      TableName: "Accounts",
+      KeyConditionExpression: "id=:id",
+      ExpressionAttributeValues: {
+        ":id": _id
+      }
+    };
+    docClient.query(params, function (err, data) {
+      if (err) {
+        console.error(
+          "Unable to read item. Error JSON:",
+          JSON.stringify(err, null, 2)
+        );
+      } else {
+        if (data.Count > 0) {
+          var oldpass = "";
+          data.Items.forEach((i) => {
+            oldpass = i.password;
+          })
+          return res.send(oldpass);
+        }
+        else {
+          return res.send(false);
+        }
+      }
+    });
+  } else {
     return false; //ERR 500
   }
- });
+});
 // ===========================================
 // ============Change Role Admin==============
 router.post("/change-password", function (req, res, next) {
-  if(CheckLogin(1,res,req)){
-   var id = req.session.passport.user.id;
-  //  var oldpass=req.body.oldpass;
-   var newpass=req.body.newpass;
-  
-   var params = {
-     TableName: "Accounts",
-     Key: {
-       id: id
-     },
-     UpdateExpression:
-       "set #pass=:a",
-       ExpressionAttributeNames:{"#pass": "password"},
-     ExpressionAttributeValues: {
-       ":a": newpass
-     },
-     ReturnValues: "UPDATED_NEW"
-   };
-   docClient.update(params, function (err, data) {
-     if (err) {
-       console.error(
-         "Unable to update item. Error JSON:",
-         JSON.stringify(err, null, 2)
-       );
-     } else {
-       return res.send(true);
-     }
-   });
-  }else{
+  if (CheckLogin(1, res, req)) {
+    var id = req.session.passport.user.id;
+    //  var oldpass=req.body.oldpass;
+    var newpass = req.body.newpass;
+
+    var params = {
+      TableName: "Accounts",
+      Key: {
+        id: id
+      },
+      UpdateExpression:
+        "set #pass=:a",
+      ExpressionAttributeNames: { "#pass": "password" },
+      ExpressionAttributeValues: {
+        ":a": newpass
+      },
+      ReturnValues: "UPDATED_NEW"
+    };
+    docClient.update(params, function (err, data) {
+      if (err) {
+        console.error(
+          "Unable to update item. Error JSON:",
+          JSON.stringify(err, null, 2)
+        );
+      } else {
+        return res.send(true);
+      }
+    });
+  } else {
     return false; //ERR 500
   }
- });
+});
 // ===========================================
 // ==============UPDATE ACCOUNT===============
+// =============GET Update ACC ALL OBJECT================
+router.get("/get-update-account", function (req, res, next) {
+  if (CheckLogin(1, res, req)) {
+    var _id = req.session.passport.user.id;
+    var params = {
+      TableName: "Accounts",
+      KeyConditionExpression: "id=:id",
+      ExpressionAttributeValues: {
+        ":id": _id
+      }
+    };
+    docClient.query(params, function (err, data) {
+      if (err) {
+        console.error(
+          "Unable to read item. Error JSON:",
+          JSON.stringify(err, null, 2)
+        );
+      } else {
+        return res.render("../views/account/update-account.ejs");
+      }
+    });
+  } else {
+    return false; //ERR 500
+  }
+});
+// ===========================================
+// ==========Update Acc==============
+router.post("/update-acc", function (req, res, next) {
+  if (CheckLogin(1, res, req)) {
+    var adress = req.body.adress;
+    var birthday = req.body.birthday;
+    var fullname = req.body.fullname;
+    var phone = req.body.phone;
+    var sex = req.body.sex;
+    var id = req.session.passport.user.id;
+    var params = {
+      TableName: "Accounts",
+      Key: {
+        id: id
+      },
+      UpdateExpression: "set info.adress=:a, info.birthday=:b, info.fullname=:c, info.phone=:d, info.sex=:g",
+      ExpressionAttributeValues: {
+        ":a": adress,
+        ":b": birthday,
+        ":c": fullname,
+        ":d": phone,
+        ":g": sex
+      },
+      ReturnValues: "UPDATED_NEW"
+    };
+    docClient.update(params, function (err, data) {
+      if (err) {
+        console.error(
+          "Unable to update item. Error JSON:",
+          JSON.stringify(err, null, 2)
+        );
+      } else {
+        console.log(JSON.stringify(data));
+        return res.send(true);
+      }
+    });
+  } else {
+    return false; //ERR 500
+  }
+});
+// =======End Update ACC=============
 // ===========================================
 
 module.exports = router;

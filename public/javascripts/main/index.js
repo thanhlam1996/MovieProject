@@ -14,9 +14,9 @@ $(document).ready(function () {
             login+='<span id="daucach"> || </span>'+sess.fullname+'<span id="daucach"> ||</span>';
             login+='</button>';
             login+='<div class="dropdown-menu">';
-            login+='<a class="dropdown-item" href="/get-detail-account">Thông tin tài khoản</a>';
-            login+='<a class="dropdown-item" href="/get-update-account">Cập nhật thông tin</a>';
-            login+='<a class="dropdown-item" href="#">Đăng xuất</a>';
+            login+='<a class="dropdown-item" href="/get-detail-account">Quản lý tài khoản</a>';
+            // login+='<a class="dropdown-item" href="/get-update-account">Cập nhật thông tin</a>';
+            login+='<a class="dropdown-item signout"  href="#">Đăng xuất</a>';
             login+='</div>';
             login+='</div>';
             login += '</li>';          
@@ -45,6 +45,6 @@ $(document).on('click', '.signout', function () {
         url: "account/signout",
         type: "get"
     }).done(function () {
-        window.location.reload();
+        window.location.href='/';
     });
 });

@@ -1,6 +1,5 @@
 var AWS = require("aws-sdk");
 var dynamoDbConfig = require("../config/dynamodb-config");
-
 if (dynamoDbConfig.isDev) {
   AWS.config.update({
     region: dynamoDbConfig.localConfig.region,
@@ -14,23 +13,20 @@ if (dynamoDbConfig.isDev) {
   AWS.accessKeyId = dynamoDbConfig.onlineConfig.accessKeyId;
   AWS.secretAccessKey = dynamoDbConfig.onlineConfig.secretAccessKey;
 }
-
 var dynamodb = new AWS.DynamoDB();
 
 var params = {
-  TableName: "Accounts",
-  KeySchema: [
-    { AttributeName: "email", KeyType: "HASH" }, //Partition key
-    { AttributeName: "fullname", KeyType: "RANGE" } //Sort key
-  ],
-  AttributeDefinitions: [
-    { AttributeName: "email", AttributeType: "S" },
-    { AttributeName: "fullname", AttributeType: "S" }
-  ],
-  ProvisionedThroughput: {
-    ReadCapacityUnits: 10,
-    WriteCapacityUnits: 10
-  }
+    TableName : "Accounts",
+    KeySchema: [       
+        { AttributeName: "id", KeyType: "HASH"}  //Partition key
+    ],
+    AttributeDefinitions: [       
+        { AttributeName: "id", AttributeType: "S" }
+    ],
+    ProvisionedThroughput: {       
+        ReadCapacityUnits: 10, 
+        WriteCapacityUnits: 10
+    }
 };
 
 dynamodb.createTable(params, function(err, data) {

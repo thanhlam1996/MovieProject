@@ -93,3 +93,83 @@ $(document).on('click','#btn-submit-changepass', function () {
        return false;
     }
 });
+$(document).on('click','.update-acc-all', function () {
+    $("#frm-update-acc").validate({
+        onfocusout: false,
+        onkeyup: false,
+        onclick: false,
+        rules: {
+            "fullname": {
+                required: true
+               
+            },
+            "birthday": {
+                required: true
+               
+            },
+            "phone": {
+                required: true
+               
+            },
+            "adress": {
+                required: true
+              
+            }
+        },
+        messages: {
+            "fullname": {
+                required: "Họ và tên bắt buộc nhập"
+                
+            },
+            "birthday": {
+                required: "Ngày sinh bắt buộc nhập"
+                
+            },
+            "phone": {
+                required: "Số điện thoại bắt buộc nhập"
+                
+            },
+            "adress": {
+                required: "Địa chỉ bắt buộc nhập"
+               
+            }
+        }
+    });
+    $('#btn-submit-update-acc').click(()=>{
+        if( $("#frm-update-acc").valid()){
+            var _fullname=$('#txt-reg-fullname').val();
+            var _birthday=$('#txt-birthday').val();
+            var _sex=$('input[name="sex"]:checked').val();
+            var _phone=$('#txt-reg-phone').val();
+            var _adress=$('#txt-reg-adpress').val();
+            $.ajax({
+                url:"/account/update-acc",
+                type:"post",
+                data:{
+                    fullname:_fullname,
+                    birthday:_birthday,
+                    sex:_sex,
+                    phone:_phone,
+                    adress:_adress
+                }
+            }).done((data)=>{
+                if(data)
+                {
+                   alert("Cập nhật thông tin thành công!");
+                   window.location.href='/get-detail-account';
+                }else{
+                    alert("Lỗi máy chủ. Hãy thử lại sau ít phút!");
+                    return false;
+                }
+            })
+        }
+        else
+        {
+           return false;
+        }
+    })
+    
+});
+// $(document).on('click','#btn-submit-update-acc',()=>{
+   
+// })

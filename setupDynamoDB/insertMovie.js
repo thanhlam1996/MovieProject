@@ -25,24 +25,39 @@ allcar.forEach(function(m) {
   var params = {
     TableName: "Movies",
     Item: {
-      id: m.id,
-      title: m.title,
-      type: m.type,
-      actor: m.actor,
-      director: m.director,
-      producer: m.producer,
-      country: m.country,
-      distance: m.distance,
-      releasedate: m.releasedate,
-      posterimage: m.posterimage,
-      trailer: m.trailer,
-      content: m.content,
-      author: m.content,
-      publicationdate: m.publicationdate,
-      status: m.status,
-      comment: m.comment,
-      like: m.like,
-      countview: m.countview
+    id:"movie01",
+    title:"Titanic",
+    stt:1,
+    process:{
+      create:{
+        creater:["Thanh Lam","lam.truong1996@gmail.com"],
+        initdate:"19-03-2019",
+        deadline:"30-03-2019",
+        createnote:"Thay đổi sẽ thành công"
+      },
+      registion:{
+        register:["Van Hieu","hieuabc@gmail.com"],
+        registiondate:"20-03-2019"
+      },
+      approve:{
+        submitiondate:"22-03-2019",
+        approver:["Thanh Lam","lam.truong1996@gmail.com"],
+        dateofapprove:"24-03-2019",
+        complaint:"Sắp rớt môn..."
+      }
+    },
+    info:{
+        movietype:["Hài", "Gia đình","Tình cảm"],
+        actor:["Thanh Lam", "Van Hieu"],
+        director:"Nhất Trung",
+        producer:"NT Studio",
+        country:"Việt Nam",
+        distance: 90,
+        posterimage:"url_aaaaa",
+        trailer:"l8vTMxuvz6Y",
+        content:"ádlkjasoldjhasldjlasdjlasdjlasgsxgbfclhdsgfhsxbfcjhjsdgfjhsdgfjhsdgfljh",
+        publicationdate:"17/02/2019"
+    }
     }
   };
   docClient.put(params, function(err, data) {

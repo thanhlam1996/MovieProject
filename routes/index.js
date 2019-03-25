@@ -3,6 +3,7 @@ var router = express.Router();
 var AWS = require("aws-sdk");
 // var passport = require("passport");
 var dynamoDbConfig = require("../config/dynamodb-config");
+var moment = require('moment');
 
 // var urlencodedParser = bodyParser.urlencoded({ extended: false })
 
@@ -207,14 +208,15 @@ router.get("/get-detail-account", function (req, res, next) {
         JSON.stringify(err, null, 2)
       );
     } else {
+      console.log(JSON.stringify(data))
       var ck=_id.substring(0, 2); ; 
       if(ck=="GG"|| ck=="FB")
       {
-        return res.render("../views/account/detail-acc-owner.ejs",{data,ck:"no"});
+        return res.render("../views/account/detail-acc-owner.ejs",{data, ck:"no", moment:moment});
       }
       else
       {
-        return res.render("../views/account/detail-acc-owner.ejs",{data,ck:"yes"});
+        return res.render("../views/account/detail-acc-owner.ejs",{data,ck:"yes",moment: moment});
       }
     }
   });
