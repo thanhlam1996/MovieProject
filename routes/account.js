@@ -19,19 +19,12 @@ var moment = require('moment');
 
 // =====================End role===========================
 
-if (dynamoDbConfig.isDev) {
-  AWS.config.update({
-    region: dynamoDbConfig.localConfig.region,
-    endpoint: dynamoDbConfig.localConfig.endpoint
-  });
-} else {
-  AWS.config.update({
-    region: dynamoDbConfig.onlineConfig.region,
-    endpoint: dynamoDbConfig.onlineConfig.endpoint
-  });
-  AWS.accessKeyId = dynamoDbConfig.onlineConfig.accessKeyId;
-  AWS.secretAccessKey = dynamoDbConfig.onlineConfig.secretAccessKey;
-}
+AWS.config.update({
+  region: "us-west-2",
+  endpoint: "http://localhost:8000"
+});
+AWS.config.accessKeyId = "AKIAJ7WBBCXAAFKR4RLA";
+AWS.config.secretAccessKey = "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";
 
 var docClient = new AWS.DynamoDB.DocumentClient();
 // =======================================================================================================
@@ -110,7 +103,7 @@ router.post("/register-account", function (req, res, next) {
         phone: req.body.phone
       },
       password: req.body.password,
-      role: 1
+      role: 4
     }
   };
   docClient.put(params, function (err, data) {

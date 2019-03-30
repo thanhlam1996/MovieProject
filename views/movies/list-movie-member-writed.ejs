@@ -31,8 +31,8 @@
                 <%}%> 
                 <td><%=i.info.producer%></td>
                 <td><%=i.info.country?i.info.country:"-"%></td>
-                <td><%=i.info.publicationdate?i.info.publicationdate:"-"%></td>
-                <td><%=i.process.approve?i.process.approve.submitiondate:"-"%></td>
+                <td><%=i.info.publicationdate?moment(i.info.publicationdate,'YYYY-MM-DD').format('DD/MM/YYYY'):"-"%></td>
+                <td><%=i.process.approve?moment(i.process.approve.submitiondate,'YYYY-MM-DD').format('DD/MM/YYYY'):"-"%></td>
                 <td><%=i.process.approve?(i.process.approve.approver?i.process.approve.approver[0]:"-"):"-"%></td>
                 <%if(i.stt==1){%>
                     <td><a class="open-view-movie" id="<%=i.id%>" href="#">Xem</a></td>

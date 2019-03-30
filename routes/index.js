@@ -4,22 +4,17 @@ var AWS = require("aws-sdk");
 // var passport = require("passport");
 var dynamoDbConfig = require("../config/dynamodb-config");
 var moment = require('moment');
+var arraySort = require('array-sort');//Phuong thuc dung de sap xep nhuwng chuaw kha thi hihi
+var descending = require('sort-desc');//Phuong thuc sorf theo thu tu gia, dan
 
 // var urlencodedParser = bodyParser.urlencoded({ extended: false })
 
-if (dynamoDbConfig.isDev) {
-  AWS.config.update({
-    region: dynamoDbConfig.localConfig.region,
-    endpoint: dynamoDbConfig.localConfig.endpoint
-  });
-} else {
-  AWS.config.update({
-    region: dynamoDbConfig.onlineConfig.region,
-    endpoint: dynamoDbConfig.onlineConfig.endpoint
-  });
-  AWS.accessKeyId = dynamoDbConfig.onlineConfig.accessKeyId;
-  AWS.secretAccessKey = dynamoDbConfig.onlineConfig.secretAccessKey;
-}
+AWS.config.update({
+  region: "us-west-2",
+  endpoint: "http://localhost:8000"
+});
+AWS.config.accessKeyId = "AKIAJ7WBBCXAAFKR4RLA";
+AWS.config.secretAccessKey = "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";
 
 var docClient = new AWS.DynamoDB.DocumentClient();
 //
@@ -144,20 +139,33 @@ router.get("/", function (req, res, next) {
           JSON.stringify(err, null, 2)
         );
       } else {
+        console.log(JSON.stringify(data))
         if (_role == "ad") {
           return res.render("../views/movies/movie-detail.ejs", {
             data,
-            role: "ad"
+            role: "ad",
+            moment:moment,
+            descending:descending,
+            id_owner:req.session.passport.user.id,
+            role_owner:req.session.passport.user.role
           });
         } else if (_role == "mb") {
           return res.render("../views/movies/movie-detail.ejs", {
             data,
-            role: "mb"
+            role: "mb",
+            moment:moment,
+            descending:descending,
+            id_owner:req.session.passport.user.id,
+            role_owner:req.session.passport.user.role
           });
         } else {
           return res.render("../views/movies/movie-detail.ejs", {
             data,
-            role: "none"
+            role: "none",
+            moment:moment,
+            descending:descending,
+            id_owner:req.session.passport.user.id,
+            role_owner:req.session.passport.user.role
           });
         }
       }

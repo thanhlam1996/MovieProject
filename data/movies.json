@@ -32,6 +32,15 @@
         "trailer":"l8vTMxuvz6Y",
         "content":"ádlkjasoldjhasldjlasdjlasdjlasgsxgbfclhdsgfhsxbfcjhjsdgfjhsdgfjhsdgfljh",
         "publicationdate":"17/02/2019"
-    }
+    },
+    "comment":[
+      {
+        "commenter":["fullname","email","id"],
+        "contentcmt":"content",
+        "rating":4.5,
+        "time":["12:40 PM","1-1-2019"]
+      }
+    ],
+    "ratings":[4.5]
   }
 ]

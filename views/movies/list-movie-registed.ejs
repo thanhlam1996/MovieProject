@@ -25,8 +25,8 @@
             <div class="row registerlist-detail">
                 <label class="col col-2"><%=i.info.producer%></label>
                 <label class="col col-2"><%=i.process.create.creater[0]%></label>
-                <label class="col col-2 deadline"><%=i.process.registion.registiondate%></label>
-                <label class="col col-2 deadline"><%=i.process.create.deadline%></label>
+                <label class="col col-2 deadline"><%=moment(i.process.registion.registiondate,'YYYY-MM-DD').format('DD/MM/YYYY')%></label>
+                <label class="col col-2 deadline"><%=moment(i.process.create.deadline,'YYYY-MM-DD').format('DD/MM/YYYY')%></label>
                 <label class="col col-2"><%=i.process.create.createnote?i.process.create.createnote:"-"%></label>
                 
             </div>
