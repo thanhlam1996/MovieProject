@@ -1,196 +1,90 @@
 <%include ../partials/header%>
 <%include ../partials/animation%>
-
-	
-	
-	<!-----------------------------------------------Container ------------------------------------------------>
-	 <!-- Top Movies Area Start -->
-	 <section class="filmoja-top-movies-area section_70">
-		<div class="container">
-		   <div class="row">
-			  <div class="col-md-12">
-				 <div class="filmoja-heading">
-					<h2>top movies :<span> 2019</span></h2>
-				 </div>
-			  </div>
-		   </div>
-		   <div class="row">
-			  <div class="col-md-12">
-				 <div class="top-movie-slider owl-carousel">
-
-						<%data.Items.forEach(function(i){%>
-					<div class="single-top-movie" id="<%=i.id%>">
-					   <div class="top-movie-wrap">
-						  <div class="top-movie-img">
-							 <a href="#">
-							 <img src="https://s3-us-west-2.amazonaws.com/movies-project-bucket/<%=i.info.posterimage%>" alt="top movies" />
-							 </a>
-						  </div>
-						  <div class="thumb-hover">
-							 <a class="play-video" href="https://www.youtube.com/watch?v=<%=i.info.trailer%>"><i class="fa fa-play"></i></a>
-							 <div class="thumb-date">
-								<span>05:30</span>
-							 </div>
-						  </div>
-					   </div>
-					   <div class="top-movie-details">
-						  <h4><a href="#"><%=i.title%></a></h4>
-						  <div class="movie-details-thumbs">
-							 <ul>
-								<li>
-								   <a href="#"><i class="fa fa-thumbs-up"></i>
-								   256</a>
-								</li>
-								<li>
-								   <a href="#"><i class="fa fa-eye"></i>45</a>
-								</li>
-								<li>
-								   <a href="#"><span class="rating"><i class="fa fa-star"></i>4.5</span></a>
-								</li>
-							 </ul>
-						  </div>
-					   </div>
-					</div>
-					<%})%>
-
-					<div class="single-top-movie">
-					   <div class="top-movie-wrap">
-						  <div class="top-movie-img">
-							 <a href="#">
-							 <img src="assets/img/top-slider-2.jpeg" alt="top movies" />
-							 </a>
-						  </div>
-						  <div class="thumb-hover">
-							 <a class="play-video" href="https://www.youtube.com/watch?v=1Q8fG0TtVAY"><i class="fa fa-play"></i></a>
-							 <div class="thumb-date">
-								<span>05:30</span>
-							 </div>
-						  </div>
-					   </div>
-					   <div class="top-movie-details">
-						  <h4><a href="#">Furious race</a></h4>
-						  <div class="movie-details-thumbs">
-							 <ul>
-								<li>
-								   <a href="#"><i class="fa fa-thumbs-up"></i>
-								   256</a>
-								</li>
-								<li>
-								   <a href="#"><i class="fa fa-eye"></i>45</a>
-								</li>
-								<li>
-								   <a href="#"><span class="rating"><i class="fa fa-star"></i>4.5</span></a>
-								</li>
-							 </ul>
-						  </div>
-					   </div>
-					</div>
-					<div class="single-top-movie">
-					   <div class="top-movie-wrap">
-						  <div class="top-movie-img">
-							 <a href="#">
-							 <img src="assets/img/top-slider-3.jpeg" alt="top movies" />
-							 </a>
-						  </div>
-						  <div class="thumb-hover">
-							 <a class="play-video" href="https://www.youtube.com/watch?v=1Q8fG0TtVAY"><i class="fa fa-play"></i></a>
-							 <div class="thumb-date">
-								<span>05:30</span>
-							 </div>
-						  </div>
-					   </div>
-					   <div class="top-movie-details">
-						  <h4><a href="#">the walk</a></h4>
-						  <div class="movie-details-thumbs">
-							 <ul>
-								<li>
-								   <a href="#"><i class="fa fa-thumbs-up"></i>
-								   256</a>
-								</li>
-								<li>
-								   <a href="#"><i class="fa fa-eye"></i>45</a>
-								</li>
-								<li>
-								   <a href="#"><span class="rating"><i class="fa fa-star"></i>4.5</span></a>
-								</li>
-							 </ul>
-						  </div>
-					   </div>
-					</div>
-					<div class="single-top-movie">
-					   <div class="top-movie-wrap">
-						  <div class="top-movie-img">
-							 <a href="#">
-							 <img src="assets/img/top-slider-4.jpg" alt="top movies" />
-							 </a>
-						  </div>
-						  <div class="thumb-hover">
-							 <a class="play-video" href="https://www.youtube.com/watch?v=1Q8fG0TtVAY"><i class="fa fa-play"></i></a>
-							 <div class="thumb-date">
-								<span>05:30</span>
-							 </div>
-						  </div>
-					   </div>
-					   <div class="top-movie-details">
-						  <h4><a href="#">Blood Day war</a></h4>
-						  <div class="movie-details-thumbs">
-							 <ul>
-								<li>
-								   <a href="#"><i class="fa fa-thumbs-up"></i>
-								   256</a>
-								</li>
-								<li>
-								   <a href="#"><i class="fa fa-eye"></i>45</a>
-								</li>
-								<li>
-								   <a href="#"><span class="rating"><i class="fa fa-star"></i>4.5</span></a>
-								</li>
-							 </ul>
-						  </div>
-					   </div>
-					</div>
-					<div class="single-top-movie">
-					   <div class="top-movie-wrap">
-						  <div class="top-movie-img">
-							 <a href="#">
-							 <img src="assets/img/top-slider-5.jpeg" alt="top movies" />
-							 </a>
-						  </div>
-						  <div class="thumb-hover">
-							 <a class="play-video" href="https://www.youtube.com/watch?v=1Q8fG0TtVAY"><i class="fa fa-play"></i></a>
-							 <div class="thumb-date">
-								<span>05:30</span>
-							 </div>
-						  </div>
-					   </div>
-					   <div class="top-movie-details">
-						  <h4><a href="#">mr.cartoon</a></h4>
-						  <div class="movie-details-thumbs">
-							 <ul>
-								<li>
-								   <a href="#"><i class="fa fa-thumbs-up"></i>
-								   256</a>
-								</li>
-								<li>
-								   <a href="#"><i class="fa fa-eye"></i>45</a>
-								</li>
-								<li>
-								   <a href="#"><span class="rating"><i class="fa fa-star"></i>4.5</span></a>
-								</li>
-							 </ul>
-						  </div>
-					   </div>
-					</div>
-				 </div>
-			  </div>
-		   </div>
+<!-----------------------------------------------Container ------------------------------------------------>
+<!-- Top Movies Area Start -->
+<section class="filmoja-top-movies-area section_70">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="filmoja-heading">
+					<h2>Top Phim :<span> 2019</span></h2>
+				</div>
+			</div>
 		</div>
-	 </section>
-	 <!-- Top Movies Area End -->
-	  
-	  
-	 <!-- Theater Area Start -->
-	 <section class="filmoja-theater-area section_70">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="top-movie-slider owl-carousel">
+
+
+					<%movietop.forEach((t,index)=>{%>
+					<%if(index<5){%>
+					<%var rat=0, rating=0%>
+					<%var countrat=0%>
+					<%t.ratings.forEach((r)=>{%>
+					<%rat+=parseFloat(r);%>
+					<%countrat++%>
+					<%})%>
+					<%if(countrat==0){%>
+					<%countrat=1;%>
+					<%}%>
+					<%var num=(rat/countrat).toFixed(1)%>
+					<%if((num*10)%10==0){%>
+					<%rating=(rat/countrat).toFixed(0)%>
+					<%}else{%>
+					<%rating=(rat/countrat).toFixed(1)%>
+					<%}%>
+											<div class="single-top-movie">
+													<div class="top-movie-wrap">
+														<div class="top-movie-img">
+															<a href="#">
+															<img src="https://s3-us-west-2.amazonaws.com/movies-project-bucket/<%=t.info.posterimage%>" alt="top movies" />
+															</a>
+														</div>
+														<div class="thumb-hover">
+															<a class="play-video" href="<%=t.info.trailer%>"><i class="fa fa-play"></i></a>
+															<div class="thumb-date">
+																<span>05:30</span>
+															</div>
+														</div>
+													</div>
+													<div class="top-movie-details">
+														<h4><a href="/detail-movie?id=<%=t.id%>"><%=t.title%></a></h4>
+					<div class="movie-details-thumbs">
+						<ul>
+							<li>
+								<a href="#"><i class="fa fa-thumbs-up"></i>
+									<%=t.countlike%></a>
+							</li>
+							<li>
+								<a href="#"><i class="fa fa-eye"></i><%=t.movieview%></a>
+							</li>
+							<li>
+								<a href="#"><span class="rating"><i class="fa fa-star"></i><%=rating%></span></a>
+							</li>
+						</ul>
+					</div>
+				</div>
+
+			</div>
+			<%}else{%>
+			<%return%>
+			<%}%>		
+												
+									<%})%>
+
+
+
+
+		</div>
+	</div>
+	</div>
+	</div>
+</section>
+
+
+
+<!-- Theater Area Start -->
+<!-- <section class="filmoja-theater-area section_70">
 		<div class="container">
 		   <div class="row">
 			  <div class="col-md-5">
@@ -217,1195 +111,464 @@
 			  </div>
 		   </div>
 		</div>
-	 </section>
-	 <!-- Theater Area End -->
-	  
-	  
-	 <!-- Tv Movies Area Start -->
-	 <section class="filmoja-tv-movies-area section_70">
-		<div class="container">
-		   <div class="row">
-			  <div class="col-md-12">
-				 <div class="filmoja-heading">
-					<h2>New <span>items</span></h2>
-				 </div>
-			  </div>
-		   </div>
-		   <div class="row">
-			  <div class="col-md-12">
-				 <div class="tv-panel-list">
+	 </section> -->
+<!-- Theater Area End -->
+
+
+<!-- Tv Movies Area Start -->
+<section class="filmoja-tv-movies-area section_70">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="filmoja-heading">
+					<h2>Phim <span>Mới</span></h2>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="tv-panel-list">
 					<div class="tv-tab">
-					   <ul class="nav nav-pills tv-tab-switch" id="pills-tab" role="tablist">
-						  <li class="nav-item">
-							 <a class="nav-link active" id="pills-popular-tab" data-toggle="pill" href="#pills-popular" role="tab" aria-controls="pills-popular" aria-selected="true">new releases</a>
-						  </li>
-						  <li class="nav-item">
-							 <a class="nav-link" id="pills-upcoming-tab" data-toggle="pill" href="#pills-upcoming" role="tab" aria-controls="pills-upcoming" aria-selected="false">movies</a>
-						  </li>
-						  <li class="nav-item">
-							 <a class="nav-link" id="pills-viewed-tab" data-toggle="pill" href="#pills-viewed" role="tab" aria-controls="pills-viewed" aria-selected="false">tv series</a>
-						  </li>
-						  <li class="nav-item">
-							 <a class="nav-link" id="pills-rated-tab" data-toggle="pill" href="#pills-rated" role="tab" aria-controls="pills-rated" aria-selected="false">cartoons</a>
-						  </li>
-					   </ul>
+						<ul class="nav nav-pills tv-tab-switch" id="pills-tab" role="tablist">
+							<li class="nav-item">
+								<a class="nav-link active" id="pills-popular-tab" data-toggle="pill" href="#pills-popular"
+									role="tab" aria-controls="pills-popular" aria-selected="true">Phim mới</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" id="pills-upcoming-tab" data-toggle="pill" href="#pills-upcoming" role="tab"
+									aria-controls="pills-upcoming" aria-selected="false">Phim sắp chiếu</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" id="pills-viewed-tab" data-toggle="pill" href="#pills-viewed" role="tab"
+									aria-controls="pills-viewed" aria-selected="false">Phim đang chiếu</a>
+							</li>
+							<!-- <li class="nav-item">
+								<a class="nav-link" id="pills-rated-tab" data-toggle="pill" href="#pills-rated" role="tab"
+									aria-controls="pills-rated" aria-selected="false">cartoons</a>
+							</li> -->
+						</ul>
 					</div>
 					<div class="tab-content" id="pills-tabContent">
-					   <div class="tab-pane fade show active" id="pills-popular" role="tabpanel" aria-labelledby="pills-popular-tab">
-						  <div class="tab-movies">
-							 <div class="row">
-								<div class="col-lg-3 col-sm-6">
-								   <div class="single-top-movie">
-									  <div class="top-movie-wrap">
-										 <div class="top-movie-img">
-											<a href="#">
-											<img src="assets/img/top-slider-1.jpeg" alt="top movies" />
-											</a>
-										 </div>
-										 <div class="thumb-hover">
-											<a class="play-video" href="https://www.youtube.com/watch?v=1Q8fG0TtVAY"><i class="fa fa-play"></i></a>
-											<div class="thumb-date">
-											   <span>05:30</span>
+						<div class="tab-pane fade show active" id="pills-popular" role="tabpanel"
+							aria-labelledby="pills-popular-tab">
+							<div class="tab-movies">
+								<div class="row">
+									<%movienew.forEach((n,index)=>{%>
+									<%if(index<4){%>
+											<%var rat=0, rating=0%>
+											<%var countrat=0%>
+											<%if(n.ratings){%>
+												<%n.ratings.forEach((r)=>{%>
+													<%rat+=parseFloat(r);%>
+													<%countrat++%>
+													<%})%>
+													<%if(countrat==0){%>
+													<%countrat=1;%>
+													<%}%>
+													<%var num=(rat/countrat).toFixed(1)%>
+													<%if((num*10)%10==0){%>
+													<%rating=(rat/countrat).toFixed(0)%>
+													<%}else{%>
+													<%rating=(rat/countrat).toFixed(1)%>
+													<%}%>
+											<%}%>
+									<!-- ========== -->
+									<div class="col-lg-3 col-sm-6">
+										<div class="single-top-movie">
+											<div class="top-movie-wrap">
+												<div class="top-movie-img">
+													<a href="#">
+														<img src="https://s3-us-west-2.amazonaws.com/movies-project-bucket/<%=n.info.posterimage%>" alt="top movies" />
+													</a>
+												</div>
+												<div class="thumb-hover">
+													<a class="play-video" href="<%=n.info.trailer%>"><i
+															class="fa fa-play"></i></a>
+													<div class="thumb-date">
+														<span>05:30</span>
+													</div>
+												</div>
 											</div>
-										 </div>
-									  </div>
-									  <div class="top-movie-details">
-										 <h4><a href="#">Dareing Joker</a></h4>
-										 <div class="movie-details-thumbs">
-											<ul>
-											   <li>
-												  <a href="#"><i class="fa fa-thumbs-up"></i>
-												  256</a>
-											   </li>
-											   <li>
-												  <a href="#"><i class="fa fa-eye"></i>45</a>
-											   </li>
-											   <li>
-												  <a href="#"><span class="rating"><i class="fa fa-star"></i>4.5</span></a>
-											   </li>
-											</ul>
-										 </div>
-									  </div>
-								   </div>
-								</div>
-								<div class="col-lg-3 col-sm-6">
-								   <div class="single-top-movie">
-									  <div class="top-movie-wrap">
-										 <div class="top-movie-img">
-											<a href="#">
-											<img src="assets/img/top-slider-2.jpeg" alt="top movies" />
-											</a>
-										 </div>
-										 <div class="thumb-hover">
-											<a class="play-video" href="https://www.youtube.com/watch?v=1Q8fG0TtVAY"><i class="fa fa-play"></i></a>
-											<div class="thumb-date">
-											   <span>05:30</span>
+											<div class="top-movie-details">
+												<h4><a href="/detail-movie?id=<%=n.id%>"><%=n.title%></a></h4>
+												<div class="movie-details-thumbs">
+													<ul>
+														<li>
+															<a href="#"><i class="fa fa-thumbs-up"></i>
+																<%=n.countlike?n.countlike:0%></a>
+														</li>
+														<li>
+															<a href="#"><i class="fa fa-eye"></i><%=n.movieview?n.movieview:0%></a>
+														</li>
+														<li>
+															<a href="#"><span class="rating"><i class="fa fa-star"></i><%=rating%></span></a>
+														</li>
+													</ul>
+												</div>
 											</div>
-										 </div>
-									  </div>
-									  <div class="top-movie-details">
-										 <h4><a href="#">racing field</a></h4>
-										 <div class="movie-details-thumbs">
-											<ul>
-											   <li>
-												  <a href="#"><i class="fa fa-thumbs-up"></i>
-												  256</a>
-											   </li>
-											   <li>
-												  <a href="#"><i class="fa fa-eye"></i>45</a>
-											   </li>
-											   <li>
-												  <a href="#"><span class="rating"><i class="fa fa-star"></i>4.5</span></a>
-											   </li>
-											</ul>
-										 </div>
-									  </div>
-								   </div>
+										</div>
+									</div>
+									<!-- ========== -->
+									<%}else{return}%>
+									<%})%>
+
+
 								</div>
-								<div class="col-lg-3 col-sm-6">
-								   <div class="single-top-movie">
-									  <div class="top-movie-wrap">
-										 <div class="top-movie-img">
-											<a href="#">
-											<img src="assets/img/top-slider-3.jpeg" alt="top movies" />
-											</a>
-										 </div>
-										 <div class="thumb-hover">
-											<a class="play-video" href="https://www.youtube.com/watch?v=1Q8fG0TtVAY"><i class="fa fa-play"></i></a>
-											<div class="thumb-date">
-											   <span>05:30</span>
+								<!-- End Row -->
+								<div class="row">
+									<%movienew.forEach((w,index)=>{%>
+									<%if(index<8){%>
+									<%if(index>3){%>
+										<%var rat=0, rating=0%>
+										<%var countrat=0%>
+										<%if(w.ratings){%>
+											<%w.ratings.forEach((r)=>{%>
+												<%rat+=parseFloat(r);%>
+												<%countrat++%>
+												<%})%>
+												<%if(countrat==0){%>
+												<%countrat=1;%>
+												<%}%>
+												<%var num=(rat/countrat).toFixed(1)%>
+												<%if((num*10)%10==0){%>
+												<%rating=(rat/countrat).toFixed(0)%>
+												<%}else{%>
+												<%rating=(rat/countrat).toFixed(1)%>
+												<%}%>
+										<%}%>
+									<!-- =============== -->
+									<div class="col-lg-3 col-sm-6">
+										<div class="single-top-movie">
+											<div class="top-movie-wrap">
+												<div class="top-movie-img">
+													<a href="#">
+														<img src="https://s3-us-west-2.amazonaws.com/movies-project-bucket/<%=w.info.posterimage%>" alt="top movies" />
+													</a>
+												</div>
+												<div class="thumb-hover">
+													<a class="play-video" href="<%=w.info.trailer%>"><i
+															class="fa fa-play"></i></a>
+													<div class="thumb-date">
+														<span>05:30</span>
+													</div>
+												</div>
 											</div>
-										 </div>
-									  </div>
-									  <div class="top-movie-details">
-										 <h4><a href="#">runnig shoot</a></h4>
-										 <div class="movie-details-thumbs">
-											<ul>
-											   <li>
-												  <a href="#"><i class="fa fa-thumbs-up"></i>
-												  256</a>
-											   </li>
-											   <li>
-												  <a href="#"><i class="fa fa-eye"></i>45</a>
-											   </li>
-											   <li>
-												  <a href="#"><span class="rating"><i class="fa fa-star"></i>4.5</span></a>
-											   </li>
-											</ul>
-										 </div>
-									  </div>
-								   </div>
-								</div>
-								<div class="col-lg-3 col-sm-6">
-								   <div class="single-top-movie">
-									  <div class="top-movie-wrap">
-										 <div class="top-movie-img">
-											<a href="#">
-											<img src="assets/img/top-slider-4.jpg" alt="top movies" />
-											</a>
-										 </div>
-										 <div class="thumb-hover">
-											<a class="play-video" href="https://www.youtube.com/watch?v=1Q8fG0TtVAY"><i class="fa fa-play"></i></a>
-											<div class="thumb-date">
-											   <span>05:30</span>
+											<div class="top-movie-details">
+												<h4><a href="/detail-movie?id=<%=w.id%>"><%=w.title%></a></h4>
+												<div class="movie-details-thumbs">
+													<ul>
+														<li>
+															<a href="#"><i class="fa fa-thumbs-up"></i>
+																<%=w.countlike?w.countlike:0%></a>
+														</li>
+														<li>
+															<a href="#"><i class="fa fa-eye"></i><%=w.movieview?w.movieview:0%></a>
+														</li>
+														<li>
+															<a href="#"><span class="rating"><i class="fa fa-star"></i><%=rating%></span></a>
+														</li>
+													</ul>
+												</div>
 											</div>
-										 </div>
-									  </div>
-									  <div class="top-movie-details">
-										 <h4><a href="#">Blood Day war</a></h4>
-										 <div class="movie-details-thumbs">
-											<ul>
-											   <li>
-												  <a href="#"><i class="fa fa-thumbs-up"></i>
-												  256</a>
-											   </li>
-											   <li>
-												  <a href="#"><i class="fa fa-eye"></i>45</a>
-											   </li>
-											   <li>
-												  <a href="#"><span class="rating"><i class="fa fa-star"></i>4.5</span></a>
-											   </li>
-											</ul>
-										 </div>
-									  </div>
-								   </div>
+										</div>
+									</div>
+									<!-- ============ -->
+									<%}%>
+								<%}else{return}%>
+									<%})%>
 								</div>
-							 </div>
-							 <!-- End Row -->
-							 <div class="row">
-								<div class="col-lg-3 col-sm-6">
-								   <div class="single-top-movie">
-									  <div class="top-movie-wrap">
-										 <div class="top-movie-img">
-											<a href="#">
-											<img src="assets/img/top-slider-5.jpeg" alt="top movies" />
-											</a>
-										 </div>
-										 <div class="thumb-hover">
-											<a class="play-video" href="https://www.youtube.com/watch?v=1Q8fG0TtVAY"><i class="fa fa-play"></i></a>
-											<div class="thumb-date">
-											   <span>05:30</span>
+								<!-- End Row -->
+							</div>
+						</div>
+						<!-- tab movie coming -->
+						<div class="tab-pane fade" id="pills-upcoming" role="tabpanel" aria-labelledby="pills-upcoming-tab">
+							<div class="tab-movies">
+								<div class="row">
+										<%moviecoming.forEach((n,index)=>{%>
+											<%if(index<4){%>
+													<%var rat=0, rating=0%>
+													<%var countrat=0%>
+													<%if(n.ratings){%>
+														<%n.ratings.forEach((r)=>{%>
+															<%rat+=parseFloat(r);%>
+															<%countrat++%>
+															<%})%>
+															<%if(countrat==0){%>
+															<%countrat=1;%>
+															<%}%>
+															<%var num=(rat/countrat).toFixed(1)%>
+															<%if((num*10)%10==0){%>
+															<%rating=(rat/countrat).toFixed(0)%>
+															<%}else{%>
+															<%rating=(rat/countrat).toFixed(1)%>
+															<%}%>
+													<%}%>
+											<!-- ========== -->
+											<div class="col-lg-3 col-sm-6">
+												<div class="single-top-movie">
+													<div class="top-movie-wrap">
+														<div class="top-movie-img">
+															<a href="#">
+																<img src="https://s3-us-west-2.amazonaws.com/movies-project-bucket/<%=n.info.posterimage%>" alt="top movies" />
+															</a>
+														</div>
+														<div class="thumb-hover">
+															<a class="play-video" href="<%=n.info.trailer%>"><i
+																	class="fa fa-play"></i></a>
+															<div class="thumb-date">
+																<span>05:30</span>
+															</div>
+														</div>
+													</div>
+													<div class="top-movie-details">
+														<h4><a href="/detail-movie?id=<%=n.id%>"><%=n.title%></a></h4>
+														<div class="movie-details-thumbs">
+															<ul>
+																<li>
+																	<a href="#"><i class="fa fa-thumbs-up"></i>
+																		<%=n.countlike?n.countlike:0%></a>
+																</li>
+																<li>
+																	<a href="#"><i class="fa fa-eye"></i><%=n.movieview?n.movieview:0%></a>
+																</li>
+																<li>
+																	<a href="#"><span class="rating"><i class="fa fa-star"></i><%=rating%></span></a>
+																</li>
+															</ul>
+														</div>
+													</div>
+												</div>
 											</div>
-										 </div>
-									  </div>
-									  <div class="top-movie-details">
-										 <h4><a href="#">mr.cartoon</a></h4>
-										 <div class="movie-details-thumbs">
-											<ul>
-											   <li>
-												  <a href="#"><i class="fa fa-thumbs-up"></i>
-												  256</a>
-											   </li>
-											   <li>
-												  <a href="#"><i class="fa fa-eye"></i>45</a>
-											   </li>
-											   <li>
-												  <a href="#"><span class="rating"><i class="fa fa-star"></i>4.5</span></a>
-											   </li>
-											</ul>
-										 </div>
-									  </div>
-								   </div>
-								</div>
-								<div class="col-lg-3 col-sm-6">
-								   <div class="single-top-movie">
-									  <div class="top-movie-wrap">
-										 <div class="top-movie-img">
-											<a href="#">
-											<img src="assets/img/top-slider-3.jpeg" alt="top movies" />
-											</a>
-										 </div>
-										 <div class="thumb-hover">
-											<a class="play-video" href="https://www.youtube.com/watch?v=1Q8fG0TtVAY"><i class="fa fa-play"></i></a>
-											<div class="thumb-date">
-											   <span>05:30</span>
+											<!-- ========== -->
+											<%}else{return}%>
+											<%})%>
+		
+		
+										</div>
+										<!-- End Row -->
+										<div class="row">
+											<%moviecoming.forEach((w,index)=>{%>
+											<%if(index<8){%>
+											<%if(index>3){%>
+												<%var rat=0, rating=0%>
+												<%var countrat=0%>
+												<%if(w.ratings){%>
+													<%w.ratings.forEach((r)=>{%>
+														<%rat+=parseFloat(r);%>
+														<%countrat++%>
+														<%})%>
+														<%if(countrat==0){%>
+														<%countrat=1;%>
+														<%}%>
+														<%var num=(rat/countrat).toFixed(1)%>
+														<%if((num*10)%10==0){%>
+														<%rating=(rat/countrat).toFixed(0)%>
+														<%}else{%>
+														<%rating=(rat/countrat).toFixed(1)%>
+														<%}%>
+												<%}%>
+											<!-- =============== -->
+											<div class="col-lg-3 col-sm-6">
+												<div class="single-top-movie">
+													<div class="top-movie-wrap">
+														<div class="top-movie-img">
+															<a href="#">
+																<img src="https://s3-us-west-2.amazonaws.com/movies-project-bucket/<%=w.info.posterimage%>" alt="top movies" />
+															</a>
+														</div>
+														<div class="thumb-hover">
+															<a class="play-video" href="<%=w.info.trailer%>"><i
+																	class="fa fa-play"></i></a>
+															<div class="thumb-date">
+																<span>05:30</span>
+															</div>
+														</div>
+													</div>
+													<div class="top-movie-details">
+														<h4><a href="/detail-movie?id=<%=w.id%>"><%=w.title%></a></h4>
+														<div class="movie-details-thumbs">
+															<ul>
+																<li>
+																	<a href="#"><i class="fa fa-thumbs-up"></i>
+																		<%=w.countlike?w.countlike:0%></a>
+																</li>
+																<li>
+																	<a href="#"><i class="fa fa-eye"></i><%=w.movieview?w.movieview:0%></a>
+																</li>
+																<li>
+																	<a href="#"><span class="rating"><i class="fa fa-star"></i><%=rating%></span></a>
+																</li>
+															</ul>
+														</div>
+													</div>
+												</div>
 											</div>
-										 </div>
-									  </div>
-									  <div class="top-movie-details">
-										 <h4><a href="#">runnig shoot</a></h4>
-										 <div class="movie-details-thumbs">
-											<ul>
-											   <li>
-												  <a href="#"><i class="fa fa-thumbs-up"></i>
-												  256</a>
-											   </li>
-											   <li>
-												  <a href="#"><i class="fa fa-eye"></i>45</a>
-											   </li>
-											   <li>
-												  <a href="#"><span class="rating"><i class="fa fa-star"></i>4.5</span></a>
-											   </li>
-											</ul>
-										 </div>
-									  </div>
-								   </div>
-								</div>
-								<div class="col-lg-3 col-sm-6">
-								   <div class="single-top-movie">
-									  <div class="top-movie-wrap">
-										 <div class="top-movie-img">
-											<a href="#">
-											<img src="assets/img/top-slider-1.jpeg" alt="top movies" />
-											</a>
-										 </div>
-										 <div class="thumb-hover">
-											<a class="play-video" href="https://www.youtube.com/watch?v=1Q8fG0TtVAY"><i class="fa fa-play"></i></a>
-											<div class="thumb-date">
-											   <span>05:30</span>
+											<!-- ============ -->
+											<%}%>
+										<%}else{return}%>
+											<%})%>
+										</div>
+								<!-- End Row -->
+							</div>
+						</div>
+						<div class="tab-pane fade show " id="pills-viewed" role="tabpanel" aria-labelledby="pills-viewed-tab">
+							<div class="tab-movies">
+								<div class="row">
+										<%movieplaying.forEach((n,index)=>{%>
+											<%if(index<4){%>
+													<%var rat=0, rating=0%>
+													<%var countrat=0%>
+													<%if(n.ratings){%>
+														<%n.ratings.forEach((r)=>{%>
+															<%rat+=parseFloat(r);%>
+															<%countrat++%>
+															<%})%>
+															<%if(countrat==0){%>
+															<%countrat=1;%>
+															<%}%>
+															<%var num=(rat/countrat).toFixed(1)%>
+															<%if((num*10)%10==0){%>
+															<%rating=(rat/countrat).toFixed(0)%>
+															<%}else{%>
+															<%rating=(rat/countrat).toFixed(1)%>
+															<%}%>
+													<%}%>
+											<!-- ========== -->
+											<div class="col-lg-3 col-sm-6">
+												<div class="single-top-movie">
+													<div class="top-movie-wrap">
+														<div class="top-movie-img">
+															<a href="#">
+																<img src="https://s3-us-west-2.amazonaws.com/movies-project-bucket/<%=n.info.posterimage%>" alt="top movies" />
+															</a>
+														</div>
+														<div class="thumb-hover">
+															<a class="play-video" href="<%=n.info.trailer%>"><i
+																	class="fa fa-play"></i></a>
+															<div class="thumb-date">
+																<span>05:30</span>
+															</div>
+														</div>
+													</div>
+													<div class="top-movie-details">
+														<h4><a href="/detail-movie?id=<%=n.id%>"><%=n.title%></a></h4>
+														<div class="movie-details-thumbs">
+															<ul>
+																<li>
+																	<a href="#"><i class="fa fa-thumbs-up"></i>
+																		<%=n.countlike?n.countlike:0%></a>
+																</li>
+																<li>
+																	<a href="#"><i class="fa fa-eye"></i><%=n.movieview?n.movieview:0%></a>
+																</li>
+																<li>
+																	<a href="#"><span class="rating"><i class="fa fa-star"></i><%=rating%></span></a>
+																</li>
+															</ul>
+														</div>
+													</div>
+												</div>
 											</div>
-										 </div>
-									  </div>
-									  <div class="top-movie-details">
-										 <h4><a href="#">Dareing Joker</a></h4>
-										 <div class="movie-details-thumbs">
-											<ul>
-											   <li>
-												  <a href="#"><i class="fa fa-thumbs-up"></i>
-												  256</a>
-											   </li>
-											   <li>
-												  <a href="#"><i class="fa fa-eye"></i>45</a>
-											   </li>
-											   <li>
-												  <a href="#"><span class="rating"><i class="fa fa-star"></i>4.5</span></a>
-											   </li>
-											</ul>
-										 </div>
-									  </div>
-								   </div>
-								</div>
-								<div class="col-lg-3 col-sm-6">
-								   <div class="single-top-movie">
-									  <div class="top-movie-wrap">
-										 <div class="top-movie-img">
-											<a href="#">
-											<img src="assets/img/top-slider-2.jpeg" alt="top movies" />
-											</a>
-										 </div>
-										 <div class="thumb-hover">
-											<a class="play-video" href="https://www.youtube.com/watch?v=1Q8fG0TtVAY"><i class="fa fa-play"></i></a>
-											<div class="thumb-date">
-											   <span>05:30</span>
+											<!-- ========== -->
+											<%}else{return}%>
+											<%})%>
+		
+		
+										</div>
+										<!-- End Row -->
+										<div class="row">
+											<%movieplaying.forEach((w,index)=>{%>
+											<%if(index<8){%>
+											<%if(index>3){%>
+												<%var rat=0, rating=0%>
+												<%var countrat=0%>
+												<%if(w.ratings){%>
+													<%w.ratings.forEach((r)=>{%>
+														<%rat+=parseFloat(r);%>
+														<%countrat++%>
+														<%})%>
+														<%if(countrat==0){%>
+														<%countrat=1;%>
+														<%}%>
+														<%var num=(rat/countrat).toFixed(1)%>
+														<%if((num*10)%10==0){%>
+														<%rating=(rat/countrat).toFixed(0)%>
+														<%}else{%>
+														<%rating=(rat/countrat).toFixed(1)%>
+														<%}%>
+												<%}%>
+											<!-- =============== -->
+											<div class="col-lg-3 col-sm-6">
+												<div class="single-top-movie">
+													<div class="top-movie-wrap">
+														<div class="top-movie-img">
+															<a href="#">
+																<img src="https://s3-us-west-2.amazonaws.com/movies-project-bucket/<%=w.info.posterimage%>" alt="top movies" />
+															</a>
+														</div>
+														<div class="thumb-hover">
+															<a class="play-video" href="<%=w.info.trailer%>"><i
+																	class="fa fa-play"></i></a>
+															<div class="thumb-date">
+																<span>05:30</span>
+															</div>
+														</div>
+													</div>
+													<div class="top-movie-details">
+														<h4><a href="/detail-movie?id=<%=w.id%>"><%=w.title%></a></h4>
+														<div class="movie-details-thumbs">
+															<ul>
+																<li>
+																	<a href="#"><i class="fa fa-thumbs-up"></i>
+																		<%=w.countlike?w.countlike:0%></a>
+																</li>
+																<li>
+																	<a href="#"><i class="fa fa-eye"></i><%=w.movieview?w.movieview:0%></a>
+																</li>
+																<li>
+																	<a href="#"><span class="rating"><i class="fa fa-star"></i><%=rating%></span></a>
+																</li>
+															</ul>
+														</div>
+													</div>
+												</div>
 											</div>
-										 </div>
-									  </div>
-									  <div class="top-movie-details">
-										 <h4><a href="#">racing field</a></h4>
-										 <div class="movie-details-thumbs">
-											<ul>
-											   <li>
-												  <a href="#"><i class="fa fa-thumbs-up"></i>
-												  256</a>
-											   </li>
-											   <li>
-												  <a href="#"><i class="fa fa-eye"></i>45</a>
-											   </li>
-											   <li>
-												  <a href="#"><span class="rating"><i class="fa fa-star"></i>4.5</span></a>
-											   </li>
-											</ul>
-										 </div>
-									  </div>
-								   </div>
-								</div>
-							 </div>
-							 <!-- End Row -->
-						  </div>
-					   </div>
-					   <div class="tab-pane fade" id="pills-upcoming" role="tabpanel" aria-labelledby="pills-upcoming-tab">
-						  <div class="tab-movies">
-							 <div class="row">
-								<div class="col-lg-3 col-sm-6">
-								   <div class="single-top-movie">
-									  <div class="top-movie-wrap">
-										 <div class="top-movie-img">
-											<a href="#">
-											<img src="assets/img/top-slider-2.jpeg" alt="top movies" />
-											</a>
-										 </div>
-										 <div class="thumb-hover">
-											<a class="play-video" href="https://www.youtube.com/watch?v=1Q8fG0TtVAY"><i class="fa fa-play"></i></a>
-											<div class="thumb-date">
-											   <span>05:30</span>
-											</div>
-										 </div>
-									  </div>
-									  <div class="top-movie-details">
-										 <h4><a href="#">racing field</a></h4>
-										 <div class="movie-details-thumbs">
-											<ul>
-											   <li>
-												  <a href="#"><i class="fa fa-thumbs-up"></i>
-												  256</a>
-											   </li>
-											   <li>
-												  <a href="#"><i class="fa fa-eye"></i>45</a>
-											   </li>
-											   <li>
-												  <a href="#"><span class="rating"><i class="fa fa-star"></i>4.5</span></a>
-											   </li>
-											</ul>
-										 </div>
-									  </div>
-								   </div>
-								</div>
-								<div class="col-lg-3 col-sm-6">
-								   <div class="single-top-movie">
-									  <div class="top-movie-wrap">
-										 <div class="top-movie-img">
-											<a href="#">
-											<img src="assets/img/top-slider-4.jpg" alt="top movies" />
-											</a>
-										 </div>
-										 <div class="thumb-hover">
-											<a class="play-video" href="https://www.youtube.com/watch?v=1Q8fG0TtVAY"><i class="fa fa-play"></i></a>
-											<div class="thumb-date">
-											   <span>05:30</span>
-											</div>
-										 </div>
-									  </div>
-									  <div class="top-movie-details">
-										 <h4><a href="#">Blood Day war</a></h4>
-										 <div class="movie-details-thumbs">
-											<ul>
-											   <li>
-												  <a href="#"><i class="fa fa-thumbs-up"></i>
-												  256</a>
-											   </li>
-											   <li>
-												  <a href="#"><i class="fa fa-eye"></i>45</a>
-											   </li>
-											   <li>
-												  <a href="#"><span class="rating"><i class="fa fa-star"></i>4.5</span></a>
-											   </li>
-											</ul>
-										 </div>
-									  </div>
-								   </div>
-								</div>
-								<div class="col-lg-3 col-sm-6">
-								   <div class="single-top-movie">
-									  <div class="top-movie-wrap">
-										 <div class="top-movie-img">
-											<a href="#">
-											<img src="assets/img/top-slider-3.jpeg" alt="top movies" />
-											</a>
-										 </div>
-										 <div class="thumb-hover">
-											<a class="play-video" href="https://www.youtube.com/watch?v=1Q8fG0TtVAY"><i class="fa fa-play"></i></a>
-											<div class="thumb-date">
-											   <span>05:30</span>
-											</div>
-										 </div>
-									  </div>
-									  <div class="top-movie-details">
-										 <h4><a href="#">runnig shoot</a></h4>
-										 <div class="movie-details-thumbs">
-											<ul>
-											   <li>
-												  <a href="#"><i class="fa fa-thumbs-up"></i>
-												  256</a>
-											   </li>
-											   <li>
-												  <a href="#"><i class="fa fa-eye"></i>45</a>
-											   </li>
-											   <li>
-												  <a href="#"><span class="rating"><i class="fa fa-star"></i>4.5</span></a>
-											   </li>
-											</ul>
-										 </div>
-									  </div>
-								   </div>
-								</div>
-								<div class="col-lg-3 col-sm-6">
-								   <div class="single-top-movie">
-									  <div class="top-movie-wrap">
-										 <div class="top-movie-img">
-											<a href="#">
-											<img src="assets/img/top-slider-1.jpeg" alt="top movies" />
-											</a>
-										 </div>
-										 <div class="thumb-hover">
-											<a class="play-video" href="https://www.youtube.com/watch?v=1Q8fG0TtVAY"><i class="fa fa-play"></i></a>
-											<div class="thumb-date">
-											   <span>05:30</span>
-											</div>
-										 </div>
-									  </div>
-									  <div class="top-movie-details">
-										 <h4><a href="#">Dareing Joker</a></h4>
-										 <div class="movie-details-thumbs">
-											<ul>
-											   <li>
-												  <a href="#"><i class="fa fa-thumbs-up"></i>
-												  256</a>
-											   </li>
-											   <li>
-												  <a href="#"><i class="fa fa-eye"></i>45</a>
-											   </li>
-											   <li>
-												  <a href="#"><span class="rating"><i class="fa fa-star"></i>4.5</span></a>
-											   </li>
-											</ul>
-										 </div>
-									  </div>
-								   </div>
-								</div>
-							 </div>
-							 <!-- End Row -->
-							 <div class="row">
-								<div class="col-lg-3 col-sm-6">
-								   <div class="single-top-movie">
-									  <div class="top-movie-wrap">
-										 <div class="top-movie-img">
-											<a href="#">
-											<img src="assets/img/top-slider-5.jpeg" alt="top movies" />
-											</a>
-										 </div>
-										 <div class="thumb-hover">
-											<a class="play-video" href="https://www.youtube.com/watch?v=1Q8fG0TtVAY"><i class="fa fa-play"></i></a>
-											<div class="thumb-date">
-											   <span>05:30</span>
-											</div>
-										 </div>
-									  </div>
-									  <div class="top-movie-details">
-										 <h4><a href="#">mr.cartoon</a></h4>
-										 <div class="movie-details-thumbs">
-											<ul>
-											   <li>
-												  <a href="#"><i class="fa fa-thumbs-up"></i>
-												  256</a>
-											   </li>
-											   <li>
-												  <a href="#"><i class="fa fa-eye"></i>45</a>
-											   </li>
-											   <li>
-												  <a href="#"><span class="rating"><i class="fa fa-star"></i>4.5</span></a>
-											   </li>
-											</ul>
-										 </div>
-									  </div>
-								   </div>
-								</div>
-								<div class="col-lg-3 col-sm-6">
-								   <div class="single-top-movie">
-									  <div class="top-movie-wrap">
-										 <div class="top-movie-img">
-											<a href="#">
-											<img src="assets/img/top-slider-1.jpeg" alt="top movies" />
-											</a>
-										 </div>
-										 <div class="thumb-hover">
-											<a class="play-video" href="https://www.youtube.com/watch?v=1Q8fG0TtVAY"><i class="fa fa-play"></i></a>
-											<div class="thumb-date">
-											   <span>05:30</span>
-											</div>
-										 </div>
-									  </div>
-									  <div class="top-movie-details">
-										 <h4><a href="#">Dareing Joker</a></h4>
-										 <div class="movie-details-thumbs">
-											<ul>
-											   <li>
-												  <a href="#"><i class="fa fa-thumbs-up"></i>
-												  256</a>
-											   </li>
-											   <li>
-												  <a href="#"><i class="fa fa-eye"></i>45</a>
-											   </li>
-											   <li>
-												  <a href="#"><span class="rating"><i class="fa fa-star"></i>4.5</span></a>
-											   </li>
-											</ul>
-										 </div>
-									  </div>
-								   </div>
-								</div>
-								<div class="col-lg-3 col-sm-6">
-								   <div class="single-top-movie">
-									  <div class="top-movie-wrap">
-										 <div class="top-movie-img">
-											<a href="#">
-											<img src="assets/img/top-slider-3.jpeg" alt="top movies" />
-											</a>
-										 </div>
-										 <div class="thumb-hover">
-											<a class="play-video" href="https://www.youtube.com/watch?v=1Q8fG0TtVAY"><i class="fa fa-play"></i></a>
-											<div class="thumb-date">
-											   <span>05:30</span>
-											</div>
-										 </div>
-									  </div>
-									  <div class="top-movie-details">
-										 <h4><a href="#">runnig shoot</a></h4>
-										 <div class="movie-details-thumbs">
-											<ul>
-											   <li>
-												  <a href="#"><i class="fa fa-thumbs-up"></i>
-												  256</a>
-											   </li>
-											   <li>
-												  <a href="#"><i class="fa fa-eye"></i>45</a>
-											   </li>
-											   <li>
-												  <a href="#"><span class="rating"><i class="fa fa-star"></i>4.5</span></a>
-											   </li>
-											</ul>
-										 </div>
-									  </div>
-								   </div>
-								</div>
-								<div class="col-lg-3 col-sm-6">
-								   <div class="single-top-movie">
-									  <div class="top-movie-wrap">
-										 <div class="top-movie-img">
-											<a href="#">
-											<img src="assets/img/top-slider-2.jpeg" alt="top movies" />
-											</a>
-										 </div>
-										 <div class="thumb-hover">
-											<a class="play-video" href="https://www.youtube.com/watch?v=1Q8fG0TtVAY"><i class="fa fa-play"></i></a>
-											<div class="thumb-date">
-											   <span>05:30</span>
-											</div>
-										 </div>
-									  </div>
-									  <div class="top-movie-details">
-										 <h4><a href="#">racing field</a></h4>
-										 <div class="movie-details-thumbs">
-											<ul>
-											   <li>
-												  <a href="#"><i class="fa fa-thumbs-up"></i>
-												  256</a>
-											   </li>
-											   <li>
-												  <a href="#"><i class="fa fa-eye"></i>45</a>
-											   </li>
-											   <li>
-												  <a href="#"><span class="rating"><i class="fa fa-star"></i>4.5</span></a>
-											   </li>
-											</ul>
-										 </div>
-									  </div>
-								   </div>
-								</div>
-							 </div>
-							 <!-- End Row -->
-						  </div>
-					   </div>
-					   <div class="tab-pane fade show " id="pills-viewed" role="tabpanel" aria-labelledby="pills-viewed-tab">
-						  <div class="tab-movies">
-							 <div class="row">
-								<div class="col-lg-3 col-sm-6">
-								   <div class="single-top-movie">
-									  <div class="top-movie-wrap">
-										 <div class="top-movie-img">
-											<a href="#">
-											<img src="assets/img/top-slider-4.jpg" alt="top movies" />
-											</a>
-										 </div>
-										 <div class="thumb-hover">
-											<a class="play-video" href="https://www.youtube.com/watch?v=1Q8fG0TtVAY"><i class="fa fa-play"></i></a>
-											<div class="thumb-date">
-											   <span>05:30</span>
-											</div>
-										 </div>
-									  </div>
-									  <div class="top-movie-details">
-										 <h4><a href="#">Blood Day war</a></h4>
-										 <div class="movie-details-thumbs">
-											<ul>
-											   <li>
-												  <a href="#"><i class="fa fa-thumbs-up"></i>
-												  256</a>
-											   </li>
-											   <li>
-												  <a href="#"><i class="fa fa-eye"></i>45</a>
-											   </li>
-											   <li>
-												  <a href="#"><span class="rating"><i class="fa fa-star"></i>4.5</span></a>
-											   </li>
-											</ul>
-										 </div>
-									  </div>
-								   </div>
-								</div>
-								<div class="col-lg-3 col-sm-6">
-								   <div class="single-top-movie">
-									  <div class="top-movie-wrap">
-										 <div class="top-movie-img">
-											<a href="#">
-											<img src="assets/img/top-slider-1.jpeg" alt="top movies" />
-											</a>
-										 </div>
-										 <div class="thumb-hover">
-											<a class="play-video" href="https://www.youtube.com/watch?v=1Q8fG0TtVAY"><i class="fa fa-play"></i></a>
-											<div class="thumb-date">
-											   <span>05:30</span>
-											</div>
-										 </div>
-									  </div>
-									  <div class="top-movie-details">
-										 <h4><a href="#">Dareing Joker</a></h4>
-										 <div class="movie-details-thumbs">
-											<ul>
-											   <li>
-												  <a href="#"><i class="fa fa-thumbs-up"></i>
-												  256</a>
-											   </li>
-											   <li>
-												  <a href="#"><i class="fa fa-eye"></i>45</a>
-											   </li>
-											   <li>
-												  <a href="#"><span class="rating"><i class="fa fa-star"></i>4.5</span></a>
-											   </li>
-											</ul>
-										 </div>
-									  </div>
-								   </div>
-								</div>
-								<div class="col-lg-3 col-sm-6">
-								   <div class="single-top-movie">
-									  <div class="top-movie-wrap">
-										 <div class="top-movie-img">
-											<a href="#">
-											<img src="assets/img/top-slider-2.jpeg" alt="top movies" />
-											</a>
-										 </div>
-										 <div class="thumb-hover">
-											<a class="play-video" href="https://www.youtube.com/watch?v=1Q8fG0TtVAY"><i class="fa fa-play"></i></a>
-											<div class="thumb-date">
-											   <span>05:30</span>
-											</div>
-										 </div>
-									  </div>
-									  <div class="top-movie-details">
-										 <h4><a href="#">racing field</a></h4>
-										 <div class="movie-details-thumbs">
-											<ul>
-											   <li>
-												  <a href="#"><i class="fa fa-thumbs-up"></i>
-												  256</a>
-											   </li>
-											   <li>
-												  <a href="#"><i class="fa fa-eye"></i>45</a>
-											   </li>
-											   <li>
-												  <a href="#"><span class="rating"><i class="fa fa-star"></i>4.5</span></a>
-											   </li>
-											</ul>
-										 </div>
-									  </div>
-								   </div>
-								</div>
-								<div class="col-lg-3 col-sm-6">
-								   <div class="single-top-movie">
-									  <div class="top-movie-wrap">
-										 <div class="top-movie-img">
-											<a href="#">
-											<img src="assets/img/top-slider-3.jpeg" alt="top movies" />
-											</a>
-										 </div>
-										 <div class="thumb-hover">
-											<a class="play-video" href="https://www.youtube.com/watch?v=1Q8fG0TtVAY"><i class="fa fa-play"></i></a>
-											<div class="thumb-date">
-											   <span>05:30</span>
-											</div>
-										 </div>
-									  </div>
-									  <div class="top-movie-details">
-										 <h4><a href="#">runnig shoot</a></h4>
-										 <div class="movie-details-thumbs">
-											<ul>
-											   <li>
-												  <a href="#"><i class="fa fa-thumbs-up"></i>
-												  256</a>
-											   </li>
-											   <li>
-												  <a href="#"><i class="fa fa-eye"></i>45</a>
-											   </li>
-											   <li>
-												  <a href="#"><span class="rating"><i class="fa fa-star"></i>4.5</span></a>
-											   </li>
-											</ul>
-										 </div>
-									  </div>
-								   </div>
-								</div>
-							 </div>
-							 <!-- End Row -->
-							 <div class="row">
-								<div class="col-lg-3 col-sm-6">
-								   <div class="single-top-movie">
-									  <div class="top-movie-wrap">
-										 <div class="top-movie-img">
-											<a href="#">
-											<img src="assets/img/top-slider-5.jpeg" alt="top movies" />
-											</a>
-										 </div>
-										 <div class="thumb-hover">
-											<a class="play-video" href="https://www.youtube.com/watch?v=1Q8fG0TtVAY"><i class="fa fa-play"></i></a>
-											<div class="thumb-date">
-											   <span>05:30</span>
-											</div>
-										 </div>
-									  </div>
-									  <div class="top-movie-details">
-										 <h4><a href="#">mr.cartoon</a></h4>
-										 <div class="movie-details-thumbs">
-											<ul>
-											   <li>
-												  <a href="#"><i class="fa fa-thumbs-up"></i>
-												  256</a>
-											   </li>
-											   <li>
-												  <a href="#"><i class="fa fa-eye"></i>45</a>
-											   </li>
-											   <li>
-												  <a href="#"><span class="rating"><i class="fa fa-star"></i>4.5</span></a>
-											   </li>
-											</ul>
-										 </div>
-									  </div>
-								   </div>
-								</div>
-								<div class="col-lg-3 col-sm-6">
-								   <div class="single-top-movie">
-									  <div class="top-movie-wrap">
-										 <div class="top-movie-img">
-											<a href="#">
-											<img src="assets/img/top-slider-3.jpeg" alt="top movies" />
-											</a>
-										 </div>
-										 <div class="thumb-hover">
-											<a class="play-video" href="https://www.youtube.com/watch?v=1Q8fG0TtVAY"><i class="fa fa-play"></i></a>
-											<div class="thumb-date">
-											   <span>05:30</span>
-											</div>
-										 </div>
-									  </div>
-									  <div class="top-movie-details">
-										 <h4><a href="#">runnig shoot</a></h4>
-										 <div class="movie-details-thumbs">
-											<ul>
-											   <li>
-												  <a href="#"><i class="fa fa-thumbs-up"></i>
-												  256</a>
-											   </li>
-											   <li>
-												  <a href="#"><i class="fa fa-eye"></i>45</a>
-											   </li>
-											   <li>
-												  <a href="#"><span class="rating"><i class="fa fa-star"></i>4.5</span></a>
-											   </li>
-											</ul>
-										 </div>
-									  </div>
-								   </div>
-								</div>
-								<div class="col-lg-3 col-sm-6">
-								   <div class="single-top-movie">
-									  <div class="top-movie-wrap">
-										 <div class="top-movie-img">
-											<a href="#">
-											<img src="assets/img/top-slider-1.jpeg" alt="top movies" />
-											</a>
-										 </div>
-										 <div class="thumb-hover">
-											<a class="play-video" href="https://www.youtube.com/watch?v=1Q8fG0TtVAY"><i class="fa fa-play"></i></a>
-											<div class="thumb-date">
-											   <span>05:30</span>
-											</div>
-										 </div>
-									  </div>
-									  <div class="top-movie-details">
-										 <h4><a href="#">Dareing Joker</a></h4>
-										 <div class="movie-details-thumbs">
-											<ul>
-											   <li>
-												  <a href="#"><i class="fa fa-thumbs-up"></i>
-												  256</a>
-											   </li>
-											   <li>
-												  <a href="#"><i class="fa fa-eye"></i>45</a>
-											   </li>
-											   <li>
-												  <a href="#"><span class="rating"><i class="fa fa-star"></i>4.5</span></a>
-											   </li>
-											</ul>
-										 </div>
-									  </div>
-								   </div>
-								</div>
-								<div class="col-lg-3 col-sm-6">
-								   <div class="single-top-movie">
-									  <div class="top-movie-wrap">
-										 <div class="top-movie-img">
-											<a href="#">
-											<img src="assets/img/top-slider-2.jpeg" alt="top movies" />
-											</a>
-										 </div>
-										 <div class="thumb-hover">
-											<a class="play-video" href="https://www.youtube.com/watch?v=1Q8fG0TtVAY"><i class="fa fa-play"></i></a>
-											<div class="thumb-date">
-											   <span>05:30</span>
-											</div>
-										 </div>
-									  </div>
-									  <div class="top-movie-details">
-										 <h4><a href="#">racing field</a></h4>
-										 <div class="movie-details-thumbs">
-											<ul>
-											   <li>
-												  <a href="#"><i class="fa fa-thumbs-up"></i>
-												  256</a>
-											   </li>
-											   <li>
-												  <a href="#"><i class="fa fa-eye"></i>45</a>
-											   </li>
-											   <li>
-												  <a href="#"><span class="rating"><i class="fa fa-star"></i>4.5</span></a>
-											   </li>
-											</ul>
-										 </div>
-									  </div>
-								   </div>
-								</div>
-							 </div>
-							 <!-- End Row -->
-						  </div>
-					   </div>
-					   <div class="tab-pane fade" id="pills-rated" role="tabpanel" aria-labelledby="pills-rated-tab">
-						  <div class="tab-movies">
-							 <div class="row">
-								<div class="col-lg-3 col-sm-6">
-								   <div class="single-top-movie">
-									  <div class="top-movie-wrap">
-										 <div class="top-movie-img">
-											<a href="#">
-											<img src="assets/img/top-slider-2.jpeg" alt="top movies" />
-											</a>
-										 </div>
-										 <div class="thumb-hover">
-											<a class="play-video" href="https://www.youtube.com/watch?v=1Q8fG0TtVAY"><i class="fa fa-play"></i></a>
-											<div class="thumb-date">
-											   <span>05:30</span>
-											</div>
-										 </div>
-									  </div>
-									  <div class="top-movie-details">
-										 <h4><a href="#">racing field</a></h4>
-										 <div class="movie-details-thumbs">
-											<ul>
-											   <li>
-												  <a href="#"><i class="fa fa-thumbs-up"></i>
-												  256</a>
-											   </li>
-											   <li>
-												  <a href="#"><i class="fa fa-eye"></i>45</a>
-											   </li>
-											   <li>
-												  <a href="#"><span class="rating"><i class="fa fa-star"></i>4.5</span></a>
-											   </li>
-											</ul>
-										 </div>
-									  </div>
-								   </div>
-								</div>
-								<div class="col-lg-3 col-sm-6">
-								   <div class="single-top-movie">
-									  <div class="top-movie-wrap">
-										 <div class="top-movie-img">
-											<a href="#">
-											<img src="assets/img/top-slider-1.jpeg" alt="top movies" />
-											</a>
-										 </div>
-										 <div class="thumb-hover">
-											<a class="play-video" href="https://www.youtube.com/watch?v=1Q8fG0TtVAY"><i class="fa fa-play"></i></a>
-											<div class="thumb-date">
-											   <span>05:30</span>
-											</div>
-										 </div>
-									  </div>
-									  <div class="top-movie-details">
-										 <h4><a href="#">Dareing Joker</a></h4>
-										 <div class="movie-details-thumbs">
-											<ul>
-											   <li>
-												  <a href="#"><i class="fa fa-thumbs-up"></i>
-												  256</a>
-											   </li>
-											   <li>
-												  <a href="#"><i class="fa fa-eye"></i>45</a>
-											   </li>
-											   <li>
-												  <a href="#"><span class="rating"><i class="fa fa-star"></i>4.5</span></a>
-											   </li>
-											</ul>
-										 </div>
-									  </div>
-								   </div>
-								</div>
-								<div class="col-lg-3 col-sm-6">
-								   <div class="single-top-movie">
-									  <div class="top-movie-wrap">
-										 <div class="top-movie-img">
-											<a href="#">
-											<img src="assets/img/top-slider-3.jpeg" alt="top movies" />
-											</a>
-										 </div>
-										 <div class="thumb-hover">
-											<a class="play-video" href="https://www.youtube.com/watch?v=1Q8fG0TtVAY"><i class="fa fa-play"></i></a>
-											<div class="thumb-date">
-											   <span>05:30</span>
-											</div>
-										 </div>
-									  </div>
-									  <div class="top-movie-details">
-										 <h4><a href="#">runnig shoot</a></h4>
-										 <div class="movie-details-thumbs">
-											<ul>
-											   <li>
-												  <a href="#"><i class="fa fa-thumbs-up"></i>
-												  256</a>
-											   </li>
-											   <li>
-												  <a href="#"><i class="fa fa-eye"></i>45</a>
-											   </li>
-											   <li>
-												  <a href="#"><span class="rating"><i class="fa fa-star"></i>4.5</span></a>
-											   </li>
-											</ul>
-										 </div>
-									  </div>
-								   </div>
-								</div>
-								<div class="col-lg-3 col-sm-6">
-								   <div class="single-top-movie">
-									  <div class="top-movie-wrap">
-										 <div class="top-movie-img">
-											<a href="#">
-											<img src="assets/img/top-slider-1.jpeg" alt="top movies" />
-											</a>
-										 </div>
-										 <div class="thumb-hover">
-											<a class="play-video" href="https://www.youtube.com/watch?v=1Q8fG0TtVAY"><i class="fa fa-play"></i></a>
-											<div class="thumb-date">
-											   <span>05:30</span>
-											</div>
-										 </div>
-									  </div>
-									  <div class="top-movie-details">
-										 <h4><a href="#">Dareing Joker</a></h4>
-										 <div class="movie-details-thumbs">
-											<ul>
-											   <li>
-												  <a href="#"><i class="fa fa-thumbs-up"></i>
-												  256</a>
-											   </li>
-											   <li>
-												  <a href="#"><i class="fa fa-eye"></i>45</a>
-											   </li>
-											   <li>
-												  <a href="#"><span class="rating"><i class="fa fa-star"></i>4.5</span></a>
-											   </li>
-											</ul>
-										 </div>
-									  </div>
-								   </div>
-								</div>
-							 </div>
-							 <!-- End Row -->
-							 <div class="row">
-								<div class="col-lg-3 col-sm-6">
-								   <div class="single-top-movie">
-									  <div class="top-movie-wrap">
-										 <div class="top-movie-img">
-											<a href="#">
-											<img src="assets/img/top-slider-5.jpeg" alt="top movies" />
-											</a>
-										 </div>
-										 <div class="thumb-hover">
-											<a class="play-video" href="https://www.youtube.com/watch?v=1Q8fG0TtVAY"><i class="fa fa-play"></i></a>
-											<div class="thumb-date">
-											   <span>05:30</span>
-											</div>
-										 </div>
-									  </div>
-									  <div class="top-movie-details">
-										 <h4><a href="#">mr. cartoon</a></h4>
-										 <div class="movie-details-thumbs">
-											<ul>
-											   <li>
-												  <a href="#"><i class="fa fa-thumbs-up"></i>
-												  256</a>
-											   </li>
-											   <li>
-												  <a href="#"><i class="fa fa-eye"></i>45</a>
-											   </li>
-											   <li>
-												  <a href="#"><span class="rating"><i class="fa fa-star"></i>4.5</span></a>
-											   </li>
-											</ul>
-										 </div>
-									  </div>
-								   </div>
-								</div>
-								<div class="col-lg-3 col-sm-6">
-								   <div class="single-top-movie">
-									  <div class="top-movie-wrap">
-										 <div class="top-movie-img">
-											<a href="#">
-											<img src="assets/img/top-slider-3.jpeg" alt="top movies" />
-											</a>
-										 </div>
-										 <div class="thumb-hover">
-											<a class="play-video" href="https://www.youtube.com/watch?v=1Q8fG0TtVAY"><i class="fa fa-play"></i></a>
-											<div class="thumb-date">
-											   <span>05:30</span>
-											</div>
-										 </div>
-									  </div>
-									  <div class="top-movie-details">
-										 <h4><a href="#">runnig shoot</a></h4>
-										 <div class="movie-details-thumbs">
-											<ul>
-											   <li>
-												  <a href="#"><i class="fa fa-thumbs-up"></i>
-												  256</a>
-											   </li>
-											   <li>
-												  <a href="#"><i class="fa fa-eye"></i>45</a>
-											   </li>
-											   <li>
-												  <a href="#"><span class="rating"><i class="fa fa-star"></i>4.5</span></a>
-											   </li>
-											</ul>
-										 </div>
-									  </div>
-								   </div>
-								</div>
-								<div class="col-lg-3 col-sm-6">
-								   <div class="single-top-movie">
-									  <div class="top-movie-wrap">
-										 <div class="top-movie-img">
-											<a href="#">
-											<img src="assets/img/top-slider-1.jpeg" alt="top movies" />
-											</a>
-										 </div>
-										 <div class="thumb-hover">
-											<a class="play-video" href="https://www.youtube.com/watch?v=1Q8fG0TtVAY"><i class="fa fa-play"></i></a>
-											<div class="thumb-date">
-											   <span>05:30</span>
-											</div>
-										 </div>
-									  </div>
-									  <div class="top-movie-details">
-										 <h4><a href="#">Dareing Joker</a></h4>
-										 <div class="movie-details-thumbs">
-											<ul>
-											   <li>
-												  <a href="#"><i class="fa fa-thumbs-up"></i>
-												  256</a>
-											   </li>
-											   <li>
-												  <a href="#"><i class="fa fa-eye"></i>45</a>
-											   </li>
-											   <li>
-												  <a href="#"><span class="rating"><i class="fa fa-star"></i>4.5</span></a>
-											   </li>
-											</ul>
-										 </div>
-									  </div>
-								   </div>
-								</div>
-								<div class="col-lg-3 col-sm-6">
-								   <div class="single-top-movie">
-									  <div class="top-movie-wrap">
-										 <div class="top-movie-img">
-											<a href="#">
-											<img src="assets/img/top-slider-2.jpeg" alt="top movies" />
-											</a>
-										 </div>
-										 <div class="thumb-hover">
-											<a class="play-video" href="https://www.youtube.com/watch?v=1Q8fG0TtVAY"><i class="fa fa-play"></i></a>
-											<div class="thumb-date">
-											   <span>05:30</span>
-											</div>
-										 </div>
-									  </div>
-									  <div class="top-movie-details">
-										 <h4><a href="#">racing field</a></h4>
-										 <div class="movie-details-thumbs">
-											<ul>
-											   <li>
-												  <a href="#"><i class="fa fa-thumbs-up"></i>
-												  256</a>
-											   </li>
-											   <li>
-												  <a href="#"><i class="fa fa-eye"></i>45</a>
-											   </li>
-											   <li>
-												  <a href="#"><span class="rating"><i class="fa fa-star"></i>4.5</span></a>
-											   </li>
-											</ul>
-										 </div>
-									  </div>
-								   </div>
-								</div>
-							 </div>
-							 <!-- End Row -->
-						  </div>
-					   </div>
+											<!-- ============ -->
+											<%}%>
+										<%}else{return}%>
+											<%})%>
+										</div>
+
+							</div>
+						</div>
+
 					</div>
-				 </div>
-			  </div>
-		   </div>
+				</div>
+			</div>
 		</div>
-	 </section>
-	 <!-- Tv Movies Area End -->
-	  
-	  
-	 <!-- Quote Area Start -->
-	 <section class="filmoja-quote-area section_100">
-		<div class="container">
-		   <div class="row">
-			  <div class="col-md-12">
-				 <div class="quote-box">
+	</div>
+</section>
+<!-- Tv Movies Area End -->
+
+<!-- Quote Area Start -->
+<section class="filmoja-quote-area section_100">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="quote-box">
 					<h4>Action, Adventure, Fantasy</h4>
 					<h3>be the first to know</h3>
-					<a href="#" class="mouse-icon hidden-sm"><span class="wheel"><i class="fa fa-long-arrow-down"></i></span></a>
+					<a href="#" class="mouse-icon hidden-sm"><span class="wheel"><i
+								class="fa fa-long-arrow-down"></i></span></a>
 					<form>
-					   <input type="email" placeholder="E-mail Address...">
-					   <button type="submit">Subscribe</button>
+						<input type="email" placeholder="E-mail Address...">
+						<button type="submit">Subscribe</button>
 					</form>
-				 </div>
-			  </div>
-		   </div>
+				</div>
+			</div>
 		</div>
-	 </section>
-	 <!-- Quote Area End -->
-	<!-- ------------------------------------------------------------------------------------------------------>
-	<%include ../partials/footer%>
+	</div>
+</section>
+<!-- Quote Area End -->
+<!-- ------------------------------------------------------------------------------------------------------>
+<%include ../partials/footer%>

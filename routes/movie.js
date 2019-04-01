@@ -143,7 +143,7 @@ var s3Options = {
   secretAccessKey: dynamoDbConfig.secretAccessKey
 };
 
-var s3Fs = new deleteS3("movies-images", s3Options);
+var s3Fs = new deleteS3(dynamoDbConfig.bucketName, s3Options);
 
 // ========================================================================
 
@@ -969,7 +969,7 @@ router.post(
   "/update-content-movie-admin",
   s3upload.single("posterimage"),
   function(req, res, next) {
-    if (CheckLogin(3)) {
+    if (CheckLogin(3,res,req)) {
       var title = req.body.title;
       var producer = req.body.producer;
       var id = req.body.id;
@@ -1218,7 +1218,6 @@ router.post("/comment-movie", function(req, res, next) {
           } else isexits = false;
         });
         if (isexits) {
-          console.log("OK");
           var params = {
             TableName: "Movies",
             Key: {
@@ -1296,6 +1295,43 @@ router.post("/comment-movie", function(req, res, next) {
     return false; //ERR 500
   }
 });
+// ===============Dislike=========================
+router.post("/dislike-movie", function(req, res, next) {
+  if (CheckLogin(1, res, req)) {
+    var id_liker = req.session.passport.user.id;
+    var movie_id = req.body.id;
+    var index = req.body.index;
+    var str = "remove #like[" + index + "]";
+    var params = {
+      TableName: "Movies",
+      Key: {
+        id: movie_id
+      },
+      UpdateExpression: str,
+      ExpressionAttributeNames: {
+        "#like": "liker"
+      },
+      // ExpressionAttributeValues: {
+
+      //   ":cnt": 1
+      // },
+      ReturnValues: "ALL_NEW"
+    };
+    docClient.update(params, function(err, data) {
+      if (err) {
+        console.error(
+          "Unable to update item. Error JSON:",
+          JSON.stringify(err, null, 2)
+        );
+      } else {
+        return res.send(true);
+      }
+    });
+  } else {
+    return false; //ERR 500
+  }
+});
+// ======================================================
 router.post("/like-movie", function(req, res, next) {
   if (CheckLogin(1, res, req)) {
     var id_liker = req.session.passport.user.id;
@@ -1516,4 +1552,43 @@ router.post("/delete-cmt-movie", async function(req, res, next) {
   }
 });
 // =========================
+
+// ==============Edit cmt===================
+router.post("/edit-comment-movie", function(req, res, next) {
+  if (CheckLogin(1, res, req)) {
+    var movie_id = req.body.id;
+    var content = req.body.content;
+    var index = req.body.index;
+    // =================================
+    var str = "set #cmt[" + index + "].contentcmt=:cmt";
+    var params = {
+      TableName: "Movies",
+      Key: {
+        id: movie_id
+      },
+      UpdateExpression: str,
+      ExpressionAttributeNames: {
+        "#cmt": "comment"
+      },
+      ExpressionAttributeValues: {
+        ":cmt": content
+      },
+      ReturnValues: "UPDATED_NEW"
+    };
+    docClient.update(params, function(err, data) {
+      if (err) {
+        console.error(
+          "Unable to update item. Error JSON:",
+          JSON.stringify(err, null, 2)
+        );
+      } else {
+        console.log(JSON.stringify(data));
+        return res.send(true);
+      }
+    });
+  } else {
+    return false; //ERR 500
+  }
+});
+// =========================================
 module.exports = router;

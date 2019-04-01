@@ -6,11 +6,14 @@
 <%if(i.ratings){%>
 <%i.ratings.forEach((k)=>{%>
 <%r+=parseFloat(k)%>
+<%count++;%>
 <%})%>
+<%}else{%>
+   <%count=1%>
 <%}%>
 
-<%count++;%>
-<section class="filmoja-breadcrumb-area section_70">
+
+<section class="filmoja-breadcrumb-area section_70" id="<%=i.id%>">
    <div class="container">
       <div class="row">
          <div class="col-md-12">
@@ -33,11 +36,24 @@
                                              class="fa fa-thumbs-up"></i><%=i.countlike?i.countlike:0%></span></a>
                                  </li>
                                  <li>
-                                    <a href="#"><span class="rating"><i class="fa fa-eye"></i>45</span></a>
+                                    <a href="#"><span class="rating"><i class="fa fa-eye"></i>
+                                       <%if(i.movieview){%>
+                                          <%=i.movieview%>
+                                       <%}else{%>
+                                          0
+                                       <%}%>
+
+                                    </span></a>
                                  </li>
                                  <li>
-                                    <a href="#"><span class="rating"><i
-                                             class="fa fa-star"></i><%=(r/count).toFixed(1)%></span></a>
+                                    <a href="#"><span class="rating"><i class="fa fa-star"></i>
+                                       <%var num=(r/count).toFixed(1)%>
+                                       <%if((num*10)%10==0){%>
+                                          <%=(r/count).toFixed(0)%>
+                                       <%}else{%>
+                                          <%=(r/count).toFixed(1)%>
+                                       <%}%>
+                                    </span></a>
                                  </li>
                               </ul>
                            </div>
@@ -48,7 +64,7 @@
                   </div>
                   <div class="col-lg-3">
                      <div class="details-banner-action">
-                        <a href="https://www.youtube.com/watch?v=<%=i.info.trailer%>" class="filmoja-btn play-video"><i
+                        <a href="<%=i.info.trailer%>" class="filmoja-btn play-video"><i
                               class="fa fa-play"></i>Xem trailer</a>
                      </div>
                   </div>
@@ -72,9 +88,28 @@
                <ul>
 
                   <li>
+                     <%if(i.liker){%>
+                     <%var dis=0;%>
+                     <%if(i.liker.length>0){%>
+                        <%i.liker.forEach((l)=>{%>
+                           <%if(l==id_owner){%>
+                           <a href="#" class="dislike" id="<%=i.id%>"><span class="rating-total dislike-index" id="<%=dis%>"><i
+                                    class="fa fa-thumbs-up"></i>Bỏ thích</span></a>
+                           <%}else{%>
+                           <a href="#" class="like" id="<%=i.id%>"><span class="rating-total"><i
+                                    class="fa fa-thumbs-up"></i>Thích</span></a>
+                           <%}%>
+                           <%dis++;%>
+                           <%})%>
+                     <%}else{%>
+                        <a href="#" class="like" id="<%=i.id%>"><span class="rating-total"><i
+                           class="fa fa-thumbs-up"></i>Thích</span></a>
+                     <%}%>
+                     <%}else{%>
                      <a href="#" class="like" id="<%=i.id%>"><span class="rating-total"><i
                               class="fa fa-thumbs-up"></i>Thích</span></a>
-                     <a href="#"><span class="rating-total"><i class="fa fa-thumbs-up"></i>Đánh giá</span></a>
+                     <%}%>
+                     
                   </li>
 
                   <li><span>Nhà sản xuất</span> : <%=i.info.producer%></li>
@@ -193,11 +228,12 @@
                               <strong><%=j.commenter[0]%></strong></span>
                            <span class="reviews-rating"><i class="fa fa-star"></i><%=j.rating%></span>
                         </div>
-                        <p class="reviews-text edit-cmt<%=dem%>"><%=j.contentcmt%></p>
+                        <p class="reviews-text edit-cmt<%=dem%>" id="<%=index%>"><%=j.contentcmt%></p>
                         <%if(id_owner){%>
                         <%if(id_owner==j.commenter[2]){%>
                         <p class="reviews-text"><a href="" class="delete-comment" id="cmt<%=dem%>">Xóa</a><span> ||
-                           </span><a  class="edit-cmt" id="edit-cmt<%=dem%>">Sửa</a></p>
+                           </span><a href="" data-toggle="modal" data-target="#dailog-edit-cmt" class="edit-cmt"
+                              id="edit-cmt<%=dem%>">Sửa</a></p>
                         <%}else{%>
                         <%if(role_owner>2){%>
                         <p class="reviews-text"><a href="" class="delete-comment" id="cmt<%=dem%>">Xóa</a></p>
@@ -245,9 +281,37 @@
    </div>
    </div>
 </section>
+<!-- Dialog Edit cmt -->
+<!-- The Modal -->
+<div class="container">
+   <!-- The Modal -->
+   <div class="modal fade" id="dailog-edit-cmt">
+      <div class="modal-dialog modal-dialog-centered">
+         <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+               <!-- <h4 class="modal-title">Lý do không duyệt bài</h4> -->
+               <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <!-- Modal Header -->
+            <div class="modal-body">
+               <textarea name="txt-edit-cmt" class="form-control txt-edit-cmt" rows="4"
+                  id="txt-edit-cmt-user"></textarea>
+            </div>
+            <!-- Modal body -->
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+               <button type="button" class="btn btn-success btn-edit-cmt-user">Xong</button>
+               <button type="button" class="btn btn-primary" data-dismiss="modal">Hủy</button>
+            </div>
+
+         </div>
+      </div>
+   </div>
+</div>
+<!-- ---------- -->
+
 <%})%>
 <!-- Movie Details Page End -->
 <%include ../partials/footer%>
-
-
-

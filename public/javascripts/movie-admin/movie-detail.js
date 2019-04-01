@@ -60,63 +60,115 @@ $(document).on('click', '.like', () => {
         }
     })
 });
-async function deletecmt(movie_id,index){
+$(document).on('click', '.dislike', () => {
+    var id = $('.dislike').attr('id');
+    var index=$('.dislike-index').attr('id');
     $.ajax({
-        url:"/movie/delete-cmt-movie",
-        type:"post",
-        data:{
-            id:movie_id,
-            index:index
+        type: "post",
+        url: "/movie/dislike-movie",
+        data: { id: id, index:index }
+    }).done((data) => {
+        if (data) {
+            window.location.reload();
         }
-    }).done(function(data){
-        if(data){
-           return true;
-        }else
-        {
+        else {
+            return false;
+        }
+     })
+});
+async function deletecmt(movie_id, index) {
+    $.ajax({
+        url: "/movie/delete-cmt-movie",
+        type: "post",
+        data: {
+            id: movie_id,
+            index: index
+        }
+    }).done(function (data) {
+        if (data) {
+            return true;
+        } else {
             return false;
         }
     })
 }
-$(document).on('click','.delete-comment',async  function(){
-  
-    var _id=$(this).attr('id')
-    var movie_id=$('.movie-details-page-box').attr('id');
-    var index=$('.'+_id).attr('id')
-    
+$(document).on('click', '.delete-comment', async function () {
+
+    var _id = $(this).attr('id')
+    var movie_id = $('.movie-details-page-box').attr('id');
+    var index = $('.' + _id).attr('id')
+
     $.ajax({
-        url:"/movie/delete-cmt-movie",
-        type:"post",
-        data:{
-            id:movie_id,
-            index:index
+        url: "/movie/delete-cmt-movie",
+        type: "post",
+        data: {
+            id: movie_id,
+            index: index
         }
-    }).done(function(data){
-        if(data){
+    }).done(function (data) {
+        if (data) {
             Window.location.reload();
-        }else
-        {
+        } else {
             return false;
         }
     })
+
+})
+$(document).on('click', '.edit-cmt', async function () {
+    var _id = $(this).attr('id')
+    var movie_id = $('.movie-details-page-box').attr('id');
+    var content = $('.' + _id).text();
+
+    var index = $('.' + _id).attr('id');
+    $('.txt-edit-cmt').text(content);
+    $('.btn-edit-cmt-user').click(function () {
+        var contentnew = $('.txt-edit-cmt').val();
+        $.ajax({
+            url: "/movie/edit-comment-movie",
+            type: "post",
+            data: {
+                id: movie_id,
+                content: contentnew,
+                index: index
+            }
+        }).done(function (data) {
+            if (data) {
+                window.location.reload();
+            } 
+            else {
+                return false;
+            }
+        })
+    })
+})
+
+// $(document).ready(function(){
+//     setTimeout(function(){ 
+//     var movie_id = $('.movie-details-page-box').attr('id');
+   
+//         $.ajax({
+//             url:"/movie/check-is-like",
+//             type:"get",
+//             data:{
+//                 id:movie_id
+//             }
+//         }).done(function(data){
+//             if(data==false)
+//             {
+//                 console.log(data);
+//                 return false;
+        
+//             }
+//             else
+//             {
+//                 var str='<i class="fa fa-thumbs-up"></i>Đã thích'
+//                 $('#liked').empty();
+//                 $('#liked').append(str);
+//             }
+//         })
+//      }, 2000);
     
-})
-$(document).on('click','.edit-cmt',async  function(){
-  
-    var _id=$(this).attr('id')
-    var movie_id=$('.movie-details-page-box').attr('id');
-    var content=$('.'+_id).text();
-    // console.log(content);
-    var ip='<form action="/movie/comment-movie" method="POST" class="form">';
-    ip+='<div class="form-item">';
-    ip+='<textarea name="content_cmt" class="txt-content-cmt" placeholder="Write your opinion here...">'+content+'</textarea>';
-    ip+='</div>';
-    ip+='<div class="form-item">';
-    ip+='<button id="" class="btn-cmt" type="button">Bình luận</button>';
-    ip+='</div>';
-    ip+='</form>';
-    $('.'+_id).empty();
-    $('.'+_id).append(ip);
-})
+// })
 // $('.removecmt').click(()=>{
 //     var id=$(this).attr('id');
 //     console.log(id);
