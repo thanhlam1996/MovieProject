@@ -24,28 +24,18 @@ var allcar = JSON.parse(fs.readFileSync("../data/account.json", "utf-8"));
 allcar.forEach(function(acc) {
   var params = {
     TableName: "Accounts",
-    Item: {
-      email: acc.email,
-      fullname: acc.fullname,
-      sex: acc.sex,
-      password: acc.password,
-      phone: acc.phone,
-      adress: acc.adress,
-      totalmovies: acc.totalmovies,
-      role: acc.role,
-      movies: acc.movies
-    }
+    Item: acc
   };
   docClient.put(params, function(err, data) {
     if (err) {
       console.error(
         "Unable to add car",
-        acc.email,
+        acc.info.email,
         " .Error Json: ",
         JSON.stringify(err, null, 2)
       );
     } else {
-      console.log("PutItem succeeded: ", acc.email);
+      console.log("PutItem succeeded: ", acc.info.email);
     }
   });
 });
